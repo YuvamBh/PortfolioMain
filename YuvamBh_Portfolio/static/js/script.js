@@ -1911,5 +1911,33 @@ document.addEventListener("contextmenu", event => event.preventDefault());
   const mount = document.getElementById("gh-calendar");
   if (!mount) return;
 
+  const username = "YuvamBh"; // <-- change if needed
+  fetch(`/github/contributions?u=${encodeURIComponent(username)}`)
+    .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
+    .then((svg) => {
+      mount.innerHTML = svg;
+
+      // optional: remove top legend & footer notes from GitHub SVG
+      const legend = mount.querySelector('svg .ContributionCalendar-legend');
+      if (legend) legend.remove();
+      const srOnly = mount.querySelector('svg .sr-only');
+      if (srOnly) srOnly.remove();
+
+      // Make SVG responsive
+      const svgEl = mount.querySelector("svg");
+      if (svgEl) {
+        svgEl.removeAttribute("width");
+        svgEl.setAttribute("width", "100%");
+        svgEl.setAttribute("height", "auto");
+        svgEl.style.maxWidth = "100%";
+      }
+    })
+    .catch(() => {
+      mount.innerHTML = '<p class="muted">Couldn’t load GitHub activity.</p>';
+    });
+})();
+
+
+
 
 
