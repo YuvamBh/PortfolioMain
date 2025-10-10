@@ -5,6 +5,8 @@ from uv_ai import uv_ai_bp
 import functools
 import gzip
 from datetime import datetime
+from flask import Response, request, jsonify
+import requests
 
 app = Flask(__name__,
             static_url_path='/static',
@@ -105,6 +107,22 @@ def index():
 def projects():
     return render_template("projects.html")
 
+# --- GitHub contributions proxy ---
+@app.route("/github/contributions")
+def github_contributions():
+    username = request.args.get("u", "yuvambhargav")  # change default if you like
+    url = f"https://github.com/users/{username}/contributions"
+    try:
+        r = requests.get(url, timeout=6, headers={"User-Agent": "Yuvam-Portfolio/1.0"})
+        if r.status_code == 200 and r.text.strip():
+            # cache for 1 hour; it's already near real-time
+            return Response(r.text, mimetype="image/svg+xml",
+                            headers={"Cache-Control": "public, max-age=3600"})
+        return jsonify({"error": "Failed to fetch contributions", "status": r.status_code}), 502
+    except requests.RequestException as e:
+        return jsonify({"error": "Request to GitHub failed", "detail": str(e)}), 502
+
+
 # Error handlers
 @app.errorhandler(404)
 def page_not_found(e):
@@ -118,3 +136,4 @@ if __name__ == "__main__":
     print("Launching Flask..")
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port, debug=False)
+
