@@ -1,0 +1,238 @@
+<!-- templates/404.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Yuvam Bhargav</title>
+    <!-- Import your existing styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            color: var(--text-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 0 1rem;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(to right, var(--accent-color), #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .error-message {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 1rem 0 2rem;
+        }
+
+        .home-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .home-button:hover {
+            background: transparent;
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Animated background elements */
+        .error-bg {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(var(--accent-color), transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .error-bg:nth-child(1) {
+            top: -250px;
+            left: -250px;
+            animation-delay: 0s;
+        }
+
+        .error-bg:nth-child(2) {
+            bottom: -250px;
+            right: -250px;
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-message {
+                font-size: 1.2rem;
+            }
+        }
+        /* Custom Cursor Styles */
+        @media (pointer: fine) {
+            body {
+                cursor: none;
+            }
+
+            .cursor-outer,
+            .cursor-inner {
+                width: 32px;
+                height: 32px;
+                position: fixed;
+                border-radius: 50%;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+                opacity: 1;
+            }
+
+            .cursor-outer {
+                transition: all 0s ease-out;
+                background: transparent;
+            }
+
+            .cursor-inner {
+                background-color: rgba(155, 156, 149, 0.8);
+                transition: all 0s ease-out;
+            }
+
+            .cursor-hover {
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                border-color: rgba(255, 255, 255, 0.2) !important;
+                transform: translate(-50%, -50%) scale(1.5) !important;
+            }
+
+            .cursor-inner.cursor-hover {
+                background-color: rgba(255, 255, 255, 0) !important;
+                transform: translate(-50%, -50%) scale(0.5) !important;
+            }
+
+            .cursor-hidden {
+                opacity: 0;
+            }
+        }
+
+        @media (pointer: coarse) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor-outer,
+            .cursor-inner {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-outer"></div>
+    <div class="cursor-inner"></div>
+    <div class="error-page">
+        <!-- Animated background elements -->
+        <div class="error-bg"></div>
+        <div class="error-bg"></div>
+        
+        <div class="error-container">
+            <h1 class="error-code">404</h1>
+            <p class="error-message">Oops! The page you're looking for ventured too far into the digital void.</p>
+            <a href="/" class="home-button">Return Home</a>
+        </div>
+    </div>
+    <script>
+        // Cursor functionality
+        const cursor = {
+            outer: document.querySelector('.cursor-outer'),
+            inner: document.querySelector('.cursor-inner'),
+            init: function() {
+                if (window.matchMedia('(pointer: fine)').matches) {
+                    document.addEventListener('mousemove', e => this.move(e));
+                    document.addEventListener('mouseout', () => this.hide());
+                    document.addEventListener('mouseover', () => this.show());
+                    
+                    // Add hover effect for interactive elements
+                    document.querySelectorAll('a, button').forEach(el => {
+                        el.addEventListener('mouseenter', () => this.addHover());
+                        el.addEventListener('mouseleave', () => this.removeHover());
+                    });
+                }
+            },
+            move: function(e) {
+                this.outer.style.left = e.clientX + 'px';
+                this.outer.style.top = e.clientY + 'px';
+                this.inner.style.left = e.clientX + 'px';
+                this.inner.style.top = e.clientY + 'px';
+            },
+            hide: function() {
+                this.outer.classList.add('cursor-hidden');
+                this.inner.classList.add('cursor-hidden');
+            },
+            show: function() {
+                this.outer.classList.remove('cursor-hidden');
+                this.inner.classList.remove('cursor-hidden');
+            },
+            addHover: function() {
+                this.outer.classList.add('cursor-hover');
+                this.inner.classList.add('cursor-hover');
+            },
+            removeHover: function() {
+                this.outer.classList.remove('cursor-hover');
+                this.inner.classList.remove('cursor-hover');
+            }
+        };
+
+        cursor.init();
+    </script>
+</body>
+</html>

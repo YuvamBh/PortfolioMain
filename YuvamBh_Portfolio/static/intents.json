@@ -1,0 +1,219 @@
+{
+    "intents": {
+      "greeting": {
+        "patterns": [
+          "hi",
+          "hello",
+          "hey",
+          "yo",
+          "greetings",
+          "good morning",
+          "good afternoon",
+          "good evening",
+          "howdy"
+        ],
+        "synonyms": ["hi", "hello", "hey", "greetings"],
+        "responses": [
+          "Hello! I'm Yuvam Bhargav. How can I help you today?",
+          "Hey there! Feel free to ask me anything about my background or experience.",
+          "Hi! I'm Yuvam Bhargav, ready to answer your questions."
+        ]
+      },
+      "identity": {
+        "patterns": [
+          "what is your name",
+          "who are you",
+          "who is yuvam",
+          "what should i call you",
+          "introduce yourself"
+        ],
+        "synonyms": ["name", "identity", "about you"],
+        "responses": [
+          "My name is Yuvam Bhargav. I'm a Computer Science and Data Science student at Arizona State University.",
+          "I'm Yuvam Bhargav — a passionate student in Computer Science with a Data Science minor."
+        ]
+      },
+      "introduction": {
+        "patterns": [
+          "tell me about yourself",
+          "introduce yourself",
+          "what's your background",
+          "your story",
+          "about you"
+        ],
+        "synonyms": ["background", "bio", "overview"],
+        "responses": [
+          "I'm Yuvam Bhargav, a Computer Science and Data Science student at Arizona State University in Tempe. I have hands-on experience in full-stack development, data analysis, and VR/AR integration.",
+          "I combine technical expertise with leadership—my work spans AI, machine learning, and innovative digital design, developed through both academic projects and internships."
+        ]
+      },
+      "education": {
+        "patterns": [
+          "where did you study",
+          "what did you study",
+          "tell me about your education",
+          "what's your degree",
+          "which university did you go to",
+          "what is your major",
+          "what coursework have you taken",
+          "when did you graduate"
+        ],
+        "synonyms": ["education", "degree", "college", "coursework", "studies"],
+        "responses": [
+          "I am pursuing a Bachelor of Science in Computer Science with a minor in Data Science at Arizona State University, expected to graduate in May 2027.",
+          "My academic journey at Arizona State University includes coursework in Object Oriented Programming, Data Structures and Algorithms, Machine Learning, AI, and several capstone projects. I've also earned recognition on the Dean's List."
+        ]
+      },
+      "skills": {
+        "patterns": [
+          "what can you do",
+          "tell me about your skills",
+          "what programming languages do you know",
+          "what are you good at",
+          "what technical expertise do you have"
+        ],
+        "synonyms": ["proficiency", "talents", "abilities", "tech stack"],
+        "responses": [
+          "I am proficient in Python, Java, JavaScript, R, SQL, and HTML/CSS. In addition, I have expertise in VR/AR development using A-Frame and AR.js, database management, and computer vision with OpenCV.",
+          "My skills cover a wide range from full-stack development to data analysis, as well as specialized areas such as VR/AR integration and innovative digital design."
+        ]
+      },
+      "experience": {
+        "patterns": [
+          "what work have you done",
+          "what is your work history",
+          "tell me about your internships",
+          "where have you worked",
+          "what experience do you have",
+          "what did you do in your internships"
+        ],
+        "synonyms": ["jobs", "internships", "work experience"],
+        "responses": [
+          "I've completed internships at Futurristic (VR/AR Development & Data Analysis in Summer 2024), Platinum Corporation (Data Scientist in Spring 2024), and ELDAAS (Data Analyst in Fall 2023).",
+          "My professional experience includes roles in data science, data analysis, and VR/AR integration. I also hold leadership positions like Director of Finance for the Indian Students' Association at ASU."
+        ]
+      },
+      "projects": {
+        "patterns": [
+          "what projects have you worked on",
+          "tell me about your projects",
+          "what have you built",
+          "show me your portfolio",
+          "what applications have you developed"
+        ],
+        "synonyms": ["projects", "portfolio", "developed", "work"],
+        "responses": [
+          "I've built a Home Automation System using Arduino, a Mopping Robot for a science exhibition, and an interactive game for toddlers using JavaScript.",
+          "My projects range from integrating hardware with software, like my home automation system, to creating engaging educational games and innovative robotics solutions."
+        ]
+      },
+      "achievements": {
+        "patterns": [
+          "what awards have you won",
+          "tell me about your recognitions",
+          "what achievements do you have",
+          "list your awards",
+          "what honors have you received"
+        ],
+        "synonyms": ["awards", "accomplishments", "recognitions"],
+        "responses": [
+          "I am a National Olympiad Gold Medalist, recognized as the Most Innovative Student and for the Best Engineering Model. I also hold the IBM Data Science Professional Certificate.",
+          "My achievements include multiple awards in engineering and innovation, and I’ve received national honors like the Olympiad Gold Medal."
+        ]
+      },
+      "leadership": {
+        "patterns": [
+          "what leadership roles have you held",
+          "tell me about your leadership experience",
+          "how do you lead",
+          "what positions have you held in student organizations"
+        ],
+        "synonyms": ["leadership", "management", "team", "director"],
+        "responses": [
+          "I currently serve as the Director of Finance for the Indian Students' Association at ASU and mentor over 55 students as a Student Mentor. I also have extensive student government experience from 2017 to 2023.",
+          "My leadership experience spans from managing financial strategies at ASU organizations to guiding students and coordinating events."
+        ]
+      },
+      "careerGoals": {
+        "patterns": [
+          "what are your career goals",
+          "what do you want to do in the future",
+          "what are your professional aspirations",
+          "where do you see yourself in the future"
+        ],
+        "synonyms": ["career", "goals", "future", "aspirations"],
+        "responses": [
+          "I aim to leverage my expertise in Computer Science and Data Science to create innovative solutions in AI and machine learning, addressing real-world challenges.",
+          "My career goal is to push the boundaries of technology by integrating emerging digital designs and advanced data analytics in practical applications."
+        ]
+      },
+      "contactInfo": {
+        "patterns": [
+          "how can I contact you",
+          "what is your email",
+          "give me your contact information",
+          "how do I reach you",
+          "connect with you on linkedin"
+        ],
+        "synonyms": ["contact", "email", "linkedin", "reach you"],
+        "responses": [
+          "You can reach me via email at yuvambhargav.official@gmail.com or connect with me on LinkedIn at [Yuvam Bhargav](https://www.linkedin.com/in/yuvam-bh/).",
+          "Feel free to email me at yuvambhargav.official@gmail.com or connect on LinkedIn for further inquiries."
+        ]
+      },
+      "thanks": {
+        "patterns": [
+          "thank you",
+          "thanks",
+          "appreciate it",
+          "many thanks",
+          "thank you so much"
+        ],
+        "synonyms": ["thanks", "thank you"],
+        "responses": [
+          "You're welcome! If you have any other questions, feel free to ask.",
+          "My pleasure! Let me know if there’s anything else you'd like to know."
+        ]
+      },
+      "resume": {
+        "patterns": [
+          "can I see your resume",
+          "send me your resume",
+          "where is your CV",
+          "download your resume",
+          "get your curriculum vitae"
+        ],
+        "synonyms": ["resume", "cv", "curriculum", "vitae"],
+        "responses": [
+          "You can request my resume using the 'Request Resume' button on the website. After approval, it will be sent to your email.",
+          "Please click on the 'Request Resume' button on the site to receive my complete resume via email."
+        ]
+      },
+      "fallback": {
+        "patterns": [],
+        "responses": [
+          "I'm sorry, I didn't understand that. Could you please rephrase your question?",
+          "I didn't quite get that. Can you ask about my education, experience, or projects?"
+        ]
+      }
+    },
+    "questionResponses": {
+      "education": {
+        "coursework": "I've taken courses such as Object Oriented Programming, Data Structures and Algorithms, Machine Learning and AI, and worked on several capstone projects that combine theory with practice.",
+        "dataScience": "My Data Science minor has equipped me with strong skills in data analysis, statistical methods, and machine learning, complementing my Computer Science background."
+      },
+      "experience": {
+        "futurristic": "At Futurristic (Summer 2024), I was involved in VR/AR Development and Data Analysis—integrating immersive technologies with research design using frameworks like A-Frame and AR.js.",
+        "eldaas": "During my internship at ELDAAS (Fall 2023), I processed survey data on AI integration in electrical circuits, working with over 700 responses to help innovate prototype designs."
+      },
+      "projects": {
+        "homeAutomation": "My Home Automation System uses Arduino, various sensors, and relay modules to create a user-friendly interface that controls lighting, temperature, and security elements remotely.",
+        "toddlerGame": "I developed an interactive educational game for toddlers using JavaScript, HTML5, and CSS3. The game features engaging, age-appropriate activities aimed at boosting early cognitive skills."
+      },
+      "achievements": {
+        "olympiadMedal": "Receiving the National Olympiad Gold Medal was a pivotal moment that underscored my problem-solving abilities under pressure and has fueled my drive for innovation.",
+        "certifications": "Holding the IBM Data Science Professional Certificate has significantly enhanced my understanding of data analytics methodologies, making me proficient in extracting insights from complex datasets."
+      }
+    }
+  }
+  

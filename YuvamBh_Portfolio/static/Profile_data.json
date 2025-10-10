@@ -1,0 +1,132 @@
+{
+  "responseTemplate": {
+    "basicInfo": {
+      "name": "Yuvam Bhargav",
+      "linkedin": "https://www.linkedin.com/in/yuvam-bh/",
+      "email": "yuvambhargav.official@gmail.com",
+      "bio": "I am a Computer Science and Data Science student passionate about AI, machine learning, and innovative digital design. With hands-on experience in full-stack development, data analysis, and VR/AR integration, I bring a unique blend of technical expertise and leadership experience from both academic and extracurricular environments.",
+      "resumeUrl": "/static/YuvamBhargav_Resume.pdf"
+    },
+    "education": {
+      "degree": "Bachelors of Science in Computer Science with a minor in Data Science",
+      "institution": "Arizona State University in Tempe, Arizona",
+      "expectedGraduation": "May 2027",
+      "relevantCoursework": "My relevant coursework includes Object Oriented Programming, Data Structures and Algorithms, Machine Learning and AI, and Capstone projects. These courses have provided me with a strong foundation in both theoretical concepts and practical implementation skills.",
+      "academicAchievements": "I've been recognized on the Dean's List in Spring 2024 and previously as a Dean's Scholar in 2020, reflecting my commitment to academic excellence throughout my educational journey."
+    },
+    "skills": {
+      "programmingLanguages": "I'm proficient in several programming languages including Python, Java, JavaScript, R, SQL, and HTML/CSS.",
+      "technicalAreas": "My technical expertise includes data analysis, VR/AR development using A-Frame and AR.js, database management, and working with OpenCV for computer vision applications.",
+      "softSkills": "Beyond technical abilities, I have strong leadership, financial management, and communication skills developed through my roles in student organizations and professional experiences."
+    },
+    "experience": {
+      "internships": "I have completed three internships: a VR/AR Development and Data Analyst role at Futurristic (Summer 2024), a Data Scientist position at Platinum Corporation (Spring 2024), and a Data Analyst role at ELDAAS (Fall 2023). These experiences have given me practical skills in data management, VR/AR integration, and AI applications.",
+      "leadershipRoles": "I currently serve as the Director of Finance for the Indian Students' Association at ASU, where I secure sponsorships and manage financial strategies. I also work as a Student Mentor at ASU, supporting over 55 students with academic and personal development.",
+      "professionalGrowth": "Throughout my experiences, I've consistently demonstrated skills in financial analysis, event management, customer service, and team collaboration."
+    },
+    "projects": {
+      "technicalProjects": "My technical projects include a Home Automation System using Arduino, a Mopping Robot for a science exhibition, and an interactive educational game for toddlers developed with JavaScript.",
+      "projectDetails": "Each project allowed me to apply theoretical knowledge to practical challenges. For instance, the Home Automation System integrated hardware and software components to create an efficient, user-friendly interface for controlling home devices."
+    },
+    "achievements": {
+      "awards": "I am a National Olympiad Gold Medalist and have received recognition as the Most Innovative Student and for the Best Engineering Model. These achievements reflect my dedication to excellence in both academic and technical endeavors.",
+      "certifications": "I hold the IBM Data Science Professional Certificate, which has enhanced my knowledge of data analytics methodologies and tools."
+    },
+    "careerGoals": "I aim to leverage my combined expertise in Computer Science and Data Science to develop innovative solutions in AI and machine learning. I'm particularly interested in exploring how emerging technologies can address real-world challenges across various industries."
+  },
+
+  "questionResponses": {
+    "education": {
+      "coursework": "During my Computer Science degree at Arizona State University, I've completed coursework in Object Oriented Programming, Data Structures and Algorithms, Machine Learning and AI, and Capstone projects. These courses have provided me with both theoretical knowledge and practical implementation skills that I've applied in my projects and internships.",
+      "dataScience": "My Data Science minor complements my Computer Science major by providing specialized knowledge in data analysis, statistical methods, and machine learning. This interdisciplinary approach has equipped me with the tools to extract meaningful insights from complex datasets and develop data-driven solutions, which has proven particularly valuable in my internships at ELDAAS and Platinum Corporation."
+    },
+    "technicalSkills": {
+      "proficiency": "I'm most proficient in Python, Java, and JavaScript. I also have strong skills in SQL for database management, R for statistical analysis, and HTML/CSS for web development. Additionally, I have experience with specialized tools like OpenCV for computer vision applications and frameworks for VR/AR development.",
+      "applications": "I've applied my technical skills across various contexts. For example, I used JavaScript to develop an interactive game for toddlers, leveraged my data analysis skills during my internship at ELDAAS to process survey data from over 700 responses, and utilized VR/AR technologies at Futurristic to integrate immersive experiences into different applications."
+    },
+    "internships": {
+      "futurristic": "At Futurristic, I worked as a VR/AR Development and Data Analyst Intern during Summer 2024. My primary responsibilities included analyzing and managing data flow in prototype and research design, as well as integrating Augmented Reality and Virtual Reality into different applications using A-Frame and AR.js. This experience enhanced my understanding of immersive technologies and their practical applications.",
+      "eldaas": "During my internship at ELDAAS, I focused on analyzing data related to AI integration with electrical circuits and PCBs. I managed a large-scale survey with over 700 responses regarding opinions on AI in electrical components and contributed valuable data for the company's prototype innovations. This experience strengthened my skills in data collection, analysis, and application in a specialized technical domain.",
+      "platinum": "As a Data Scientist at Platinum Corporation during Spring 2024, I maintained and managed databases tracking transactions, wrote efficient SQL queries for updates, and implemented verification procedures to ensure data accuracy across all records."
+    },
+    "experience": {
+      "financeDirector": "As the Director of Finance for the Indian Students' Association, I've developed partnerships with sponsors that funded our event calendar and created valuable networking opportunities for members. I implemented cost-reduction strategies that maximized resources while maintaining high-quality programming.",
+      "studentGovernment": "My involvement in Student Government from 2017 to 2023 significantly enhanced my leadership abilities. I learned to represent diverse student interests, manage large-scale events, and make decisions that balanced multiple perspectives—sharpening my skills in conflict resolution, public speaking, and organization."
+    },
+    "projects": {
+      "homeAutomation": "I built a Home Automation System using Arduino to make daily tasks more convenient and reduce energy usage. It integrates sensors and relay modules, control algorithms, and a simple remote UI for lighting, temperature, and security.",
+      "toddlerGame": "I created an interactive educational game for toddlers using JavaScript, focused on cognitive skills like pattern recognition and color matching, with audio/visual feedback and user testing to ensure engagement and learning."
+    },
+    "awards": {
+      "olympiadMedal": "Receiving the National Olympiad Gold Medal was a pivotal moment that validated my problem-solving under pressure and motivated me to tackle increasingly challenging projects.",
+      "influence": "Awards and recognitions opened doors to internships and leadership roles and reinforced my commitment to continuous learning and innovation."
+    },
+    "graduationWhen": {
+      "q": "when do you graduate",
+      "a": "May 2027."
+    }
+  },
+
+  "responses": {
+    "greeting": "Hello! I'm Yuvam Bhargav, a Computer Science and Data Science student at Arizona State University. How can I help you today?",
+    "identity": "My name is Yuvam Bhargav. I'm currently pursuing a Bachelor's degree in Computer Science with a minor in Data Science at Arizona State University, expected to graduate in May 2027.",
+    "introduction": "I'm Yuvam Bhargav, a Computer Science and Data Science student passionate about AI, machine learning, and innovative digital design. With experience in data analysis, full-stack development, and VR/AR integration, I bring a unique blend of technical expertise and leadership skills.",
+    "education": "I'm pursuing a Bachelor's of Science in Computer Science with a minor in Data Science at Arizona State University, expected to graduate in May 2027. My coursework includes Object Oriented Programming, Data Structures and Algorithms, and Machine Learning and AI. I've been recognized on the Dean's List in Spring 2024.",
+    "skills": "I'm proficient in Python, Java, JavaScript, R, SQL, and HTML/CSS. My technical expertise includes data analysis, VR/AR development using A-Frame and AR.js, database management, and OpenCV for computer vision. I also bring leadership, financial management, and strong communication skills.",
+    "experience": "I've completed three internships: VR/AR Development and Data Analyst at Futurristic (Summer 2024), Data Scientist at Platinum Corporation (Spring 2024), and Data Analyst at ELDAAS (Fall 2023). I'm also the Director of Finance for the Indian Students' Association and work as a Student Mentor at ASU.",
+    "projects": "My key projects include a Home Automation System using Arduino, a Mopping Robot for a science exhibition, and an interactive educational game for toddlers developed with JavaScript.",
+    "achievements": "National Olympiad Gold Medalist; Most Innovative Student; Best Engineering Model; IBM Data Science Professional Certificate.",
+    "leadership": "Director of Finance (ISA) — sponsorships, budgeting, and event finance; Student Mentor — supporting 55+ students.",
+    "careerGoals": "I aim to leverage my CS + DS background to build AI/ML solutions that solve real-world problems.",
+    "contactInfo": "Email: yuvambhargav.official@gmail.com · LinkedIn: https://www.linkedin.com/in/yuvam-bh/",
+    "thanks": "You're welcome! Feel free to ask anything else about my background, experience, or projects.",
+    "resume": "I'm glad you requested my resume. Please email me at hi@yuvambhargav.com if you have any questions.",
+    "graduation": "May 2027.",
+    "fallback": "I’m Yuvam Bhargav. Ask me about my education, skills, experience, projects, achievements, or graduation date."
+  },
+
+  "keywords": {
+    "greeting": ["hello", "hi", "hey", "greetings", "morning", "afternoon", "evening", "sup", "yo", "howdy"],
+    "identity": ["name", "who are you", "who you are", "introduce yourself", "what should i call you"],
+    "introduction": ["about you", "about yourself", "background", "tell me about you", "introduce", "who is yuvam", "your story"],
+    "education": ["education", "degree", "study", "studies", "studying", "college", "university", "school", "course", "courses", "academic", "gpa", "major", "minor", "what did you study", "where did you go to school"],
+    "skills": ["skill", "skills", "skillz", "skils", "technology", "tech stack", "programming", "language", "software", "framework", "tool", "proficient", "code", "technical", "proficiency", "what can you do", "what do you know", "what are you good at"],
+    "experience": ["experience", "experiences", "wrk exp", "work exp", "workexperience", "work history", "employment", "jobs", "roles", "positions", "where worked", "what did you do"],
+    "internships": ["intern", "internship", "internships", "intern exp", "intern roles", "summer intern", "spring intern", "fall intern"],
+    "projects": ["project", "projects", "portfolio", "built", "created", "developed", "application", "system", "github", "implementation", "software development", "automation", "robot", "game", "what have you built", "show me your work"],
+    "achievements": ["award", "achievement", "recognition", "honor", "certificate", "medal", "accomplishment", "win", "scholarship", "olympiad"],
+    "leadership": ["leadership", "lead", "director", "management", "team", "organize", "president", "head", "mentor", "mentoring"],
+    "careerGoals": ["goal", "future", "plan", "aspiration", "ambition", "objective", "aim", "target", "career path", "vision", "plans"],
+    "contactInfo": ["contact", "email", "phone", "reach", "connect", "linkedin", "social", "message", "how can i reach you", "how do i contact you"],
+    "thanks": ["thanks", "thank you", "appreciate", "grateful", "thx"],
+    "resume": ["resume", "cv", "curriculum", "vitae", "download resume", "get resume", "send resume", "share resume", "request resume", "can i see your resume"],
+    "graduation": ["grad", "graduate", "when graduate", "when do you graduate", "graduation", "passout", "grad date"]
+  },
+
+  "specificResponses": {
+    "homeAutomation": "My Home Automation System using Arduino integrates various sensors and relay modules to create an efficient, user-friendly interface for controlling home devices. I programmed the system in C++ and built a simple remote UI to control lighting, temperature, and security.",
+    "moppingRobot": "I built a Mopping Robot for a science exhibition that won Best Engineering Model. I optimized water distribution, designed navigation logic, and balanced battery life with cleaning performance through iterative testing.",
+    "toddlerGame": "I developed an interactive educational game for toddlers using JavaScript, HTML5, and CSS3. It focuses on pattern recognition and color matching with audio/visual feedback and was tested with the target age group.",
+    "futurristic": "VR/AR Development & Data Analyst (Summer 2024): integrated AR/VR with A-Frame and AR.js; analyzed prototype data and collaborated with designers.",
+    "platinum": "Data Scientist (Spring 2024): managed transaction databases; wrote SQL for updates; implemented verification procedures for data accuracy.",
+    "eldaas": "Data Analyst (Fall 2023): analyzed data on AI integration with circuits/PCBs; managed a 700+ response survey; produced insights for prototypes.",
+    "olympiadMedal": "National Olympiad Gold Medal—validated problem-solving under pressure and encouraged leadership and ambitious projects.",
+    "dataScience": "My Data Science minor provided specialized knowledge in statistics, ML, and data analysis for real-world decision-making.",
+    "programming": "Most proficient in Python, Java, JavaScript; also SQL, R, and HTML/CSS used across projects/internships.",
+    "vrar": "Hands-on AR/VR experience from Futurristic using A-Frame and AR.js for immersive applications.",
+    "resume": "Use the 'Request Resume' button on the site; after approval, it will be emailed to you."
+  },
+
+  "conversationalResponses": {
+    "greeting": "Hi! Ask me about my projects, internships, experience, skills, education, or graduation date.",
+    "whatCanYouDo": "I can answer questions about my experience, education, skills, projects, and career goals. Feel free to ask me anything about my background!",
+    "howAreYou": "I'm doing well—thanks for asking! What would you like to know about my background or projects?",
+    "tellMeMore": "I’m an ASU CS + DS student with experience in data analysis, VR/AR development, and leadership roles. Which area should I expand on?",
+    "whatDoYouKnow": "I work with Python/Java/JS, data analysis, VR/AR, and databases. Want details on internships, projects, or skills?",
+    "whereDidYouWork": "Internships: Futurristic (VR/AR & Data), Platinum (Data Scientist), ELDAAS (Data Analyst).",
+    "whatDidYouStudy": "B.S. in Computer Science with a minor in Data Science at ASU.",
+    "whatsYourName": "I’m Yuvam Bhargav.",
+    "whyComputerScience": "I’m passionate about building useful things with data and AI—CS gives me the tools to do that.",
+    "coolProjects": "Home Automation (Arduino), Mopping Robot, and a JavaScript learning game for toddlers."
+  }
+}

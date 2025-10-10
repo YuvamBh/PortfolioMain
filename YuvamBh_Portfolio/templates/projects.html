@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/projects.css" />
+</head>
+
+<body class="projects">
+  <!-- Fullscreen background (two layers for crossfade) -->
+  <div class="proj-bg">
+    <div class="bg-layer bg-a" id="bgA"></div>
+    <div class="bg-layer bg-b" id="bgB"></div>
+    <div class="bg-wash"></div>
+  </div>
+
+  <!-- Top bar -->
+  <header class="proj-topbar">
+  <a href="{{ url_for('index') }}" class="proj-back">← Back</a>
+    <span class="proj-brand">Projects</span>
+  </header>
+
+  <!-- Overlay frame with slide-like project panels -->
+  <main class="proj-frame" id="frame">
+    <nav class="proj-list" id="list">
+      <!-- 01 -->
+      <section class="proj-item is-active" data-bg="/static/projects/fashion-discovery.jpg" id="p-01">
+        <span class="proj-no">01</span>
+        <h2 class="proj-title">Fashion Discovery</h2>
+        <p class="proj-desc">
+          TikTok-style product swiper powered by embeddings + vector search with a RAG layer. 
+          Focus on fast recommendations, caching, and an eval harness.
+        </p>
+        <div class="proj-cta">
+          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Live Demo</a>
+          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
+        </div>
+        <p class="proj-tags">GenAI • CLIP/embeddings • Vector DB • RAG • FastAPI</p>
+      </section>
+
+      <!-- 02 -->
+      <section class="proj-item" data-bg="/static/projects/gcn.jpg" id="p-02">
+        <span class="proj-no">02</span>
+        <h2 class="proj-title">Global Career Network</h2>
+        <p class="proj-desc">
+          Community site migration from Flask to a static stack for speed and reliability. 
+          Clean content pipeline, analytics, and a lightweight CMS workflow.
+        </p>
+        <div class="proj-cta">
+          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Live Site</a>
+          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
+        </div>
+        <p class="proj-tags">Static Site • HTML/CSS/JS • Netlify/Vercel • Analytics</p>
+      </section>
+
+      <!-- 03 -->
+      <section class="proj-item" data-bg="/static/projects/wcf.jpg" id="p-03">
+        <span class="proj-no">03</span>
+        <h2 class="proj-title">Service-Oriented Suite (WCF)</h2>
+        <p class="proj-desc">
+          SOAP/REST services (TempService, SortRef, etc.) with clean contracts and tests. 
+          Built for reliability, versioning, and easy client generation.
+        </p>
+        <div class="proj-cta">
+          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Docs</a>
+          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
+        </div>
+        <p class="proj-tags">WCF • SOAP/REST • C# • Contracts • Tooling</p>
+      </section>
+
+      <!-- 04 -->
+      <section class="proj-item" data-bg="/static/projects/ibm-certification-badge.jpg" id="p-04">
+        <span class="proj-no">04</span>
+        <h2 class="proj-title">AI Workflow Microservices</h2>
+        <p class="proj-desc">
+          Containerized workers for async pipelines (Celery) with Redis/Postgres, MQTT events, and API gateway. 
+          Emphasis on observability and retries.
+        </p>
+        <div class="proj-cta">
+          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Live Docs</a>
+          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
+        </div>
+        <p class="proj-tags">Docker • Celery • Redis • Postgres • Observability</p>
+      </section>
+
+      <!-- 05 -->
+      <section class="proj-item" data-bg="/static/projects/checkout.jpg" id="p-05">
+        <span class="proj-no">05</span>
+        <h2 class="proj-title">Checkout Automation</h2>
+        <p class="proj-desc">
+          Playwright flows for address autocomplete + cart checkout with resilient selectors, 
+          fallback keystrokes, and per-site strategies.
+        </p>
+        <div class="proj-cta">
+          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Demo Video</a>
+          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
+        </div>
+        <p class="proj-tags">Playwright • Automation • Resilient Selectors</p>
+      </section>
+
+      <!-- 06 -->
+      <section class="proj-item" data-bg="/static/projects/analytics.jpg" id="p-06">
+        <span class="proj-no">06</span>
+        <h2 class="proj-title">Employer Mapping Analytics</h2>
+        <p class="proj-desc">
+          Python scripts parse career-fair CSVs, map industries↔majors, and export summary tables 
+          with OPT/CPT insights for students.
+        </p>
+        <div class="proj-cta">
+          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Notebook</a>
+          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
+        </div>
+        <p class="proj-tags">Python • Pandas • CSV • Reporting</p>
+      </section>
+    </nav>
+  </main>
+
+  <script src="/static/js/projects.js"></script>
+</body>
+</html>

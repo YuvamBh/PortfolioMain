@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <!-- Essential Meta Tags -->
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <meta name="google-site-verification" content="j0GAa5vcFoOAd1kc02Tf9JIsVIusmUa0Gk2mS1qD3H4" />
+      
+      <!-- SEO Meta Tags -->
+      <title>Yuvam Bhargav</title>
+      <meta name="description" content="A passionate AI/ML developer and full stack engineer specializing in machine learning, data science, and web development. View projects and experience.">
+      <meta name="keywords" content="Yuvam Bhargav, AI Developer, Machine Learning Engineer, Full Stack Developer, Data Science, Python Developer, ASU">
+      <meta name="author" content="Yuvam Bhargav">
+      
+      <!-- Open Graph / Social Media Meta Tags -->
+      <meta property="og:title" content="Yuvam Bhargav">
+      <meta property="og:description" content="Yuvam Bhargav - Innovative AI/ML developer and full stack engineer creating impactful technology solutions.">
+      <meta property="og:image" content="https://opengraph.b-cdn.net/production/images/2758d5f0-3fb4-4b0a-aef5-54c3a370f16f.png?token=mP_gPpZHJ-zIPfOTTXMigFjRjKRw4B-8npEl0Rl2wOU&height=675&width=1200&expires=33279767318">
+      <meta property="og:url" content="https://yuvambhargav.com">
+      <meta property="og:type" content="website">
+      
+      <!-- Twitter Card Meta Tags -->
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="Yuvam Bhargav">
+      <meta property="twitter:domain" content="yuvambhargav.com">
+      <meta property="twitter:url" content="https://yuvambhargav.com">
+      <meta name="twitter:description" content="AI/ML developer and full stack engineer creating innovative solutions in machine learning and web development.">
+      <meta name="twitter:image" content="https://opengraph.b-cdn.net/production/images/2758d5f0-3fb4-4b0a-aef5-54c3a370f16f.png?token=mP_gPpZHJ-zIPfOTTXMigFjRjKRw4B-8npEl0Rl2wOU&height=675&width=1200&expires=33279767318">
+      
+        <!-- Favicons -->
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+        <link rel="icon" href="/static/favicon.ico">
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+        <link rel="icon" type="image/x-icon" href="/static/favicon.png">
+        <link rel="apple-touch-icon" href="/static/android-chrome-512x512.png">
+        <link rel="android-chrome-192x192" href="/static/android-chrome-192x192.png">
+        <link rel="android-chrome-512x512" href="/static/android-chrome-512x512.png">
+        <link rel="manifest" href="/static/site.webmanifest">
+      
+      <!-- Canonical URL -->
+      <link rel="canonical" href="https://yuvambhargav.com">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Yuvam Bhargav</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/project-glide.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sohne:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Yuvam Bhargav",
+        "givenName": "Yuvam",
+        "familyName": "Bhargav",
+        "url": "https://yuvambhargav.com",
+        "image": "https://yuvambhargav.com/static/android-chrome-192x192.png",
+        "sameAs": [
+          "https://www.linkedin.com/in/yuvam-bh/",
+          "https://github.com/your-github",
+          "https://twitter.com/your-twitter"
+        ],
+        "jobTitle": "AI/ML Developer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Arizona State University"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Arizona State University"
+        },
+        "description": "AI/ML Developer and Data Scientist specializing in artificial intelligence, machine learning, and full-stack development."
+      }
+      </script>
+      
+  </head>
+
+  <body>
+    <div class="cursor-outer"></div>
+    <div class="cursor-inner"></div>
+
+    <h1 class="visually-hidden">Yuvam Bhargav</h1>
+
+    <nav>
+      <button class="menu-button" style="font-size: larger">☕︎</button>
+      <div class="menu-overlay">
+        <button class="close-button" style="font-size: larger">x</button>
+        <div class="menu-content">
+          <div class="menu-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#Leadership">Leadership</a>
+            <a href="#accomplishments">Accomplishments</a>
+            <a href="#connect">Contact</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+          </div>
+          <div class="social-links">
+            <a
+              href="https://www.linkedin.com/in/yuvam-bh/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color: rgb(0, 119, 181)"
+              aria-label="LinkedIn"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a
+              href="https://www.instagram.com/yuvam.bh/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color: rgb(252, 99, 219)"
+              aria-label="Instagram"
+            >
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home" class="hero">
+      <div class="hero-content" data-aos="fade-up">
+        <h1 class="hero-text">
+          <span>Hey, &nbsp;this&nbsp;is</span>
+          <span>&nbsp;Yuvam!</span>
+        </h1>
+        <h2 class="dynamic-text">Passionate about
+          <span class="shatter-container" style="font-family:Georgia, 'Times New Roman', Times, serif">
+              <span class="shatter-word" style="color: cadetblue;">GenAI.</span>
+              <span class="shatter-word" style="color: rgb(171, 136, 109);">Machine Learning.</span>
+              <span class="shatter-word" style="color: rgb(168, 124, 124);">Innovation.</span>
+              <span class="shatter-word" style="color: rgb(169, 191, 168);">Data.</span>
+              <span class="shatter-word" style="color: rgb(230, 105, 97);">Creativity.</span>
+          </span>
+      </h2>
+      </div>
+    </section>
+
+
+
+    <section class="intro-text">
+      <div class="container">
+        <p data-aos="fade-up">
+          I'm a Computer Science student at Arizona State University, specializing in AI/ML and full-stack development. I love turning complex problems into user-friendly solutions.
+      </p>
+      </div>
+    </section>
+
+    <!--about-->
+<!--about-->
+<section id="about" class="about-section">
+  <div class="about-container">
+    <!-- Section Header -->
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">About Me</h2>
+      <div class="title-decoration">
+        <span class="line"></span>
+        <span class="dot"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="profile-content">
+      <!-- Left Column: Image and Quick Info -->
+      <!-- add static-photo to kill transforms/animations inside -->
+      <div class="profile-visual static-photo">
+        <div class="profile-image-container">
+          <img src="/static/imgs/yuvam-bhargav-profile.jpg" alt="Yuvam Bhargav" class="profile-image">
+          <div class="image-decoration"></div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+          <div class="stat-item">
+            <i class="fas fa-code"></i>
+            <div class="stat-content"><span>7+ Projects</span></div>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-award"></i>
+            <div class="stat-content"><span>5+ Awards</span></div>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-certificate"></i>
+            <div class="stat-content"><span>2+ Certifications</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Bio and Details -->
+      <div class="profile-details" data-aos="fade-left" data-aos-delay="150">
+        <!-- Introduction -->
+        <div class="bio-section">
+          <p class="bio-text">
+            Hi, I’m <strong>Yuvam Bhargav</strong>—a Computer Science student at
+            <strong>Arizona State University</strong> who enjoys turning ambiguous problems
+            into products people actually use. I work at the intersection of
+            <strong>AI/ML</strong> and <strong>full-stack engineering</strong>, with a focus on
+            reliability, speed, and a clean developer experience.
+          </p>
+          <p class="bio-text">
+            Lately I’ve been building <strong>GenAI features</strong>,
+            <strong>recommendation systems</strong>, and <strong>data pipelines</strong> with
+            solid observability and caching. I like fast prototypes that graduate into
+            maintainable, scalable systems.
+          </p>
+        </div>
+
+        <!-- Focus Areas -->
+        <div class="focus-areas" data-aos="fade-up" data-aos-delay="250">
+          <h4 class="focus-item">Focus Areas:</h4>
+          <div class="focus-grid">
+            <div class="focus-item" data-aos="zoom-in" data-aos-delay="300">
+              <i class="fas fa-brain"></i><span>Machine Learning</span>
+            </div>
+            <div class="focus-item" data-aos="zoom-in" data-aos-delay="350">
+              <i class="fas fa-laptop-code"></i><span>Full-Stack Systems</span>
+            </div>
+            <div class="focus-item" data-aos="zoom-in" data-aos-delay="400">
+              <i class="fas fa-database"></i><span>Data Engineering</span>
+            </div>
+            <div class="focus-item" data-aos="zoom-in" data-aos-delay="450">
+              <i class="fas fa-lightbulb"></i><span>GenAI &amp; LLM Apps</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Current Goals -->
+        <div class="current-goals" data-aos="fade-up" data-aos-delay="300">
+          <h4>Current Goals</h4>
+          <ul class="goals-list">
+            <li>Ship ML features behind tidy, well-documented APIs</li>
+            <li>Scale async AI workflows with queues &amp; caching</li>
+            <li>Collaborate with startups and research teams</li>
+          </ul>
+        </div>
+
+        <!-- Personal Interests -->
+        <div class="interests" data-aos="fade-up" data-aos-delay="350">
+          <h4>When I'm Not Coding</h4>
+          <div class="interests-tags">
+            <span class="interest-tag" data-aos="zoom-in" data-aos-delay="400">🎮 Gaming</span>
+            <span class="interest-tag" data-aos="zoom-in" data-aos-delay="450">🎵 Music</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  
+    
+    <!-- Projects Section -->
+<section id="projects" class="projects-section">
+  <div class="projects-container">
+    <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
+    
+    <div class="projects-grid">
+      <!-- AI Chatbot Project -->
+      <div class="project-card" data-aos="fade-up">
+        <div class="project-content">
+          <div class="project-front">
+            <div class="project-icon">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h3>[Work in Progress]</h3>
+            <div class="tech-stack">
+              <span>Python</span>
+              <span>TensorFlow</span>
+              <span>NLP</span>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>An AI powered companion to efficiently navigate available resources.</p>
+            <div class="project-links">
+              <!--<a href="#" class="demo-link">Live Demo</a>
+              <a href="#" class="github-link">
+                <i class="fab fa-github"></i> View Code
+              </a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portfolio 3D Project -->
+      <div class="project-card featured" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-content">
+          <div class="project-front">
+            <div class="project-icon">
+              <i class="fas fa-cube"></i>
+            </div>
+            <h3>Deepfake Detector</h3>
+            <div class="tech-stack">
+              <span>Python</span>
+              <span>OpenAI API</span>
+              <span>TensorFlow</span>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>A web-app that can detect deepfakes with 90% accuracy. Just upload any image or video file and get results within seconds.</p>
+            <div class="project-links">
+              <a href="#" class="demo-link">Live Demo</a>
+              <a href="#" class="github-link">
+                <i class="fab fa-github"></i> View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Neural Craft Project -->
+      <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="project-content">
+          <div class="project-front">
+            <div class="project-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3>CoFounderHunt</h3>
+            <div class="tech-stack">
+              <span>Python</span>
+              <span>GitHub Integration</span>
+              <span>PostgreSQL</span>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>An intelligent platform that help Founders find brilliant Cofounders and vice-versa. Make an account using Email/GitHub and navigate your next big venture.</p>
+            <div class="project-links">
+              <a href="#" class="demo-link">Live Demo</a>
+              <a href="#" class="github-link">
+                <i class="fab fa-github"></i> View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Vision Project -->
+      <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="project-content">
+          <div class="project-front">
+            <div class="project-icon">
+              <i class="fa-regular fa-file"></i>
+            </div>
+            <h3>Joberrrr</h3>
+            <div class="tech-stack">
+              <span>OpenAI</span>
+              <span>PostgreSQL</span>
+              <span>Python</span>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>A very intelligent Google Extension that helps you apply and land jobs by tailoring your resume and cover letter according to the job requirements using AI.</p>
+            <div class="project-links">
+              <a href="#" class="demo-link">Live Demo</a>
+              <a href="#" class="github-link">
+                <i class="fab fa-github"></i> View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+    
+  <section id="experience" class="experience-section">
+    <h2 class="section-title" data-aos="fade-up">Professional Experience</h2>
+    
+    <div class="experience-grid">
+      <!-- VR/AR Development -->
+      <div class="experience-card" data-aos="fade-up">
+        <div class="card-year">2024</div>
+        <div class="card-content">
+          <div class="role-tag">Internship</div>
+          <h3>VR/AR Development Intern</h3>
+          <div class="company-name">
+            <i class="fas fa-building"></i>
+            Futurristic
+          </div>
+          <div class="card-description">
+            <p>Worked on cutting-edge VR/AR applications and data visualization projects.</p>
+            <div class="achievements">
+              <div class="achievement-item">
+                <span class="achievement-icon">📊</span>
+                <span>Data flow analysis in prototype and final design</span>
+              </div>
+              <div class="achievement-item">
+                <span class="achievement-icon">🔧</span>
+                <span>AR/VR integration with A-Frame</span>
+              </div>
+              <div class="achievement-item">
+                <span class="achievement-icon">📈</span>
+                <span>3D data visualization.</span>
+              </div>
+            </div>
+          </div>
+          <div class="tech-stack">
+            <div class="stack-label">Technologies:</div>
+            <div class="stack-items">
+              <span>AR/VR</span>
+              <span>A-Frame</span>
+              <span>AR.js</span>
+              <span>PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!--ELDAAS-->
+      <div class="experience-card alt" data-aos="fade-up">
+        <div class="card-year">2023</div>
+        <div class="card-content">
+          <div class="role-tag">Internship</div>
+          <h3>Data Analyst Intern</h3>
+          <div class="company-name">
+            <i class="fas fa-building"></i>
+            ELDAAS
+          </div>
+          <div class="card-description">
+            <p>Collaborated with cross-functional teams to analyze and optimize data pipelines, ensuring improved performance.</p>
+            <div class="achievements">
+              <div class="achievement-item">
+                <span class="achievement-icon">📊</span>
+                <span>Automated end-to-end data flow for companies using Python and PostgreSQL, enhancing processing efficiency and data integrity.</span>
+                </div>
+              <div class="achievement-item">
+                <span class="achievement-icon">🔍</span>
+                <span>Analyzed and managed Data related to AI and its integration with electrical circuits/PCBs.</span>
+              </div>
+              <div class="achievement-item">
+                <span class="achievement-icon">🗒</span>
+                <span>Worked on 700+ responses</span>
+              </div>
+            </div>
+          </div>
+          <div class="tech-stack">
+            <div class="stack-label">Technologies:</div>
+            <div class="stack-items">
+              <span>Python</span>
+              <span>Pandas</span>
+              <span>SQL</span>
+              <span>Scikit-learn</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Education -->
+      <div class="experience-card" data-aos="fade-up">
+        <div class="card-year">2023</div>
+        <div class="card-content">
+          <div class="role-tag">Education</div>
+          <h3>Computer Science Student</h3>
+          <div class="company-name">
+            <i class="fas fa-university"></i>
+            Arizona State University
+          </div>
+          <div class="card-description">
+            <p>Pursuing advanced studies in Computer Science with focus on ML and AI.</p>
+            <div class="achievements">
+              <div class="achievement-item">
+                <span class="achievement-icon">🤖</span>
+                <span>Machine Learning Focus</span>
+              </div>
+              <div class="achievement-item">
+                <span class="achievement-icon">📚</span>
+                <span>Data Structures & Algorithms</span>
+              </div>
+              <div class="achievement-item">
+                <span class="achievement-icon">📊</span>
+                <span>Data Science Minor</span>
+              </div>
+            </div>
+          </div>
+          <div class="tech-stack">
+            <div class="stack-label">Focus Areas:</div>
+            <div class="stack-items">
+              <span>ML/AI</span>
+              <span>DSA</span>
+              <span>R, SQL</span>
+              <span>OOP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--events/leadership experience-->
+  <section id="Leadership" class="events-showcase">
+    <div class="section-title-container">
+        <h2 class="section-title">Events & Leadership</h2>
+        <div class="title-decoration">
+            <span class="line"></span>
+            <span class="dot"></span>
+            <span class="line"></span>
+        </div>
+    </div>
+
+    <div class="leadership-showcase">
+      <div class="leadership-menu">
+          <button class="menu-btn active" data-filter="current">Current Positions</button>
+          <button class="menu-btn" data-filter="past">Past Positions</button>
+      </div>
+  
+      <div class="leadership-grid">
+          <!-- CURRENT POSITIONS-->
+          <div class="leadership-card" data-position="current">
+              <div class="card-glow"></div>
+              <div class="card-content">
+                  <div class="role-tagL">Current</div>
+                  <div class="role-info">
+                      <h3>Director of Finance</h3>
+                      <span>Global Career Network @ ASU</span>
+                  </div>
+                  <div class="stats">
+                      <div class="stat">
+                          <span class="stat-number">2+</span>
+                          <span class="stat-label">Events</span>
+                      </div>
+                      <div class="stat">
+                          <span class="stat-number">200+</span>
+                          <span class="stat-label">Students</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="leadership-card" data-position="current">
+              <div class="card-glow"></div>
+              <div class="card-content">
+                  <div class="role-tagL">Current</div>
+                  <div class="role-info">
+                      <h3>Finance and Industry</h3>
+                      <span>DevLabs</span>
+                  </div>
+                  <div class="stats">
+                      <div class="stat">
+                          <span class="stat-number">4+</span>
+                          <span class="stat-label">Events</span>
+                      </div>
+                      <div class="stat">
+                          <span class="stat-number">700+</span>
+                          <span class="stat-label">Students Catered</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+  
+          <!-- PAST POSITIONS -->
+          <div class="leadership-card" data-position="past">
+              <div class="card-glow"></div>
+              <div class="card-content">
+                  <div class="role-tagLp">Past</div>
+                  <div class="role-info">
+                      <h3>Director of Finance</h3>
+                      <span>Indian Students' Association</span>
+                      <div class="role-progression">
+                        <span class="progression-tag">Finance Officer</span>
+                        <i class="fas fa-arrow-right progression-arrow"></i>
+                        <span class="progression-tag">Dir. of Finance</span>
+                    </div>
+                  </div>
+                  <div class="stats">
+                      <div class="stat">
+                          <span class="stat-number">4k+</span>
+                          <span class="stat-label">Students</span>
+                      </div>
+                      <div class="stat">
+                          <span class="stat-number">3+</span>
+                          <span class="stat-label">Events</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+    <div class="events-container">
+        <!-- Navigation Buttons -->
+        <button class="nav-btn prev" aria-label="Previous event">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="events-wrapper">
+            <!-- Event 1 -->
+            <div class="event-card active" data-event="1">
+                <div class="event-media">
+                    <video autoplay loop muted playsinline>
+                        <source src="/static/vids/DevHacks_video.mp4" type="video/mp4">
+                    </video>
+                    <div class="event-overlay"></div>
+                </div>
+                <div class="event-content">
+                    <div class="event-header">
+                        <div class="organization-details">
+                            <span class="event-organization">ASU Hacks</span>
+                            <span class="org-badge">
+                              DevLabs
+                          </span>
+                            <span class="event-position">
+                                <i class="fas fa-briefcase"></i>
+                                Lead Organizer
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="event-title">DevHacks x Strategy</h3>
+                    <div class="event-details">
+                        <span class="date"><i class="far fa-calendar"></i>March 29-30, 2025</span>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i>ASU Tempe Campus</span>
+                    </div>
+                    <p class="event-description">
+                        A 2-Day hackathon where students from various backgrounds come together to innovate and create impactful projects.
+                    </p>
+                    <div class="event-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-users"></i>
+                            <p>200+ Participants</p>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>10 Industry Mentors</p>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-handshake"></i>
+                            <p>5 Partners</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 2 
+            <div class="event-card" data-event="2">
+                <div class="event-media">
+                    <video autoplay loop muted playsinline>
+                        <source src="/static/vids/intro02.mp4" type="video/mp4">
+                    </video>
+                    <div class="event-overlay"></div>
+                </div>
+                <div class="event-content">
+                    <div class="event-header">
+                        <div class="organization-details">
+                            <span class="event-organization">Google Developer Student Clubs</span>
+                            <span class="event-position">
+                                <i class="fas fa-briefcase"></i>
+                                Technical Lead
+                            </span>
+                        </div>
+                    </div>
+                    <h3 class="event-title">Machine Learning Bootcamp</h3>
+                    <div class="event-details">
+                        <span class="date"><i class="far fa-calendar"></i>Fall 2023</span>
+                        <span class="location"><i class="fas fa-map-marker-alt"></i>Virtual & In-Person</span>
+                    </div>
+                    <p class="event-description">
+                        8-week intensive program on practical AI applications, covering ML fundamentals to advanced implementations.
+                    </p>
+                    <div class="event-highlights">
+                        <div class="highlight">
+                            <i class="fas fa-laptop-code"></i>
+                            <p>15 Projects</p>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-users"></i>
+                            <p>200+ Students</p>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-certificate"></i>
+                            <p>90% Success</p>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+
+        <button class="nav-btn next" aria-label="Next event">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Page Indicators -->
+    <div class="page-indicators">
+        <button class="page-dot active" data-event="1"></button>
+        <button class="page-dot" data-event="2"></button>
+    </div>
+</section>
+
+  
+
+    <!-- Accomplishments Section -->
+    <section id="accomplishments" class="accomplishments-section">
+      <div class="section-header">
+        <h2>Accomplishments</h2>
+        <div class="header-line"></div>
+      </div>
+      
+      <div class="carousel-container">
+        <div class="carousel">
+          <!-- Only one visible at a time, no scrolling -->
+          <div class="carousel-slide">
+            <div class="accomplishment-logo">
+              <img src="/static/imgs/ibm-certification-badge.jpeg" alt="IBM">
+            </div>
+            <p class="accomplishment-text">IBM Data Science Professional</p>
+          </div>
+
+          <div class="carousel-slide">
+            <div class="accomplishment-logo">
+              <img src="/static/imgs/Introduction to GenAI.jpeg" alt="GenAI">
+            </div>
+            <p class="accomplishment-text">Introduction to Generative AI</p>
+          </div>
+          
+          <div class="carousel-slide">
+            <div class="accomplishment-logo">
+              <img src="/static/imgs/arizona-state-university-logo.png" alt="ASU">
+            </div>
+            <p class="accomplishment-text">Dean's List</p>
+          </div>
+          
+          <div class="carousel-slide">
+            <div class="accomplishment-logo">
+              <img src="/static/imgs/arizona-state-university-logo.png" alt="Innovative Student">
+            </div>
+            <p class="accomplishment-text">Most Innovative Project</p>
+          </div>
+        </div>
+        
+        <!-- Navigation dots -->
+        <div class="carousel-navigation">
+          <span class="nav-dot active" data-slide="0"></span>
+          <span class="nav-dot" data-slide="1"></span>
+          <span class="nav-dot" data-slide="2"></span>
+          <span class="nav-dot" data-slide="3"></span>
+        </div>
+        <br>
+        <hr>
+        <br>
+      </div>
+    </section>
+
+    <!--ai-->
+    <div class="site-overlay"></div>
+    <div class="chat-display">
+      <div class="messages-container">
+        <!-- Messages added -->
+      </div>
+    </div>
+
+    <div class="ai-query-container">
+      <div class="ai-query-wrapper">
+        <input
+          type="text"
+          class="ai-query-box"
+          placeholder="Ask me anything about Yuvam..."
+          autocomplete="off"
+          required
+        />
+        <button class="send-button" aria-label="Send message">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Connect Section HTML -->
+<section id="connect" class="connect-section">
+  <div class="connect-container">
+    <h2 class="section-title" data-aos="fade-up">Let's Connect</h2>
+    
+    <!-- Connect Cards Container -->
+    <div class="connect-cards">
+      <!-- LinkedIn Card -->
+      <div class="connect-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-icon">
+          <i class="fab fa-linkedin"></i>
+        </div>
+        <h3>LinkedIn</h3>
+        <p>Let's grow our Network</p>
+        <a href="https://linkedin.com/in/yuvam-bh" target="_blank" class="connect-link">Connect on LinkedIn</a>
+      </div>
+
+      <!-- Calendar Card -->
+      <div class="connect-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="card-icon">
+          <i class="far fa-calendar-alt"></i>
+        </div>
+        <h3>Schedule</h3>
+        <p>Book a meeting</p>
+        <a href="#" onclick="openCalendly()" class="connect-link">Schedule Time</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!--footer-->
+    <div class="footer-bottom">
+      <p>
+        &copy;
+        <span id="current-year"></span>
+        Yuvam Bhargav | All rights reserved.
+      </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script src="js/projects-glide.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="/static/js/script.js"></script>
+    <body
+      style="-webkit-overflow-scrolling: touch; overscroll-behavior-y: contain"
+    ></body>
+  </body>
+</html>

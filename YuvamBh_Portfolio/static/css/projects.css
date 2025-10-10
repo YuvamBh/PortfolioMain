@@ -1,0 +1,103 @@
+:root { --fg:#eaeaea; --dim:#a7a7a7; }
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; margin:0; }
+body.projects {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--fg);
+  background-color: #0E0B09; /* primary dark tone of your portfolio */
+  overflow: hidden;
+}
+
+/* Optional gradient for depth */
+.proj-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(120% 90% at 50% 40%, #120E0C 0%, #0E0B09 60%, #090705 100%);
+}
+
+
+
+/* ---------- Background (full viewport, crossfade) ---------- */
+.proj-bg{ position:fixed; inset:0; z-index:0; }
+.bg-layer{
+  position:absolute; inset:0;
+  background:#0b0b0d center/cover no-repeat;
+  opacity:0; transform:scale(1.02);
+  transition: opacity .6s ease, transform .6s ease;
+  will-change: opacity, transform, background-image;
+}
+.bg-layer.is-show{ opacity:1; transform:scale(1); }
+.bg-wash{
+  position:absolute; inset:0;
+  background: radial-gradient(80% 60% at 50% 30%, rgba(145, 104, 66, 0.25), rgba(0,0,0,.75) 70%),
+              linear-gradient(180deg, rgba(130, 104, 65, 0.2), rgba(0,0,0,.65));
+}
+
+/* ---------- Top bar ---------- */
+.proj-topbar{
+  position:fixed; top:0; left:0; right:0; z-index:3;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 20px; pointer-events:none;
+}
+.proj-topbar a, .proj-topbar span{ pointer-events:auto; }
+.proj-back{ color:#fff; text-decoration:none; opacity:.95; }
+.proj-back:hover{ opacity:1; }
+.proj-brand{ opacity:.7; letter-spacing:.08em; text-transform:uppercase; font-size:.8rem; }
+
+/* ---------- Frame / list ---------- */
+.proj-frame{
+  position:fixed; inset:0; z-index:2;
+  display:grid; place-items:center;
+  padding: max(6vh,40px) clamp(16px, 3vw, 36px);
+}
+.proj-list{
+  width:min(1200px, 92vw);
+  height:min(82vh, 700px);
+  overflow:auto; scroll-snap-type:y mandatory; scroll-snap-stop:always;
+  border:1px solid rgba(179, 179, 179, 0.08);
+  border-radius:18px;
+  background: rgba(95, 87, 82, 0.35); backdrop-filter: blur(8px) saturate(120%);
+  -ms-overflow-style:none; scrollbar-width:none;
+}
+.proj-list::-webkit-scrollbar{ display:none; }
+
+/* ---------- Item (centered slide) ---------- */
+.proj-item{
+  position:relative;
+  display:grid; place-content:center; text-align:center;
+  gap:1rem;
+  padding: clamp(28px, 5vw, 48px) clamp(20px, 4vw, 48px);
+  height: 78vh; /* JS will overwrite to exact frame height */
+  scroll-snap-align:start;
+  border-bottom: 1px solid rgba(187, 71, 71, 0.08);
+  text-decoration:none; color:var(--fg);
+}
+.proj-item:last-child{ border-bottom:none; }
+
+.proj-no{ position:absolute; top:18px; right:22px; font-size:12px; opacity:.7; }
+.proj-title{
+  font-family:"Anton", system-ui, sans-serif;
+  font-size: clamp(40px, 10vw, 104px);
+  line-height:.9; letter-spacing:.01em; text-transform:uppercase;
+  margin:0; text-shadow: 0 12px 40px rgba(0,0,0,.45);
+}
+.proj-desc{ margin:0 auto; max-width: 58ch; opacity:.9; }
+.proj-tags{ margin:.25rem 0 0; opacity:.8; color:var(--dim); font-size:.95rem; }
+
+.proj-cta{ display:flex; gap:.8rem; justify-content:center; margin-top:.5rem; }
+.btn{
+  display:inline-block; padding:.6rem 1.1rem; border-radius:12px;
+  text-decoration:none; font-weight:600; letter-spacing:.02em;
+  border:1px solid rgba(255,255,255,.18);
+}
+.btn-primary{ background:#ffffff15; color:#fff; }
+.btn-primary:hover{ background:#ffffff25; }
+.btn-outline{ background:transparent; color:#fff; }
+.btn-outline:hover{ background:#ffffff10; }
+
+/* Responsive */
+@media (max-width: 900px){
+  .proj-list{ height: 82vh; }
+}

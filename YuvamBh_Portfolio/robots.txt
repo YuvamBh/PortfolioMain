@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /static/
+Allow: /projects
+Disallow: /static/resume/
+Disallow: /__pycache__/
+
+Sitemap: https://yuvambhargav.com/sitemap.xml

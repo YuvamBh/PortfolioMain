@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Experiments — Yuvam Bhargav</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/experiments.css" />
+</head>
+
+<body class="experiments">
+  <!-- Fullscreen background (two layers for crossfade) -->
+  <div class="exp-bg">
+    <div class="bg-layer bg-a" id="bgA"></div>
+    <div class="bg-layer bg-b" id="bgB"></div>
+    <!-- dark wash for readability -->
+    <div class="bg-wash"></div>
+  </div>
+
+  <!-- Overlay menu (transparent, centered column) -->
+  <header class="exp-topbar">
+    <a href="/" class="exp-back">← Back</a>
+    <span class="exp-brand">Experiments</span>
+  </header>
+
+  <main class="exp-menu-wrap" id="menuWrap">
+    <nav class="exp-menu" id="menu">
+      <!-- Each item controls the background via data-bg -->
+      <a class="exp-item is-active" data-bg="/static/experiments/bg-01.jpg" href="#" id="e-01">
+        <span class="exp-no">01</span>
+        <h2 class="exp-title">FORGET EVERYTHING …</h2>
+        <p class="exp-tags">CSS only • Type motion • 2025</p>
+      </a>
+
+      <a class="exp-item" data-bg="/static/experiments/bg-02.jpg" href="#" id="e-02">
+        <span class="exp-no">02</span>
+        <h2 class="exp-title">FAKE</h2>
+        <p class="exp-tags">Clip-mask • SVG • Study</p>
+      </a>
+
+      <a class="exp-item" data-bg="/static/experiments/bg-03.jpg" href="#" id="e-03">
+        <span class="exp-no">03</span>
+        <h2 class="exp-title">I’M NOT THE ONE YOU WANT</h2>
+        <p class="exp-tags">3D illusion • Perspective</p>
+      </a>
+
+      <a class="exp-item" data-bg="/static/experiments/bg-04.jpg" href="#" id="e-04">
+        <span class="exp-no">04</span>
+        <h2 class="exp-title">BREAKING THE HABIT</h2>
+        <p class="exp-tags">Variable font • Kinetic type</p>
+      </a>
+    </nav>
+  </main>
+
+  <script src="/static/js/experiments.js"></script>
+</body>
+</html>
