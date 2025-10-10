@@ -1904,3 +1904,6 @@ const skillsData = [
   renderProof(first.proof);
 })();
 
+// Prevent right-click context menu
+document.addEventListener("contextmenu", event => event.preventDefault());
+
