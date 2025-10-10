@@ -3339,18 +3339,27 @@
   filter: none !important;
 }
 
-/* Disable text selection globally */
-* {
-  user-select: none;            /* standard */
-  -webkit-user-select: none;    /* Safari */
-  -moz-user-select: none;       /* Firefox */
-  -ms-user-select: none;        /* old IE/Edge */
+/* --- Make everything non-selectable but keep buttons/links clickable --- */
+html, body, * {
+  user-select: none;            /* disable text highlight */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
-/* Optional: disable dragging of images */
-img, a, video {
-  pointer-events: none;
+/* --- Allow interaction for clickable elements --- */
+a, button, input, textarea, select, label {
+  pointer-events: auto !important;
+  cursor: pointer;
+  user-select: text; /* optional: allow copying inside form fields if needed */
+}
+
+/* --- Prevent image dragging but keep them visible --- */
+img {
   -webkit-user-drag: none;
   user-drag: none;
+  pointer-events: auto;
 }
+
+
 
