@@ -110,7 +110,7 @@ def projects():
 # --- GitHub contributions proxy ---
 @app.route("/github/contributions")
 def github_contributions():
-    username = request.args.get("u", "yuvambhargav")  # change default if you like
+    username = request.args.get("u", "YuvamBh")  # change default if you like
     url = f"https://github.com/users/{username}/contributions"
     try:
         r = requests.get(url, timeout=6, headers={"User-Agent": "Yuvam-Portfolio/1.0"})
