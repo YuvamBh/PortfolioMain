@@ -1903,30 +1903,3 @@ const skillsData = [
   setGauge(first.level);
   renderProof(first.proof);
 })();
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const obj = document.getElementById("githubContrib");
-
-  obj.addEventListener("load", () => {
-    const svgDoc = obj.contentDocument;
-    if (!svgDoc) return;
-
-    // Grab all contribution squares
-    const rects = svgDoc.querySelectorAll("rect.ContributionCalendar-day");
-    rects.forEach((r) => {
-      const level = r.getAttribute("data-level");
-      switch (level) {
-        case "0": r.style.fill = "#1a130f"; break;  // very dark background
-        case "1": r.style.fill = "#5d3f2b"; break;  // coffee brown
-        case "2": r.style.fill = "#9a6f4f"; break;  // warm beige-brown
-        case "3": r.style.fill = "#c1916d"; break;  // gold-brown
-        case "4": r.style.fill = "#e0b38f"; break;  // soft gold highlight
-      }
-    });
-
-    // Optional: remove GitHub's footer legend
-    const legends = svgDoc.querySelectorAll(".ContributionCalendar-legend, .sr-only");
-    legends.forEach(l => l.remove());
-  });
-});
