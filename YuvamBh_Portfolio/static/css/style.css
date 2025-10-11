@@ -3361,3 +3361,44 @@ img {
   pointer-events: auto;
 }
 
+.github-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  background: rgba(20,17,15,0.3);
+  backdrop-filter: blur(8px) saturate(130%);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  max-width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.github-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 18px rgba(201,155,114,0.25);
+}
+
+.github-title {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e0b38f; /* soft gold accent */
+  letter-spacing: 0.5px;
+}
+
+.github-embed {
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+.github-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease;
+}
+
+.github-card:hover .github-img {
+  filter: brightness(1);
+}
