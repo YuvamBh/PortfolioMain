@@ -3338,7 +3338,6 @@
   transform: none !important;
   filter: none !important;
 }
-
 /* --- Make everything non-selectable but keep buttons/links clickable --- */
 html, body, * {
   user-select: none;            /* disable text highlight */

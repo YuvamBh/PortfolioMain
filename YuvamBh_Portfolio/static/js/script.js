@@ -1903,3 +1903,5 @@ const skillsData = [
   setGauge(first.level);
   renderProof(first.proof);
 })();
+
+document.addEventListener("contextmenu", e => e.preventDefault());
