@@ -826,6 +826,32 @@
       </p>
     </div>
 
+    <!-- Gesture Control UI -->
+    <div id="gesture-ui" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: flex-end;">
+        <button id="enable-gesture-btn" class="menu-button" style="position: static; width: auto; padding: 12px 24px; border-radius: 50px; font-size: 14px; background: rgba(19, 14, 14, 0.9); color: rgb(204, 204, 204); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s ease;">
+            <i class="fas fa-hand-paper" style="margin-right: 8px;"></i> Enable Gestures
+        </button>
+        
+        <div id="gesture-container" style="display: none; background: rgba(19, 14, 14, 0.95); padding: 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px); width: 190px; margin-top: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="color: rgb(204, 204, 204); font-size: 12px; font-weight: 500;">Camera Feed</span>
+                <button id="close-gesture-btn" style="background: none; border: none; color: rgb(204, 204, 204); cursor: pointer; font-size: 16px; padding: 0; transition: color 0.2s;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div style="position: relative; width: 100%; padding-top: 75%; overflow: hidden; border-radius: 12px; background: #000;">
+                <video id="gesture-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1);" playsinline></video>
+                <canvas id="gesture-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1);"></canvas>
+            </div>
+            <div id="gesture-status" style="color: rgb(204, 204, 204); text-align: center; margin-top: 10px; font-size: 11px; min-height: 1.2em; transition: opacity 0.3s;">Initializing...</div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="/static/js/gesture.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
     <script src="js/projects-glide.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
