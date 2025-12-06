@@ -20,17 +20,19 @@ document.addEventListener("mousemove", (e) => {
   }, 20);
 });
 
-// Hover effects for interactive elements
-document.querySelectorAll("a, button").forEach((element) => {
-  element.addEventListener("mouseenter", () => {
+// Hover effects for interactive elements (Event Delegation)
+document.body.addEventListener("mouseover", (e) => {
+  if (e.target.closest("a, button, .gesture-btn, .resume-close-btn")) {
     cursorInner.classList.add("cursor-hover");
     cursorOuter.classList.add("cursor-hover");
-  });
+  }
+});
 
-  element.addEventListener("mouseleave", () => {
+document.body.addEventListener("mouseout", (e) => {
+  if (e.target.closest("a, button, .gesture-btn, .resume-close-btn")) {
     cursorInner.classList.remove("cursor-hover");
     cursorOuter.classList.remove("cursor-hover");
-  });
+  }
 });
 
 // Handle cursor visibility

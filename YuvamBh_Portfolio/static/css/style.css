@@ -797,6 +797,141 @@
     position: absolute;
     left: 0;
   }
+
+/* Gesture Control UI */
+.gesture-ui {
+    position: fixed;
+    top: 20px;
+    right: 100px;
+    bottom: auto;
+    z-index: 1000;
+    font-family: var(--font-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.gesture-btn {
+    position: static;
+    width: auto;
+    padding: 10px 25px; /* Keep padding for alignment */
+    border-radius: 50px;
+    font-size: 16px; /* Keep font size for alignment */
+    background: rgba(190, 138, 95, 0.9); /* Revert to Coffee Accent */
+    color: #000; /* Revert to Black text */
+    border: none;
+    backdrop-filter: blur(10px); /* Restore glass effect */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Restore shadow */
+    transition: all 0.3s ease;
+    font-weight: 500; /* Revert font weight */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gesture-btn:hover {
+    transform: translateY(-2px); /* Restore hover effect */
+    box-shadow: 0 6px 20px rgba(190, 138, 95, 0.4);
+    opacity: 1; /* Reset opacity */
+}
+
+.gesture-container {
+    display: none;
+    background: rgba(20, 20, 20, 0.95);
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: 1px solid rgba(190, 138, 95, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    margin-top: 10px;
+    align-items: center;
+    gap: 15px;
+}
+
+.gesture-status {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.gesture-close {
+    background: none;
+    border: none;
+    color: rgba(190, 138, 95, 0.8);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.gesture-close:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* Resume Modal */
+.resume-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.resume-content {
+    position: relative;
+    width: 80%;
+    height: 90%;
+    background: var(--primary-color);
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(190, 138, 95, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.resume-close-btn {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 40px;
+    height: 40px;
+    background: rgb(146, 85, 85); /* Close button color from theme */
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.resume-close-btn:hover {
+    transform: scale(1.1);
+    background: rgb(170, 100, 100);
+}
+
+.resume-iframe {
+    width: 100%;
+    flex: 1;
+    border: none;
+    border-radius: 20px;
+}
   
   /* Content Footer */
   .content-footer {
@@ -1328,6 +1463,7 @@
   font-weight: 600;
   background: linear-gradient(to right, var(--accent-color), lightgray);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1556,7 +1692,6 @@
 
 
   /*accomplishments*/
-  <style>
   .accomplishments-section {
     padding: 4rem 0;
     background: rgba(18, 18, 20, 0.8);
@@ -3099,6 +3234,7 @@
   margin-bottom: 1rem;
   background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
 }
 
