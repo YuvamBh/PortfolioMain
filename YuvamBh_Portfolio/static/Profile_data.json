@@ -80,7 +80,7 @@
     "careerGoals": "I aim to leverage my CS + DS background to build AI/ML solutions that solve real-world problems.",
     "contactInfo": "Email: yuvambhargav.official@gmail.com · LinkedIn: https://www.linkedin.com/in/yuvam-bh/",
     "thanks": "You're welcome! Feel free to ask anything else about my background, experience, or projects.",
-    "resume": "I'm glad you requested my resume. Please email me at hi@yuvambhargav.com if you have any questions.",
+    "resume": "You can download my resume below. [[GET_RESUME:/static/YuvamBhargav_Resume.pdf]] Also, if you turn on gesture control from the top right and show a victory sign (✌️), you can access my resume.",
     "graduation": "May 2027.",
     "fallback": "I’m Yuvam Bhargav. Ask me about my education, skills, experience, projects, achievements, or graduation date."
   },
@@ -114,7 +114,7 @@
     "dataScience": "My Data Science minor provided specialized knowledge in statistics, ML, and data analysis for real-world decision-making.",
     "programming": "Most proficient in Python, Java, JavaScript; also SQL, R, and HTML/CSS used across projects/internships.",
     "vrar": "Hands-on AR/VR experience from Futurristic using A-Frame and AR.js for immersive applications.",
-    "resume": "Use the 'Request Resume' button on the site; after approval, it will be emailed to you."
+    "resume": "You can download my resume below. [[GET_RESUME:/static/YuvamBhargav_Resume.pdf]] Also, if you turn on gesture control from the top right and show a victory sign (✌️), you can access my resume."
   },
 
   "conversationalResponses": {

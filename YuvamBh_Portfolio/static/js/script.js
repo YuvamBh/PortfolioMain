@@ -582,12 +582,12 @@ function enhanceMessage(element) {
       const url = (rawUrl || "").trim();
       if (url) {
         // Use an <a> so it works everywhere and triggers download/open
-        return `<a class="resume-btn" href="${url}" target="_blank" rel="noopener noreferrer">Get Resume</a>`;
+        return `<a class="resume-btn" href="${url}" target="_blank" rel="noopener noreferrer">Download Resume</a>`;
       }
       // Fallback: open email compose if no URL was passed
       const match = text.match(emailRegex);
       const email = match ? match[0] : "hi@yuvambhargav.com";
-      return `<button class="resume-btn" data-email="${email}">Get Resume</button>`;
+      return `<button class="resume-btn" data-email="${email}">Download Resume</button>`;
     });
   }
 
