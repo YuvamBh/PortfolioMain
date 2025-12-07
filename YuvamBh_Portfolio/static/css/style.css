@@ -802,7 +802,7 @@
 .gesture-ui {
     position: fixed;
     top: 20px;
-    right: 100px;
+    right: 90px; /* Reduced gap to align better with menu button */
     bottom: auto;
     z-index: 1000;
     font-family: var(--font-primary);
@@ -816,14 +816,13 @@
     width: auto;
     padding: 10px 25px; /* Keep padding for alignment */
     border-radius: 50px;
-    font-size: 16px; /* Keep font size for alignment */
-    background: rgba(190, 138, 95, 0.9); /* Revert to Coffee Accent */
-    color: #000; /* Revert to Black text */
+    font-size: 1rem; /* Match 'larger' font size of menu button */
+    background: #000000; /* Match menu button */
+    color: #ffffff; /* Match menu button */
     border: none;
-    backdrop-filter: blur(10px); /* Restore glass effect */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Restore shadow */
+    box-shadow: none; /* Remove shadow to match menu button */
     transition: all 0.3s ease;
-    font-weight: 500; /* Revert font weight */
+    font-weight: 500;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -838,20 +837,22 @@
 
 .gesture-container {
     display: none;
-    background: rgba(20, 20, 20, 0.95);
-    padding: 15px 25px;
+    background: #000000; /* Match buttons */
+    /* padding: 15px 25px; */ 
+    padding: 10px 25px; /* Match button padding height */
     border-radius: 50px;
-    border: 1px solid rgba(190, 138, 95, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    margin-top: 10px;
+    border: none; /* Remove border */
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); */
+    box-shadow: none; /* Remove shadow */
+    /* backdrop-filter: blur(10px); Removed */
+    margin-top: 0; /* Remove top margin for perfect alignment */
     align-items: center;
     gap: 15px;
 }
 
 .gesture-status {
     color: rgba(255, 255, 255, 0.9);
-    font-size: 14px;
+    font-size: 16px; /* Match button font size */
     white-space: nowrap;
 }
 

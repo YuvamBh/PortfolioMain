@@ -10,30 +10,57 @@ let camera = null;
 let hands = null;
 
 // Status updates 
+// Status updates 
 function onResults(results) {
   if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
     for (const landmarks of results.multiHandLandmarks) {
+      const now = Date.now();
+      
+      // 1. Victory Gesture -> Resume
       if (detectVictory(landmarks)) {
           gestureStatus.innerText = "✌️ Victory! Opening Resume...";
-          gestureStatus.style.color = "rgb(190, 138, 95)"; // Keep dynamic feedback if needed, or move to class
+          gestureStatus.style.color = "rgb(190, 138, 95)";
           
-          if (!resumeOpened) {
-              const now = Date.now();
-              if (now - lastGestureTime > 2000) {
-                   lastGestureTime = now;
-                   resumeOpened = true; 
-                   showResumeModal();
-                   setTimeout(() => { resumeOpened = false; }, 5000);
-              }
+          if (!resumeOpened && (now - lastGestureTime > 2000)) {
+               lastGestureTime = now;
+               resumeOpened = true; 
+               showResumeModal();
+               setTimeout(() => { resumeOpened = false; }, 5000);
           }
       } 
+      // 2. Pointing Up -> AI Chat
+      else if (detectPointingUp(landmarks)) {
+          gestureStatus.innerText = "☝️ Pointing Up! Opening AI Chat...";
+          gestureStatus.style.color = "rgb(100, 200, 255)";
+
+          // Simple debounce for AI chat trigger
+          if (now - lastGestureTime > 2000) {
+              lastGestureTime = now;
+              const queryBox = document.querySelector('.ai-query-box');
+              if (queryBox) {
+                  queryBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  setTimeout(() => queryBox.focus(), 500); // Wait for scroll
+              }
+          }
+      }
+      // 3. Thumbs Up -> LinkedIn
+      else if (detectThumbsUp(landmarks)) {
+          gestureStatus.innerText = "👍 Thumbs Up! Connecting on LinkedIn...";
+          gestureStatus.style.color = "rgb(0, 119, 181)"; // LinkedIn Blue
+
+          // Stronger debounce for window.open to prevent popup blast
+          if (now - lastGestureTime > 3000) {
+              lastGestureTime = now;
+              window.open('https://www.linkedin.com/in/yuvam-bh/', '_blank');
+          }
+      }
       else {
-          gestureStatus.innerText = "👀 Looking for Victory sign...";
+          gestureStatus.innerText = "👀 Scanning... (✌️Resume | ☝️AI | 👍LinkedIn)";
           gestureStatus.style.color = "rgba(255, 255, 255, 0.9)";
       }
     }
   } else {
-      gestureStatus.innerText = "👋 Waiting for hand...";
+      gestureStatus.innerText = "👋 Show hand... (✌️Resume | ☝️AI | 👍LinkedIn)";
       gestureStatus.style.color = "rgba(255, 255, 255, 0.5)";
   }
 }
@@ -96,6 +123,62 @@ function detectVictory(landmarks) {
     const isPinkyCurled = pinkyTip.y > pinkyMCP.y;
 
     return isIndexExtended && isMiddleExtended && isRingCurled && isPinkyCurled;
+}
+
+function detectPointingUp(landmarks) {
+    // Index Extended
+    const indexTip = landmarks[8];
+    const indexMCP = landmarks[5];
+    const isIndexExtended = indexTip.y < indexMCP.y;
+
+    // Others Curled
+    const middleTip = landmarks[12];
+    const middleMCP = landmarks[9];
+    const isMiddleCurled = middleTip.y > middleMCP.y;
+
+    const ringTip = landmarks[16];
+    const ringMCP = landmarks[13];
+    const isRingCurled = ringTip.y > ringMCP.y;
+
+    const pinkyTip = landmarks[20];
+    const pinkyMCP = landmarks[17];
+    const isPinkyCurled = pinkyTip.y > pinkyMCP.y;
+    
+    return isIndexExtended && isMiddleCurled && isRingCurled && isPinkyCurled;
+}
+
+function detectThumbsUp(landmarks) {
+    // Thumb Extended Upward
+    const thumbTip = landmarks[4];
+    const thumbIP = landmarks[3];
+    const thumbMCP = landmarks[2];
+    
+    // Check if thumb is strictly pointing up (Tip highest, decreasing Y)
+    // Note: Y coordinates increase downwards
+    const thumbIsVertical = (thumbTip.y < thumbIP.y) && (thumbIP.y < thumbMCP.y);
+    
+    // Check horizontal alignment of thumb (Tip shouldn't drastically deviate from MCP on X-axis)
+    // This ensures it's "upright" and not slanted
+    const thumbIsUpright = Math.abs(thumbTip.x - thumbMCP.x) < 0.1; // Strict X deviation check
+
+    // Others Curled
+    const indexTip = landmarks[8];
+    const indexMCP = landmarks[5];
+    const isIndexCurled = indexTip.y > indexMCP.y;
+
+    const middleTip = landmarks[12];
+    const middleMCP = landmarks[9];
+    const isMiddleCurled = middleTip.y > middleMCP.y;
+
+    const ringTip = landmarks[16];
+    const ringMCP = landmarks[13];
+    const isRingCurled = ringTip.y > ringMCP.y;
+
+    const pinkyTip = landmarks[20];
+    const pinkyMCP = landmarks[17];
+    const isPinkyCurled = pinkyTip.y > pinkyMCP.y;
+
+    return thumbIsVertical && thumbIsUpright && isIndexCurled && isMiddleCurled && isRingCurled && isPinkyCurled;
 }
 
 function startGestureRecognition() {
