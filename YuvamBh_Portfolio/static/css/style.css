@@ -812,17 +812,17 @@
 }
 
 .gesture-btn {
-    position: static;
-    width: auto;
+    position: fixed;
+    top: 70px;
+    right: 10px;
     padding: 10px 25px; /* Keep padding for alignment */
     border-radius: 50px;
-    font-size: 1rem; /* Match 'larger' font size of menu button */
+    font-size: 23px; /* Match 'larger' font size of menu button */
     background: #000000; /* Match menu button */
     color: #ffffff; /* Match menu button */
     border: none;
     box-shadow: none; /* Remove shadow to match menu button */
     transition: all 0.3s ease;
-    font-weight: 500;
     cursor: pointer;
     display: flex;
     align-items: center;
