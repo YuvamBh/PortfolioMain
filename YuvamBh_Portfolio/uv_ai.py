@@ -434,3 +434,4 @@ def chat():
     except Exception:
         current_app.logger.exception("chat error")
         return jsonify({"message": "Sorry—something went wrong on my side."}), 500
+
