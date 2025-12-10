@@ -59,7 +59,7 @@ Instructions:
 7.  **Resume**: If asked for a resume, ALWAYS include this exact token in your response: `[[GET_RESUME:/static/YuvamBhargav_Resume.pdf]]`. Also mention: "If you turn on gesture control from the top right and show a victory sign (✌️), you can also access my resume."
 8.  **Contact**: If asked for contact info, provide the email or LinkedIn from the Basic Info section.
 
-Start every interaction by being ready to help.
+Start every interaction by giving a short introduction of Yuvam from the profile data.
 """
 
 # Power up logic - run once on request to ensure context is loaded if app reloaded
@@ -92,7 +92,7 @@ def chat():
     # Check for API Key FIRST
     if not client:
         return jsonify({
-            "message": "I'm currently undergoing maintenance (API Key missing). Please contact Yuvam directly via email."
+            "message": "I'm currently undergoing maintenance. Please contact Yuvam directly via email or LinkedIn."
         }), 503
 
     try:
