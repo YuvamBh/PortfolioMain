@@ -13,7 +13,6 @@
 
   const items = Array.from(list.querySelectorAll('.proj-item'));
 
-  /* 1) Size slides to the frame height for perfect snap */
   function sizeSlides() {
     const h = list.clientHeight;
     items.forEach(el => { el.style.height = h + 'px'; });
@@ -43,7 +42,6 @@
     }
   });
 
-  /* 3) Background crossfade (image preloading) */
   let showingA = true;
   function setBackground(url) {
     if (!url) return;
@@ -68,7 +66,6 @@
     bgA.classList.add('is-show');
   }
 
-  /* 4) Activate by visibility within the list */
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const el = entry.target;
@@ -81,7 +78,6 @@
   }, { root: list, threshold: [0.6] });
   items.forEach(el => io.observe(el));
 
-  /* 5) Clamp + autosnap after scroll end */
   let scrollTimer = null;
   list.addEventListener('scroll', () => {
     if (scrollTimer) clearTimeout(scrollTimer);
@@ -97,6 +93,4 @@
     }, 90);
   });
 
-  /* 6) Keep buttons clickable (don’t attach a click handler to the slide itself) */
-  // No slide-level click listeners here on purpose.
 })();

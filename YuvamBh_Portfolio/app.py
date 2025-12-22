@@ -41,7 +41,6 @@ def gzipped(f):
         return response
     return view_func
 
-# Combined header function for SEO, caching, and security
 @app.after_request
 def add_headers(response):
     # SEO headers

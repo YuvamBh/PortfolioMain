@@ -74,8 +74,7 @@ function showResumeModal() {
         
         const content = document.createElement('div');
         content.className = 'resume-content';
-        
-        // Close Button
+
         const closeBtn = document.createElement('button');
         closeBtn.innerHTML = "&times;";
         closeBtn.className = 'resume-close-btn';
@@ -93,13 +92,11 @@ function showResumeModal() {
         content.appendChild(iframe);
         modal.appendChild(content);
         document.body.appendChild(modal);
-        
-        // Force reflow
+
         void modal.offsetWidth;
     }
     
     modal.style.display = 'flex';
-    // Small delay to allow display:flex to apply before opacity transition
     setTimeout(() => { modal.style.opacity = '1'; }, 10);
 }
 

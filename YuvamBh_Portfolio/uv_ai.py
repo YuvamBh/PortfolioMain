@@ -1,25 +1,25 @@
-# uv_ai.py — OpenAI Powered Portfolio Assistant
 import json
 import os
 from pathlib import Path
 from flask import Blueprint, request, jsonify, current_app
 from dotenv import load_dotenv
 from openai import OpenAI
+from datetime import datetime, timedelta
 
 uv_ai_bp = Blueprint("uv_ai", __name__, url_prefix="/api")
 
-# Load environment variables
 load_dotenv()
 
-# Initialize OpenAI Client
 client = None
 if os.getenv("OPENAI_API_KEY"):
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# -----------------------
-# System Prompt & Context
-# -----------------------
 SYSTEM_PROMPT = ""
+
+RATE_LIMIT_DATA = {}
+MAX_REQUESTS_PER_SESSION = 2
+BLOCK_DURATION_MINUTES = 26
+SESSION_IDLE_TIMEOUT_HOURS = 1
 
 def _load_profile():
     global SYSTEM_PROMPT
@@ -27,7 +27,6 @@ def _load_profile():
     profile_path = root / "static" / "Profile_data.json"
     
     if not profile_path.exists():
-        # Fallback path if needed
         profile_path = root / "Profile_data.json"
 
     data = {}
@@ -35,9 +34,6 @@ def _load_profile():
         with open(profile_path, "r", encoding="utf-8") as f:
             data = json.load(f)
             
-    # Construct System Prompt
-    # We dump the entire JSON into the context so the model can query it intelligently.
-    # You can optimize this by summarizing if the JSON is huge, but for a portfolio it's usually fine.
     profile_str = json.dumps(data, indent=2)
     
     SYSTEM_PROMPT = f"""
@@ -62,19 +58,53 @@ Instructions:
 Start every interaction by giving a short introduction of Yuvam from the profile data.
 """
 
-# Power up logic - run once on request to ensure context is loaded if app reloaded
 def _ensure_context():
     global SYSTEM_PROMPT, client
     if not SYSTEM_PROMPT:
         _load_profile()
-    # Re-check client in case env was loaded late? 
-    # Usually env is loaded at module level, but safe to check.
     if not client and os.getenv("OPENAI_API_KEY"):
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# -----------------------
-# Routes
-# -----------------------
+def _check_rate_limit(ip_address):
+    now = datetime.now()
+    user_data = RATE_LIMIT_DATA.get(ip_address)
+
+    if not user_data:
+        RATE_LIMIT_DATA[ip_address] = {
+            'count': 1,
+            'last_request': now,
+            'blocked_until': None
+        }
+        return True, None
+
+    # Check if currently blocked
+    if user_data['blocked_until']:
+        if now < user_data['blocked_until']:
+            wait_time = (user_data['blocked_until'] - now).seconds // 60 + 1
+            return False, f"You have reached the message limit. Please wait {wait_time} minutes."
+        else:
+            # Block expired, reset
+            user_data['blocked_until'] = None
+            user_data['count'] = 1
+            user_data['last_request'] = now
+            return True, None
+
+    # Check session idle timeout (reset count if idle for too long)
+    if now - user_data['last_request'] > timedelta(hours=SESSION_IDLE_TIMEOUT_HOURS):
+        user_data['count'] = 1
+        user_data['last_request'] = now
+        return True, None
+
+    # Check limit
+    if user_data['count'] >= MAX_REQUESTS_PER_SESSION:
+        user_data['blocked_until'] = now + timedelta(minutes=BLOCK_DURATION_MINUTES)
+        return False, f"You have reached the message limit. Please wait {BLOCK_DURATION_MINUTES} minutes."
+
+    # Update count
+    user_data['count'] += 1
+    user_data['last_request'] = now
+    return True, None
+
 @uv_ai_bp.route("/health", methods=["GET"])
 def health():
     try:
@@ -89,7 +119,12 @@ def health():
 def chat():
     _ensure_context()
     
-    # Check for API Key FIRST
+    # 1. Check Rate Limit
+    client_ip = request.remote_addr
+    allowed, error_message = _check_rate_limit(client_ip)
+    if not allowed:
+        return jsonify({"message": error_message}), 429
+    
     if not client:
         return jsonify({
             "message": "I'm currently undergoing maintenance. Please contact Yuvam directly via email or LinkedIn."
@@ -99,19 +134,15 @@ def chat():
         data = request.get_json(silent=True) or {}
         user_message = (data.get("question") or "").strip()
         
-        # Handle message history if sent
-        # The frontend might send specific structure, but for now we look for 'question' or extract from 'messages'
         if not user_message and isinstance(data.get("messages"), list):
-             # Simple extraction of last user message
              msgs = [m for m in data["messages"] if m.get("role") == "user" and m.get("content")]
              if msgs: user_message = msgs[-1]["content"].strip()
 
         if not user_message:
             return jsonify({"message": "I didn't catch that. Could you ask again?"}), 400
 
-        # Call OpenAI
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo", # Or gpt-4o-mini if available/preferred for speed/cost
+            model="gpt-3.5-turbo", 
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_message}
