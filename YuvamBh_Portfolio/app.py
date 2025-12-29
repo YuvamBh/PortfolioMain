@@ -12,7 +12,7 @@ app = Flask(__name__,
             static_url_path='/static',
             static_folder='static')
 
-# Register AI blueprint
+#ai blueprint
 app.register_blueprint(uv_ai_bp)
 
 # Gzip compression decorator
@@ -106,6 +106,12 @@ def index():
 def projects():
     return render_template("projects.html")
 
+@app.route("/testimonial-test")
+@gzipped
+def testimonial_test():
+    return render_template("testimonial_test.html")
+
+
 # Error handlers
 @app.errorhandler(404)
 def page_not_found(e):
@@ -119,4 +125,3 @@ if __name__ == "__main__":
     print("Launching Flask..")
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port, debug=False)
-

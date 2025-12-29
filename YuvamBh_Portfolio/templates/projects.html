@@ -1,125 +1,147 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projects</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/css/projects.css" />
-  <link rel="stylesheet" href="/static/cs/style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - Yuvam Bhargav</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/static/css/projectsPage.css">
 </head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor-outer"></div>
+  <div class="cursor-inner"></div>
 
-<body class="projects">
-  <div class="proj-bg">
-    <div class="bg-layer bg-a" id="bgA"></div>
-    <div class="bg-layer bg-b" id="bgB"></div>
-    <div class="bg-wash"></div>
+  <!-- Back Button -->
+  <a href="{{ url_for('index') }}" class="proj-back-btn">← Back</a>
+
+  <div class="projects-showcase">
+    <div class="showcase-wrapper">
+      <!-- Large background number -->
+      <div class="project-number-bg entering">01</div>
+
+      <!-- Main content -->
+      <div class="showcase-content">
+        <!-- Left sidebar -->
+        <div class="showcase-sidebar">
+          <span class="showcase-label">Projects</span>
+          
+          <!-- Progress indicator -->
+          <div class="showcase-progress">
+            <div class="showcase-progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Main content area -->
+        <div class="showcase-main">
+          <!-- Project type badge -->
+          <div class="project-type visible">
+            <span class="project-type-dot"></span>
+            <span class="project-type-name">AI/ML Project</span>
+          </div>
+
+          <!-- Project Title -->
+          <h2 class="project-title">
+            <span class="project-title-word">Fashion</span>
+            <span class="project-title-word">Discovery</span>
+          </h2>
+
+          <!-- Description -->
+          <p class="project-description">
+            TikTok-style product swiper powered by embeddings + vector search with a RAG layer. Focus on fast recommendations, caching, and an eval harness.
+          </p>
+
+          <!-- Tech Stack -->
+          <div class="project-tech">
+            <span>GenAI</span>
+            <span>CLIP/embeddings</span>
+            <span>Vector DB</span>
+            <span>RAG</span>
+            <span>FastAPI</span>
+          </div>
+
+          <!-- Project Buttons -->
+          <div class="project-buttons">
+            <a href="#" class="project-btn demo-link">Live Demo</a>
+            <a href="#" class="project-btn github-link">
+              <i class="fab fa-github"></i> View Code
+            </a>
+          </div>
+
+          <!-- Footer -->
+          <div class="project-footer">
+            <div class="project-meta visible">
+              <div class="project-meta-line visible"></div>
+              <div>
+                <p class="project-count">1 / 6</p>
+              </div>
+            </div>
+
+            <!-- Navigation buttons -->
+            <div class="showcase-nav">
+              <button class="showcase-nav-btn prev" aria-label="Previous project">
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+                  <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="showcase-nav-btn next" aria-label="Next project">
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom ticker -->
+      <div class="project-ticker">
+        <div class="project-ticker-content">
+          Fashion Discovery • Deepfake Detector • Global Career Network • AI Workflow • Checkout Automation • Fashion Discovery • Deepfake Detector • Global Career Network • AI Workflow • Checkout Automation • 
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Top bar -->
-  <header class="proj-topbar">
-  <a href="{{ url_for('index') }}" class="proj-back">← Back</a>
-    <span class="proj-brand">Projects</span>
-  </header>
+  <!-- Cursor Script -->
+  <script>
+    // Custom cursor
+    const cursorInner = document.querySelector('.cursor-inner');
+    const cursorOuter = document.querySelector('.cursor-outer');
+    
+    if (cursorInner && cursorOuter) {
+      document.addEventListener('mousemove', (e) => {
+        cursorInner.style.left = e.clientX + 'px';
+        cursorInner.style.top = e.clientY + 'px';
+        cursorOuter.style.left = e.clientX + 'px';
+        cursorOuter.style.top = e.clientY + 'px';
+      });
+      
+      // Hover effect for interactive elements
+      const interactiveElements = document.querySelectorAll('a, button, .showcase-nav-btn');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorInner.classList.add('cursor-hover');
+          cursorOuter.classList.add('cursor-hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursorInner.classList.remove('cursor-hover');
+          cursorOuter.classList.remove('cursor-hover');
+        });
+      });
+    }
+  </script>
 
-  <!-- Overlay frame with slide-like project panels -->
-  <main class="proj-frame" id="frame">
-    <nav class="proj-list" id="list">
-      <!-- 01 -->
-      <section class="proj-item is-active" data-bg="/static/projects/fashion-discovery.jpg" id="p-01">
-        <span class="proj-no">01</span>
-        <h2 class="proj-title">Fashion Discovery</h2>
-        <p class="proj-desc">
-          TikTok-style product swiper powered by embeddings + vector search with a RAG layer. 
-          Focus on fast recommendations, caching, and an eval harness.
-        </p>
-        <div class="proj-cta">
-          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Live Demo</a>
-          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
-        </div>
-        <p class="proj-tags">GenAI • CLIP/embeddings • Vector DB • RAG • FastAPI</p>
-      </section>
-
-      <!-- 02 -->
-      <section class="proj-item" data-bg="/static/projects/gcn.jpg" id="p-02">
-        <span class="proj-no">02</span>
-        <h2 class="proj-title">Global Career Network</h2>
-        <p class="proj-desc">
-          Community site migration from Flask to a static stack for speed and reliability. 
-          Clean content pipeline, analytics, and a lightweight CMS workflow.
-        </p>
-        <div class="proj-cta">
-          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Live Site</a>
-          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
-        </div>
-        <p class="proj-tags">Static Site • HTML/CSS/JS • Netlify/Vercel • Analytics</p>
-      </section>
-
-      <!-- 03 -->
-      <section class="proj-item" data-bg="/static/projects/wcf.jpg" id="p-03">
-        <span class="proj-no">03</span>
-        <h2 class="proj-title">Service-Oriented Suite (WCF)</h2>
-        <p class="proj-desc">
-          SOAP/REST services (TempService, SortRef, etc.) with clean contracts and tests. 
-          Built for reliability, versioning, and easy client generation.
-        </p>
-        <div class="proj-cta">
-          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Docs</a>
-          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
-        </div>
-        <p class="proj-tags">WCF • SOAP/REST • C# • Contracts • Tooling</p>
-      </section>
-
-      <!-- 04 -->
-      <section class="proj-item" data-bg="/static/projects/ibm-certification-badge.jpg" id="p-04">
-        <span class="proj-no">04</span>
-        <h2 class="proj-title">AI Workflow Microservices</h2>
-        <p class="proj-desc">
-          Containerized workers for async pipelines (Celery) with Redis/Postgres, MQTT events, and API gateway. 
-          Emphasis on observability and retries.
-        </p>
-        <div class="proj-cta">
-          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Live Docs</a>
-          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
-        </div>
-        <p class="proj-tags">Docker • Celery • Redis • Postgres • Observability</p>
-      </section>
-
-      <!-- 05 -->
-      <section class="proj-item" data-bg="/static/projects/checkout.jpg" id="p-05">
-        <span class="proj-no">05</span>
-        <h2 class="proj-title">Checkout Automation</h2>
-        <p class="proj-desc">
-          Playwright flows for address autocomplete + cart checkout with resilient selectors, 
-          fallback keystrokes, and per-site strategies.
-        </p>
-        <div class="proj-cta">
-          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Demo Video</a>
-          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
-        </div>
-        <p class="proj-tags">Playwright • Automation • Resilient Selectors</p>
-      </section>
-
-      <!-- 06 -->
-      <section class="proj-item" data-bg="/static/projects/analytics.jpg" id="p-06">
-        <span class="proj-no">06</span>
-        <h2 class="proj-title">Employer Mapping Analytics</h2>
-        <p class="proj-desc">
-          Python scripts parse career-fair CSVs, map industries↔majors, and export summary tables 
-          with OPT/CPT insights for students.
-        </p>
-        <div class="proj-cta">
-          <!--<a class="btn btn-primary" href="#" target="_blank" rel="noopener">Notebook</a>
-          <a class="btn btn-outline" href="#" target="_blank" rel="noopener">Code</a>-->
-        </div>
-        <p class="proj-tags">Python • Pandas • CSV • Reporting</p>
-      </section>
-    </nav>
-  </main>
-
-  <script src="/YuvamBh_Portfolio/static/js/projects.js"></script>
-  <script src="/YuvamBh_Portfolio/static/js/script.js"></script>
+  <script src="/static/js/projectsPage.js"></script>
+  <script src="/static/js/script.js"></script>
 </body>
 </html>
-

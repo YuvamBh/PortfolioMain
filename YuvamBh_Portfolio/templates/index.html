@@ -101,7 +101,6 @@
   <body>
     <div class="cursor-outer"></div>
     <div class="cursor-inner"></div>
-
     <h1 class="visually-hidden">Yuvam Bhargav</h1>
 
     <nav>
@@ -164,9 +163,17 @@
 
     <section class="intro-text">
       <div class="container">
-        <p data-aos="fade-up">
-          I'm a Computer Science student at Arizona State University, specializing in AI/ML and full-stack development. I love turning complex problems into user-friendly solutions.
-      </p>
+        <!-- Ambient Thinking Microcopy -->
+        <div class="ambient-thinking" data-aos="fade-up" aria-live="polite" aria-busy="false">
+          <span class="prompt-text">
+            
+          </span>
+          <div class="thinking-loader">
+            <div class="loader-ball"></div>
+            <div class="loader-ball"></div>
+            <div class="loader-ball"></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -215,17 +222,17 @@
         <!--introduction-->
         <div class="bio-section">
           <p class="bio-text">
-            Hi, I’m <strong>Yuvam Bhargav</strong>, a Computer Science student at
+            Hi, I’m <strong style="color: rgba(190, 138, 95, 0.9);">Yuvam Bhargav</strong>, a Computer Science student at
             <strong style="color: #8C1D40">Arizona State University</strong> who enjoys turning ambiguous problems
-            into products people actually use. I work at the intersection of
+            into products people actually use. I like working at the intersection of
             <strong>AI/ML</strong> and <strong>full-stack engineering</strong>, with a focus on
-            reliability, speed, and a clean developer experience.
+            reliability, speed, and a clean experience.
           </p>
           <p class="bio-text">
-            Lately I’ve been building <strong>GenAI features</strong>,
-            <strong>recommendation systems</strong>, and <strong>data pipelines</strong> with
-            solid observability and caching. I like fast prototypes that graduate into
-            maintainable, scalable systems.
+            Lately I’ve been building <strong style="color: #a5a28e">GenAI features</strong>,
+            <strong style="color: #a5a28e">recommendation systems</strong>, and <strong style="color: #a5a28e">data pipelines</strong> with
+            solid observability and caching. I like building fast prototypes that turn into maintainable,
+            and scalable systems.
           </p>
         </div>
 
@@ -257,21 +264,10 @@
             <li>Collaborate with startups and research teams</li>
           </ul>
         </div>
-
-        <!--personalInterests-->
-        <div class="interests" data-aos="fade-up" data-aos-delay="350">
-          <h4>When I'm Not Coding</h4>
-          <div class="interests-tags">
-            <span class="interest-tag" data-aos="zoom-in" data-aos-delay="400">🎮 Gaming</span>
-            <span class="interest-tag" data-aos="zoom-in" data-aos-delay="450">🎵 Music</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </section>
-
-
   
     
     <!--projectsSection-->
@@ -280,22 +276,22 @@
     <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
     
     <div class="projects-grid">
-      <!--aiChatbotProject-->
+      <!--fashionDiscoveryProject-->
       <div class="project-card" data-aos="fade-up">
         <div class="project-content">
           <div class="project-front">
             <div class="project-icon">
-              <i class="fas fa-robot"></i>
+              <i class="fas fa-shopping-bag"></i>
             </div>
-            <h3>[Work in Progress]</h3>
+            <h3>Fashion Discovery</h3>
             <div class="tech-stack">
-              <span>Python</span>
-              <span>TensorFlow</span>
-              <span>NLP</span>
+              <span>GenAI</span>
+              <span>Vector DB</span>
+              <span>RAG</span>
             </div>
           </div>
           <div class="project-back">
-            <p>An AI powered companion to efficiently navigate available resources.</p>
+            <p>TikTok-style product swiper powered by embeddings + vector search with a RAG layer. Focus on fast recommendations, caching, and an eval harness.</p>
             <div class="project-links">
               <!--<a href="#" class="demo-link">Live Demo</a>
               <a href="#" class="github-link">
@@ -332,25 +328,25 @@
         </div>
       </div>
 
-      <!--cofounderHuntProject-->
+      <!--globalCareerNetworkProject-->
       <div class="project-card" data-aos="fade-up" data-aos-delay="200">
         <div class="project-content">
           <div class="project-front">
             <div class="project-icon">
-              <i class="fas fa-brain"></i>
+              <i class="fas fa-globe"></i>
             </div>
-            <h3>CoFounderHunt</h3>
+            <h3>Global Career Network</h3>
             <div class="tech-stack">
-              <span>Python</span>
-              <span>GitHub Integration</span>
-              <span>PostgreSQL</span>
+              <span>Static Site</span>
+              <span>HTML/CSS/JS</span>
+              <span>Analytics</span>
             </div>
           </div>
           <div class="project-back">
-            <p>An intelligent platform that help Founders find brilliant Cofounders and vice-versa. Make an account using Email/GitHub and navigate your next big venture.</p>
+            <p>Community site migration from Flask to a static stack for speed and reliability. Clean content pipeline, analytics, and a lightweight CMS workflow.</p>
             <div class="project-links">
-              <a href="#" class="demo-link">Live Demo</a>
-              <a href="#" class="github-link">
+              <a href="https://gcn-asu.com/" class="demo-link">Live Demo</a>
+              <a href="https://github.com/YuvamBh/GCN_WebsiteMain.git" class="github-link">
                 <i class="fab fa-github"></i> View Code
               </a>
             </div>
@@ -358,32 +354,55 @@
         </div>
       </div>
 
-      <!--joberrrProject-->
+      <!--aiWorkflowMicroservicesProject-->
       <div class="project-card" data-aos="fade-up" data-aos-delay="300">
         <div class="project-content">
           <div class="project-front">
             <div class="project-icon">
-              <i class="fa-regular fa-file"></i>
+              <i class="fas fa-network-wired"></i>
             </div>
-            <h3>Joberrrr</h3>
+            <h3>AI Workflow Microservices</h3>
             <div class="tech-stack">
-              <span>OpenAI</span>
-              <span>PostgreSQL</span>
-              <span>Python</span>
+              <span>Docker</span>
+              <span>Celery</span>
+              <span>Redis</span>
             </div>
           </div>
           <div class="project-back">
-            <p>A very intelligent Google Extension that helps you apply and land jobs by tailoring your resume and cover letter according to the job requirements using AI.</p>
+            <p>Containerized workers for async pipelines (Celery) with Redis/Postgres, MQTT events, and API gateway. Emphasis on observability and retries.</p>
             <div class="project-links">
-              <a href="#" class="demo-link">Live Demo</a>
+              <!--<a href="#" class="demo-link">Live Docs</a>
               <a href="#" class="github-link">
                 <i class="fab fa-github"></i> View Code
-              </a>
+              </a>-->
             </div>
           </div>
         </div>
       </div>
     </div>
+    </div>
+    
+    <!-- Slide to View Button -->
+    <div class="slide-btn-container">
+      <div class="slide-track">
+        <div class="slide-track-bg"></div>
+        <div class="slide-text">Slide to view all projects</div>
+        <div class="slide-handle">
+          <!-- Arrow Right Icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="M12 5l7 7-7 7"></path>
+          </svg>
+        </div>
+        <div class="slide-spinner">
+            <svg class="animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
+        </div>
+        <div class="slide-success">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+      </div>
+    </div>
+</section>
 </section>
     
   <section id="experience" class="experience-section">
@@ -730,7 +749,7 @@
 
           <div class="carousel-slide">
             <div class="accomplishment-logo">
-              <img src="/YuvamBh_Portfolio/static/imgs/Introduction to GenAI.jpeg" alt="GenAI">
+              <img src="/static/imgs/Introduction to GenAI.jpeg" alt="GenAI">
             </div>
             <p class="accomplishment-text">Introduction to Generative AI</p>
           </div>
@@ -809,7 +828,7 @@
           <i class="far fa-calendar-alt"></i>
         </div>
         <h3>Schedule</h3>
-        <p>Book a meeting</p>
+        <p>Lets Chat!</p>
         <a href="#" onclick="openCalendly()" class="connect-link">Schedule Time</a>
       </div>
     </div>

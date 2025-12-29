@@ -3486,3 +3486,209 @@ img {
   -webkit-user-drag: none;
   pointer-events: auto;
 }
+
+/* Slide to View Button - Premium Minimalist */
+.slide-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin-top: 5rem; /* Increased from 3rem */
+  width: 100%;
+}
+
+.slide-track {
+  position: relative;
+  width: 22rem; /* Significantly wider for single line text */
+  height: 2.75rem; /* Sleeker height */
+  background-color: #1a1a1a; 
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Changed to flex-start for filling from left */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+  overflow: hidden; /* Important: Keep moving fill inside */
+}
+
+.slide-track.completed {
+    width: 3.5rem; /* Collapses to circle */
+    background-color: #C0A062; /* Gold accent for success */
+    border-color: #C0A062;
+    justify-content: center; /* Center content when collapsed */
+}
+
+.slide-track-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0px; /* Start at 0 width */
+    background-color: rgba(70, 75, 75, 0.329); /* Stronger gold fill */
+    opacity: 1; /* Always visible */
+    border-radius: 9999px 0 0 9999px; /* Rounded only on left while filling */
+    pointer-events: none;
+    z-index: 1; /* Behind text but visible */
+}
+
+.slide-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: #888; 
+    font-family: var(--font-primary, sans-serif);
+    font-size: 0.8rem; 
+    font-weight: 500;
+    letter-spacing: 0.15em; 
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    opacity: 1;
+    white-space: nowrap; 
+    z-index: 2; /* On top of fill */
+}
+
+.slide-track.dragging .slide-text,
+.slide-track.completed .slide-text {
+    opacity: 0;
+}
+
+.slide-handle {
+    position: absolute;
+    left: 0.25rem; 
+    width: 2.25rem; 
+    height: 2.25rem;
+    background-color: #C0A062; /* Gold handle */
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    z-index: 10;
+    touch-action: none;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-handle:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.slide-track.completed .slide-handle {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+.slide-handle svg {
+    color: #1a1a1a; /* Dark icon on gold handle */
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.slide-track:hover .slide-handle svg {
+    transform: translateX(2px);
+}
+
+/* Spinner and Success Icons */
+.slide-spinner, .slide-success {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-track.loading .slide-spinner {
+    opacity: 1;
+    transform: scale(1);
+    color: #1a1a1a;
+}
+
+.slide-track.success .slide-success {
+    opacity: 1;
+    transform: scale(1);
+    color: #1a1a1a;
+}
+
+/* Spinner Animation */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Ambient Thinking Microcopy */
+.ambient-thinking {
+  font-size: 1.375rem; /* Increased from 1.25rem (20px to 22px) */
+  font-family: "Courier New", Courier, "Lucida Console", Monaco, monospace;
+  font-weight: 400;
+  opacity: 0.6;
+  min-height: 1.5em;
+  line-height: 1.5;
+  text-align: left;
+  margin-top: 15px; /* Move down 15 pixels */
+  margin-left: 15px; /* Move right 5 pixels */
+}
+
+.ambient-thinking .prompt-text {
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.ambient-thinking .prompt-text.visible {
+  opacity: 1;
+}
+
+/* Bouncing Ball Loader */
+.ambient-thinking .thinking-loader {
+  display: none; /* Hidden by default */
+  gap: 0.5rem;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.ambient-thinking .thinking-loader.visible {
+  display: flex;
+  opacity: 1;
+}
+
+.loader-ball {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #a0a0a0, #808080);
+  border: 1px solid #666;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.loader-ball:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loader-ball:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader-ball:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

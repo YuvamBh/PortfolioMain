@@ -1907,3 +1907,233 @@ const skillsData = [
 })();
 
 document.addEventListener("contextmenu", e => e.preventDefault());
+
+// Slide to View Button Logic
+document.addEventListener("DOMContentLoaded", function () {
+  const track = document.querySelector('.slide-track');
+  const handle = document.querySelector('.slide-handle');
+  const trackBg = document.querySelector('.slide-track-bg');
+  
+  if (!track || !handle) return; 
+
+  let isDragging = false;
+  let startX = 0;
+  let currentX = 0;
+  let completed = false;
+  
+  // Dynamic constraints calculation
+  function getConstraints() {
+      const trackWidth = track.offsetWidth;
+      const handleWidth = handle.offsetWidth;
+      // Allow handle to go all the way to the right edge minus padding
+      // track padding is not set on parent, but handle has left offset
+      // Effective drag width = trackWidth - handleWidth - (left offset * 2)
+      return trackWidth - handleWidth - 8; // 8px buffer
+  }
+
+  const THRESHOLD = 0.9;
+
+  function updateDrag(clientX) {
+     if (!isDragging || completed) return;
+     const maxDrag = getConstraints();
+     const delta = clientX - startX;
+     currentX = Math.max(0, Math.min(delta, maxDrag));
+     
+     handle.style.transform = `translateX(${currentX}px)`;
+     
+     // Update background width directly for "filling" effect
+     if (trackBg) {
+        trackBg.style.width = `${currentX + 24}px`; // +24 to cover handle center/offset
+        trackBg.style.opacity = '1';
+     }
+  }
+
+  function startDrag(e) {
+    if (completed) return;
+    isDragging = true;
+    startX = (e.type === 'mousedown') ? e.clientX : e.touches[0].clientX;
+    
+    // If not starting from 0 (e.g. quick re-grab), adjust startX
+    // This simple version assumes reset on let-go, so startX is fine.
+    
+    track.classList.add('dragging');
+    if (trackBg) trackBg.style.transition = 'none'; // Disable transition for direct tracking
+  }
+
+  function drag(e) {
+    if (!isDragging || completed) return;
+    if(e.type === 'touchmove') {
+       // Optional: prevent scroll depending on UX preference
+    }
+    
+    const clientX = (e.type === 'mousemove') ? e.clientX : e.touches[0].clientX;
+    updateDrag(clientX);
+  }
+
+  function endDrag() {
+    if (!isDragging || completed) return;
+    isDragging = false;
+    track.classList.remove('dragging');
+    
+    const maxDrag = getConstraints();
+    const progress = currentX / maxDrag;
+    
+    if (progress >= THRESHOLD) {
+      completed = true;
+      finishAnimation();
+    } else {
+      // Snap back animation
+      handle.style.transition = 'transform 0.4s cubic-bezier(0.19, 1, 0.22, 1)';
+      if (trackBg) {
+          trackBg.style.transition = 'width 0.4s cubic-bezier(0.19, 1, 0.22, 1)'; // Animate width back
+          trackBg.style.width = '0px';
+      }
+      
+      handle.style.transform = 'translateX(0)';
+      
+      setTimeout(() => {
+        handle.style.transition = ''; // Reset inline transition
+        if (trackBg) trackBg.style.transition = '';
+      }, 400);
+    }
+  }
+
+  function finishAnimation() {
+    track.classList.add('completed');
+    
+    // Ensure full fill
+    if(trackBg) trackBg.style.width = '100%';
+
+    // Simulate loading state
+    setTimeout(() => {
+        track.classList.add('loading');
+        
+        // Success state
+        setTimeout(() => {
+            track.classList.remove('loading');
+            track.classList.add('success');
+            
+            // Redirect
+            setTimeout(() => {
+                window.location.href = "/projects";
+            }, 800);
+        }, 1200);
+    }, 400);
+  }
+
+  handle.addEventListener('mousedown', startDrag);
+  handle.addEventListener('touchstart', startDrag, {passive: false});
+  
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('touchmove', drag, {passive: false});
+  
+  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('touchend', endDrag);
+});
+
+// Ambient Thinking Microcopy - Rotating Prompts with Typewriter Effect
+document.addEventListener("DOMContentLoaded", function () {
+  const container = document.querySelector('.ambient-thinking');
+  if (!container) return;
+
+  const promptText = container.querySelector('.prompt-text');
+  const thinkingLoader = container.querySelector('.thinking-loader');
+  
+  // Prompts in exact order
+  const prompts = [
+    "Most people start by asking a question....",
+    "You are not here by accident....",
+    "This site responds to curiosity....",
+    "Thinking through possibilities....",
+    "Not everything here is static....",
+    "This could be a start to something BIG!",
+    "Observing patterns....",
+    "Thinking through possibilities....",
+    "Waiting for intent....",
+  ];
+  
+  let currentIndex = 0;
+  let typewriterTimeout = null;
+  
+  // Show/hide loader
+  function showLoader() {
+    thinkingLoader.classList.add('visible');
+  }
+  
+  function hideLoader() {
+    thinkingLoader.classList.remove('visible');
+  }
+  
+  // Typewriter effect with natural pauses
+  function typeWriter(text, callback) {
+    let charIndex = 0;
+    promptText.textContent = '';
+    promptText.classList.add('visible');
+    
+    function typeNextChar() {
+      if (charIndex < text.length) {
+        promptText.textContent += text.charAt(charIndex);
+        charIndex++;
+        
+        // Variable speed based on character
+        let delay = 50; // Base typing speed
+        const char = text.charAt(charIndex - 1);
+        
+        // Longer pauses for punctuation (like a real typewriter)
+        if (char === ',' || char === ';') {
+          delay = 200; // Short pause after comma/semicolon
+        } else if (char === '.' || char === '!' || char === '?') {
+          delay = 300; // Longer pause after sentence end
+        } else if (char === '…') {
+          delay = 150; // Pause for ellipsis
+        } else if (char === ' ') {
+          delay = 80; // Slight pause between words
+        } else {
+          // Add slight randomness to typing speed (40-70ms)
+          delay = 40 + Math.random() * 30;
+        }
+        
+        typewriterTimeout = setTimeout(typeNextChar, delay);
+      } else {
+        // Done typing, call callback
+        if (callback) callback();
+      }
+    }
+    
+    typeNextChar();
+  }
+  
+  // Main rotation cycle
+  function showPrompt(index) {
+    container.setAttribute('aria-busy', 'false');
+    
+    // Type out the prompt
+    typeWriter(prompts[index], () => {
+      // Keep visible for 4 seconds after typing completes
+      setTimeout(() => {
+        // Fade out prompt
+        promptText.classList.remove('visible');
+        
+        // After fade out completes (~600ms), start thinking phase
+        setTimeout(() => {
+          container.setAttribute('aria-busy', 'true');
+          showLoader();
+          
+          // Think for 3.7 seconds
+          setTimeout(() => {
+            hideLoader();
+            
+            // Move to next prompt
+            currentIndex = (currentIndex + 1) % prompts.length;
+            showPrompt(currentIndex);
+          }, 3700); // Changed from 1500 to 3700
+        }, 600);
+      }, 4400); // Changed from 5000 to 4400
+    });
+  }
+  
+  // Initialize: show first prompt after 6 seconds
+  setTimeout(() => {
+    showPrompt(0);
+  }, 4000);
+});
