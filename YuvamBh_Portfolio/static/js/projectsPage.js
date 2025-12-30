@@ -43,7 +43,7 @@ class ProjectsShowcase {
         description: "Playwright flows for address autocomplete + cart checkout with resilient selectors, fallback keystrokes, and per-site strategies.",
         tech: ["Playwright", "Automation", "Resilient Selectors", "Testing"],
         type: "Automation Tool",
-        links: { demo: null, github: null }
+        links: { demo: "https://github.com/YuvamBh/AutoCheckout/blob/main/vuoriAutoCheckout.mp4", github: "https://github.com/YuvamBh/AutoCheckout.git" }
       }
     ];
 
