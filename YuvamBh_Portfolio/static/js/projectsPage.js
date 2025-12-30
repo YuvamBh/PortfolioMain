@@ -148,18 +148,22 @@ class ProjectsShowcase {
       // Update demo button
       if (links.demo) {
         demoBtn.href = links.demo;
+        demoBtn.target = '_blank';
         demoBtn.classList.remove('disabled');
       } else {
         demoBtn.href = '#';
+        demoBtn.removeAttribute('target');
         demoBtn.classList.add('disabled');
       }
       
       // Update github button
       if (links.github) {
         githubBtn.href = links.github;
+        githubBtn.target = '_blank';
         githubBtn.classList.remove('disabled');
       } else {
         githubBtn.href = '#';
+        githubBtn.removeAttribute('target');
         githubBtn.classList.add('disabled');
       }
       
