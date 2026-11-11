@@ -43,9 +43,12 @@ def gzipped(f):
 
 @app.after_request
 def add_headers(response):
-    # SEO headers
-    response.headers['X-Robots-Tag'] = 'index, follow'
-    response.headers['Link'] = '<https://yuvambhargav.com>; rel="canonical"'
+    # SEO headers (the unlisted /duvi pages are kept out of search engines)
+    if request.path.startswith('/duvi'):
+        response.headers['X-Robots-Tag'] = 'noindex, nofollow'
+    else:
+        response.headers['X-Robots-Tag'] = 'index, follow'
+        response.headers['Link'] = '<https://yuvambhargav.com>; rel="canonical"'
     
     # Cache control
     response.cache_control.public = True
@@ -110,6 +113,23 @@ def projects():
 @gzipped
 def testimonial_test():
     return render_template("testimonial_test.html")
+
+
+# duvi: unlisted pages required by Google's OAuth consent screen (home, privacy, terms).
+# Not linked from the site, not in the sitemap, noindex via robots.txt and headers.
+DUVI_UPDATED = "11 November 2026"
+
+@app.route("/duvi")
+def duvi_home():
+    return render_template("duvi.html")
+
+@app.route("/duvi/privacy")
+def duvi_privacy():
+    return render_template("duvi_privacy.html", updated=DUVI_UPDATED)
+
+@app.route("/duvi/terms")
+def duvi_terms():
+    return render_template("duvi_terms.html", updated=DUVI_UPDATED)
 
 
 # Error handlers
