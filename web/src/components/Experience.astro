@@ -1,0 +1,94 @@
+---
+// Experience as an alternating timeline: a spine down the middle; each role's card (logo, title, dates,
+// highlights, site) on one side and a picture of the company on the other, swapping sides row by row.
+// Phones: the spine moves to the left edge and the picture sits under the card.
+import Icon from './Icon.astro';
+import LogoTile from './LogoTile.astro';
+import { experience } from '../data/profile';
+---
+<section id="experience" class="section" aria-labelledby="exp-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow"><span class="num">03</span> Experience</p>
+      <h2 id="exp-title" class="section-title" data-split>Where I’ve worked.</h2>
+    </div>
+
+    <div class="xp-wrap">
+      <span class="xp-spine" aria-hidden="true"><span class="xp-line" data-line></span></span>
+      <ol class="xp">
+        {experience.map((e, i) => (
+          <li class:list={['xp-row', i % 2 ? 'is-right' : 'is-left']} data-xp>
+            <article class="xp-card glass" data-xp-card aria-labelledby={`xp-${i}`}>
+              <header class="xp-head">
+                <LogoTile logo={e.logo} size={52} />
+                <div>
+                  <h3 id={`xp-${i}`} class="xp-org">{e.org}</h3>
+                  <p class="xp-role">{e.role}</p>
+                </div>
+              </header>
+              <p class="xp-when">{e.dates} · {e.place}</p>
+              <ul class="xp-points">{e.points.map((pt) => <li>{pt}</li>)}</ul>
+              {e.site && (
+                <a class="link-arrow" href={e.site.href} target="_blank" rel="noopener"><span>{e.site.label}</span><Icon name="arrow-up-right" /></a>
+              )}
+            </article>
+            <span class="xp-node" aria-hidden="true" data-xp-node></span>
+            <figure class="xp-pic" data-xp-pic>
+              {e.image ? (
+                <img src={e.image} alt={`${e.org} website`} width="1400" height="875" loading="lazy" decoding="async" />
+              ) : (
+                <div class="xp-pic-empty"><LogoTile logo={e.logo} size={104} /><span>{e.org}</span></div>
+              )}
+            </figure>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .xp-wrap { position: relative; }
+  .xp-spine { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line); transform: translateX(-50%); }
+  .xp-line { position: absolute; inset: 0; background: linear-gradient(var(--accent), rgba(201, 169, 110, 0.2)); transform-origin: top; }
+  .xp { list-style: none; display: grid; gap: clamp(56px, 7vw, 104px); }
+  .xp-row { display: grid; grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr); align-items: center; }
+  .xp-card, .xp-node, .xp-pic { grid-row: 1; }
+  .is-left .xp-card { grid-column: 1; }
+  .is-left .xp-pic { grid-column: 3; }
+  .is-right .xp-card { grid-column: 3; }
+  .is-right .xp-pic { grid-column: 1; }
+  .xp-node {
+    grid-column: 2; justify-self: center; position: relative; z-index: 1; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--accent); box-shadow: 0 0 0 7px rgba(201, 169, 110, 0.12);
+  }
+
+  .xp-card { display: grid; gap: 14px; padding: clamp(22px, 2.4vw, 32px); border-radius: var(--radius-lg); }
+  .xp-head { display: flex; align-items: center; gap: 16px; }
+  .xp-org { font-size: clamp(20px, 1.8vw, 26px); line-height: 1.15; letter-spacing: -0.02em; }
+  .xp-role { color: var(--accent); font-size: 14px; font-weight: 500; margin-top: 5px; line-height: 1.4; }
+  .xp-when { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+  .xp-points { list-style: none; display: grid; gap: 8px; color: var(--text-2); font-size: 16px; line-height: 1.65; }
+  .xp-points li { position: relative; padding-left: 18px; }
+  .xp-points li::before { content: ''; position: absolute; left: 0; top: 0.72em; width: 6px; height: 1px; background: var(--accent); }
+
+  .xp-pic {
+    margin: 0; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius-lg);
+    border: 1px solid var(--line-strong); background: var(--surface); box-shadow: var(--shadow);
+  }
+  .xp-pic img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .xp-pic-empty {
+    width: 100%; height: 100%; display: grid; place-items: center; align-content: center; gap: 16px;
+    background: radial-gradient(120% 90% at 20% 10%, rgba(201, 169, 110, 0.22), transparent 60%),
+      radial-gradient(100% 80% at 90% 100%, rgba(47, 77, 74, 0.35), transparent 60%), var(--surface-2);
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);
+  }
+
+  @media (max-width: 860px) {
+    .xp-spine { left: 15px; }
+    .xp-row { grid-template-columns: 30px minmax(0, 1fr); row-gap: 16px; }
+    .xp-node { grid-column: 1; grid-row: 1; justify-self: start; margin-left: 8px; align-self: start; margin-top: 30px; }
+    .is-left .xp-card, .is-right .xp-card { grid-column: 2; grid-row: 1; }
+    .is-left .xp-pic, .is-right .xp-pic { grid-column: 2; grid-row: 2; }
+  }
+</style>

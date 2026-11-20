@@ -1,0 +1,67 @@
+---
+import Icon from './Icon.astro';
+import LogoTile from './LogoTile.astro';
+import { certifications, honors } from '../data/profile';
+---
+<section id="accomplishments" class="section" aria-labelledby="acc-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow"><span class="num">05</span> Accomplishments</p>
+      <h2 id="acc-title" class="section-title" data-split>Certifications and honors.</h2>
+    </div>
+    <div class="acc-grid">
+      <article class="acc-panel glass" data-reveal aria-labelledby="acc-cert">
+        <header class="acc-head">
+          <h3 id="acc-cert">Certifications</h3>
+          <span>{String(certifications.length).padStart(2, '0')}</span>
+        </header>
+        <ul class="acc-list">
+          {certifications.map((c) => (
+            <li>
+              <LogoTile logo={c.logo} size={48} />
+              <div>
+                <p class="acc-title">{c.title}</p>
+                <p class="acc-sub">{c.issuer}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+      <article class="acc-panel glass" data-reveal aria-labelledby="acc-hon">
+        <header class="acc-head">
+          <h3 id="acc-hon">Honors</h3>
+          <span>{String(honors.length).padStart(2, '0')}</span>
+        </header>
+        <ul class="acc-list">
+          {honors.map((h, i) => (
+            <li>
+              {h.logo ? <LogoTile logo={h.logo} size={48} /> : <span class="acc-icon" aria-hidden="true"><Icon name={h.icon ?? 'sparkle'} size={22} /></span>}
+              <div>
+                <p class="acc-title">{h.title}</p>
+                <p class="acc-sub">{[h.detail, h.where].filter(Boolean).join(' · ')}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .acc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: stretch; }
+  .acc-panel { padding: 28px clamp(22px, 2.6vw, 36px) 12px; border-radius: var(--radius-lg); }
+  .acc-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .acc-head h3 { font-size: clamp(22px, 2vw, 28px); }
+  .acc-head span { font-size: 11px; letter-spacing: 0.16em; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .acc-list { list-style: none; }
+  .acc-list li { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 18px; align-items: center; padding: 18px 0; }
+  .acc-list li + li { border-top: 1px solid var(--line); }
+  .acc-icon {
+    width: 48px; height: 48px; display: grid; place-items: center; border-radius: 11px; color: var(--accent);
+    background: rgba(201, 169, 110, 0.12); border: 1px solid rgba(201, 169, 110, 0.3);
+  }
+  .acc-title { font-weight: 500; font-size: 17px; line-height: 1.4; color: var(--text); }
+  .acc-sub { font-size: 14px; line-height: 1.5; color: var(--text-3); margin-top: 3px; }
+  @media (max-width: 860px) { .acc-grid { grid-template-columns: 1fr; } }
+</style>

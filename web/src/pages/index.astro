@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Work from '../components/Work.astro';
+import Experience from '../components/Experience.astro';
+import Leadership from '../components/Leadership.astro';
+import Accomplishments from '../components/Accomplishments.astro';
+import Contact from '../components/Contact.astro';
+import { profile } from '../data/profile';
+---
+<Base>
+  <Hero />
+  <section class="statement" aria-label="What I do">
+    <div class="wrap">
+      <p class="statement-text" data-scrub-words>{profile.statement}</p>
+    </div>
+  </section>
+  <About />
+  <Work />
+  <Experience />
+  <Leadership />
+  <Accomplishments />
+  <Contact />
+</Base>
+
+<style>
+  .statement { padding: clamp(72px, 12vw, 160px) 0; border-top: 1px solid var(--line); }
+  .statement-text {
+    font-family: var(--font-display); font-weight: 600; letter-spacing: -0.025em; line-height: 1.12;
+    font-size: clamp(28px, 4.4vw, 64px); max-width: 24ch;
+  }
+</style>

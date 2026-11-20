@@ -1,0 +1,56 @@
+---
+import Icon from './Icon.astro';
+import { profile } from '../data/profile';
+---
+<section id="contact" class="section contact" aria-labelledby="contact-title">
+  <div class="wrap contact-grid">
+    <div class="contact-main">
+      <p class="eyebrow"><span class="num">06</span> Contact</p>
+      <h2 id="contact-title" class="contact-title" data-split>Let’s build something people love to use.</h2>
+    </div>
+    <div class="contact-side">
+    <p class="contact-lede prose" data-reveal>I’m looking for product and full-stack engineering roles, and work in AI and machine learning.</p>
+    <div class="contact-actions" data-reveal>
+      <a class="btn btn-primary" href={`mailto:${profile.email}?subject=${encodeURIComponent('Hiring Yuvam Bhargav')}`} data-hire>Hire me <Icon name="arrow-right" /></a>
+      <a class="btn" href={`mailto:${profile.email}`}><Icon name="mail" /> Email me</a>
+      <a class="btn" href={profile.links.calendly} target="_blank" rel="noopener"><Icon name="calendar" /> Book a call</a>
+    </div>
+    <p class="sr-only" aria-live="polite" data-copy-status></p>
+    <ul class="contact-links" data-reveal>
+      <li><a href={profile.links.github} target="_blank" rel="noopener"><Icon name="github" /> GitHub</a></li>
+      <li><a href={profile.links.linkedin} target="_blank" rel="noopener"><Icon name="linkedin" /> LinkedIn</a></li>
+      <li><a href={profile.resume} target="_blank" rel="noopener"><Icon name="download" /> Resume (PDF)</a></li>
+      <li><button type="button" class="copy-link" data-copy={profile.email}><Icon name="copy" /> <span data-copy-label>Copy email</span></button></li>
+    </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px clamp(40px, 6vw, 96px); align-items: end; }
+  .contact-title { font-size: clamp(40px, 6vw, 96px); line-height: 0.98; letter-spacing: -0.035em; margin-top: 22px; max-width: 12ch; }
+  .contact-lede { color: var(--text-2); font-size: clamp(17px, 1.4vw, 19px); line-height: 1.6; max-width: 44ch; }
+  .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 20px; }
+  @media (max-width: 960px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-links { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 28px; }
+  .contact-links a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--text-2); text-decoration: none; font-weight: 500; }
+  .contact-links a:hover, .copy-link:hover { color: var(--text); }
+  .copy-link { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--text-2); font-weight: 500; font-size: inherit; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const label = btn.querySelector('[data-copy-label]');
+      const status = document.querySelector('[data-copy-status]');
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy ?? '');
+        if (label) label.textContent = 'Copied';
+        if (status) status.textContent = 'Email address copied';
+        setTimeout(() => { if (label) label.textContent = 'Copy email'; }, 2000);
+      } catch {
+        if (label) label.textContent = btn.dataset.copy ?? '';
+      }
+    });
+  });
+</script>

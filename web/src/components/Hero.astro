@@ -1,0 +1,93 @@
+---
+import Icon from './Icon.astro';
+import { profile } from '../data/profile';
+const lines = profile.highlights;
+---
+<section class="hero" data-hero aria-labelledby="hero-title">
+  <div class="hero-orb" data-orb aria-hidden="true"></div>
+  <div class="wrap hero-inner" data-hero-inner>
+    <p class="hero-role" data-hero-fade>
+      <span class="code-slash" aria-hidden="true">//</span>
+      <span class="typed" aria-hidden="true" data-typed data-words={JSON.stringify(profile.roleWords)}>{profile.roleWords[0]}</span><span class="caret" aria-hidden="true"></span>
+      <span class="sr-only">{profile.role}</span>
+    </p>
+    <h1 id="hero-title" class="hero-title" data-hero-title>Hey, I’m Yuvam.</h1>
+    <div class="hero-row">
+      <div class="cycle" data-hero-fade data-cycle-box>
+        <p class="cycle-text" data-cycle data-lines={JSON.stringify(lines)} aria-hidden="true">{lines[0]}</p>
+        <ul class="sr-only">{lines.map((l) => <li>{l}</li>)}</ul>
+        <div class="cycle-ctrl" data-cycle-ctrl hidden>
+          <span class="cycle-dashes" aria-hidden="true">{lines.map((_, i) => <i class:list={{ on: i === 0 }}></i>)}</span>
+          <button type="button" class="cycle-pause" data-cycle-pause aria-pressed="false" aria-label="Pause the rotating highlights">
+            <svg class="i-pause" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" fill="currentColor" /></svg>
+            <svg class="i-play" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2l7 4-7 4z" fill="currentColor" /></svg>
+          </button>
+        </div>
+      </div>
+      <div class="hero-side">
+        <p class="prose hero-lede" data-hero-fade>
+          CS and Data Science at Arizona State University. Founder of <a href="https://www.mystre.app" target="_blank" rel="noopener">Mystré</a>
+          and President of the Claude Builders Club. I take ideas from the first sketch to a live product.
+        </p>
+        <div class="hero-cta" data-hero-fade>
+          <a class="btn btn-primary" href="#work">See my work <Icon name="arrow-down" /></a>
+          <a class="btn" href={profile.resume} target="_blank" rel="noopener">Resume</a>
+          <button class="btn" type="button" data-chat-open><Icon name="sparkle" /> Ask my AI</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+    padding: calc(var(--nav-h) + 48px) 0 28px; overflow: hidden; isolation: isolate;
+  }
+  .hero-orb {
+    position: absolute; z-index: -1; width: min(1000px, 130vw); aspect-ratio: 1; left: calc(50% - min(500px, 65vw)); top: -48%;
+    border-radius: 50%; filter: blur(100px); opacity: 0.32;
+    background: radial-gradient(circle at 40% 40%, rgba(201, 169, 110, 0.7), transparent 62%);
+  }
+  .hero-inner { display: grid; gap: clamp(16px, 2vw, 24px); }
+  .hero-role {
+    display: flex; align-items: center; gap: 0.6em; min-height: 1.6em;
+    font-family: var(--font-mono); font-weight: 400; font-size: clamp(14px, 1.1vw, 16px); letter-spacing: 0.02em;
+    color: var(--text-2); text-transform: lowercase;
+  }
+  .code-slash { color: var(--accent); }
+  .caret { display: inline-block; width: 0.55em; height: 1.15em; margin-left: -0.45em; background: var(--accent); opacity: 0.8; animation: caret 1.05s steps(1) infinite; }
+  @keyframes caret { 50% { opacity: 0; } }
+  .hero-title { font-weight: 700; font-size: clamp(52px, 8.6vw, 150px); line-height: 0.92; letter-spacing: -0.04em; }
+  .hero-row {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px clamp(32px, 5vw, 80px);
+    align-items: end; margin-top: clamp(20px, 3vw, 44px);
+  }
+  .cycle { display: grid; gap: 18px; align-content: end; }
+  .cycle-text {
+    font-family: var(--font-body); font-weight: 400; font-size: clamp(22px, 2.2vw, 32px); line-height: 1.32; letter-spacing: -0.02em;
+    color: var(--text); min-height: 3.96em; max-width: 30ch;
+  }
+  .cycle-ctrl { display: flex; align-items: center; gap: 14px; }
+  .cycle-ctrl[hidden] { display: none; }
+  .cycle-dashes { display: flex; gap: 6px; }
+  .cycle-dashes i { width: 6px; height: 2px; background: rgba(var(--ink), 0.25); transition: width 0.4s var(--ease-out), background 0.4s var(--ease-out); }
+  .cycle-dashes i.on { width: 18px; background: var(--accent); }
+  .cycle-pause {
+    width: 32px; height: 32px; display: grid; place-items: center; cursor: pointer; color: var(--text-2);
+    background: rgba(var(--ink), 0.04); border: 1px solid rgba(var(--ink), 0.2); transition: color 0.2s, border-color 0.2s;
+  }
+  .cycle-pause:hover { color: var(--text); border-color: rgba(var(--ink), 0.45); }
+  .cycle-pause .i-play, .cycle-pause[aria-pressed='true'] .i-pause { display: none; }
+  .cycle-pause[aria-pressed='true'] .i-play { display: block; }
+  .hero-side { display: grid; gap: 24px; }
+  .hero-lede { max-width: 46ch; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hero-foot {
+    margin-top: clamp(40px, 7vh, 88px); display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-3);
+  }
+  @media (max-width: 960px) {
+    .hero-row { grid-template-columns: 1fr; }
+  }
+</style>

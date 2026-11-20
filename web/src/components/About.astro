@@ -1,0 +1,129 @@
+---
+import { profile } from '../data/profile';
+const { bio, stats, focus, now, education, skills } = profile;
+---
+<section id="about" class="section about" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow"><span class="num">01</span> About</p>
+      <h2 id="about-title" class="section-title" data-split>A designer who ships.</h2>
+    </div>
+
+    <div class="about-grid">
+      <figure class="about-photo" data-clip>
+        <img src="/img/yuvam.webp" width="506" height="900" alt="Portrait of Yuvam Bhargav" loading="lazy" decoding="async" data-parallax="5" />
+      </figure>
+
+      <div class="about-body">
+        <div>
+          {bio.map((p, i) => <p class:list={['prose', { lead: i === 0 }]} data-reveal>{p}</p>)}
+        </div>
+
+        <ul class="stats glass" aria-label="In numbers" data-reveal>
+          {stats.map((s) => (
+            <li>
+              <strong>{s.prefix}<span data-count={s.value}>{s.value}</span>{s.suffix}</strong>
+              <span>{s.label}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="about-cols">
+          <div data-reveal>
+            <h3 class="mini">Focus</h3>
+            <ul class="list">{focus.map((f) => <li>{f}</li>)}</ul>
+          </div>
+          <div data-reveal>
+            <h3 class="mini">Right now</h3>
+            <ul class="list">{now.map((f) => <li>{f}</li>)}</ul>
+          </div>
+        </div>
+
+        <div class="edu glass" data-reveal>
+          <div>
+            <h3 class="mini">Education</h3>
+            <p class="edu-school">{education.school}</p>
+            <p class="edu-degree">{education.degree}</p>
+          </div>
+          <ul class="edu-notes">
+            <li>{education.dates}</li>
+            {education.notes.map((n) => <li>{n}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="toolkit">
+      <div class="toolkit-head">
+        <h3 class="toolkit-title" data-split>Toolkit</h3>
+        <p class="prose" data-reveal>What I reach for, from the first sketch to the shipped product.</p>
+      </div>
+      <div class="bento">
+        {skills.map((g, i) => (
+          <article class:list={['tool', 'glass', `tool-${i}`]} data-reveal>
+            <span class="tool-num">{String(i + 1).padStart(2, '0')}</span>
+            <h4 class="tool-name">{g.group}</h4>
+            <ul class="tool-items">{g.items.map((it) => <li>{it}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+  .about-photo { margin: 0; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4 / 5; background: var(--surface); position: sticky; top: calc(var(--nav-h) + 32px); border: 1px solid var(--line); }
+  .about-photo img { width: 100%; height: 112%; object-fit: cover; object-position: center 20%; }
+  .about-body { display: grid; gap: 36px; }
+  .lead { color: var(--text); font-size: clamp(19px, 1.6vw, 22px); line-height: 1.6; }
+
+  .stats { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-radius: var(--radius-lg); overflow: hidden; }
+  .stats li { padding: 24px 22px; display: grid; gap: 10px; align-content: start; }
+  .stats li + li { border-left: 1px solid var(--line); }
+  .stats strong { font-family: var(--font-display); font-weight: 700; font-size: clamp(36px, 4vw, 52px); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .stats li span:last-child { font-size: 14px; color: var(--text-2); line-height: 1.5; }
+
+  .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .mini { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+  .list { list-style: none; display: grid; gap: 12px; }
+  .list li { position: relative; padding-left: 18px; color: var(--text-2); font-size: 16px; line-height: 1.6; }
+  .list li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 5px; height: 5px; background: var(--accent); }
+
+  .edu { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 32px; align-items: end; padding: 26px 28px; border-radius: var(--radius-lg); }
+  .edu-school { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .edu-degree { color: var(--text-2); font-size: 16px; line-height: 1.6; max-width: 46ch; }
+  .edu-notes { list-style: none; display: grid; gap: 6px; text-align: right; font-size: 14px; color: var(--text-2); white-space: nowrap; }
+
+  .toolkit { margin-top: clamp(80px, 10vw, 136px); }
+  .toolkit-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
+  .toolkit-title { font-size: clamp(30px, 3.4vw, 48px); }
+  .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+  .tool { position: relative; display: flex; flex-direction: column; gap: 14px; min-height: 230px; padding: 26px; border-radius: var(--radius-lg); transition: border-color 0.4s var(--ease-out), transform 0.5s var(--ease-out); }
+  .tool:hover { border-color: rgba(var(--ink), 0.24); transform: translateY(-3px); }
+  .tool-0, .tool-1 { grid-column: span 3; }
+  .tool-2, .tool-3, .tool-4 { grid-column: span 2; }
+  .tool-num { font-size: 11px; letter-spacing: 0.16em; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .tool-name { font-size: clamp(22px, 2vw, 28px); }
+  .tool-items { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: auto; font-size: 15px; line-height: 1.5; color: var(--text-2); }
+  .tool-items li { position: relative; }
+  .tool-items li + li::before { content: ''; position: absolute; left: -12px; top: 50%; width: 3px; height: 3px; border-radius: 50%; background: var(--text-3); }
+
+  @media (max-width: 960px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-photo { position: relative; top: 0; max-width: 420px; }
+    .bento { grid-template-columns: 1fr 1fr; }
+    .tool-0, .tool-1, .tool-2, .tool-3, .tool-4 { grid-column: auto; }
+    .tool-0 { grid-column: 1 / -1; }
+  }
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: 1fr; }
+    .stats li + li { border-left: 0; border-top: 1px solid var(--line); }
+    .stats li { grid-template-columns: auto 1fr; align-items: center; gap: 18px; }
+    .about-cols { grid-template-columns: 1fr; }
+    .edu { grid-template-columns: 1fr; }
+    .edu-notes { text-align: left; }
+    .bento { grid-template-columns: 1fr; }
+    .tool { min-height: 0; }
+  }
+</style>
