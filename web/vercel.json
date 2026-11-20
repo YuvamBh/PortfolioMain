@@ -1,0 +1,6 @@
+{
+  "framework": "astro",
+  "headers": [
+    { "source": "/duvi(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
+  ]
+}

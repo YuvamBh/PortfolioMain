@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /duvi
+Sitemap: https://yuvambhargav.com/sitemap-index.xml
