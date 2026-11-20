@@ -1,0 +1,32 @@
+---
+import { profile } from '../data/profile';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="wrap">
+    <p class="footer-mark" aria-hidden="true">yuvam bhargav<span>.</span></p>
+    <div class="footer-row">
+      <p>© {year} {profile.name}. Designed and built by me.</p>
+      <nav aria-label="Footer">
+        <a href={profile.links.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a href={`mailto:${profile.email}`}>Email</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { border-top: 1px solid var(--line); padding: 64px 0 calc(32px + env(safe-area-inset-bottom)); overflow: hidden; }
+  @media (max-width: 560px) { .footer { padding-bottom: calc(88px + env(safe-area-inset-bottom)); } }
+  .footer .wrap { container-type: inline-size; }
+  /* "yuvam bhargav." is 8.09em wide at this weight and tracking, so 12.2cqw fills the content width. */
+  .footer-mark {
+    font-family: var(--font-display); font-weight: 700; letter-spacing: -0.05em; line-height: 0.9;
+    font-size: 12.2cqw; white-space: nowrap; color: var(--text); margin-bottom: 32px;
+  }
+  .footer-mark span { color: var(--accent); }
+  .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 32px; color: var(--text-3); font-size: 14px; border-top: 1px solid var(--line); padding-top: 16px; }
+  .footer-row nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+  .footer-row a { min-height: 44px; display: inline-flex; align-items: center; color: var(--text-2); text-decoration: none; }
+  .footer-row a:hover { color: var(--text); }
+</style>
