@@ -1,0 +1,28 @@
+---
+// A desktop screenshot in a browser frame, with the phone screenshot overlapping when there is one.
+import type { Project } from '../data/profile';
+interface Props { project: Project; eager?: boolean }
+const { project: p, eager = false } = Astro.props;
+const host = p.links.find((l) => l.href.startsWith('http') && !l.href.includes('github.com'))?.href.replace(/^https?:\/\//, '').replace(/\/$/, '') ?? p.title.toLowerCase();
+---
+<div class:list={['media', { 'has-phone': !!p.phone }]}>
+  <div class="browser">
+    <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>{host}</span></div>
+    {p.image ? (
+      <img src={p.image} width="1600" height="1000" alt={`${p.title} website on desktop`} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    ) : (
+      <div class="placeholder-art" role="img" aria-label={`${p.title}`}><strong>{p.title}</strong></div>
+    )}
+  </div>
+  {p.phone && (
+    <div class="phone" aria-hidden="true">
+      <img src={p.phone} width="780" height="1560" alt="" loading="lazy" decoding="async" />
+    </div>
+  )}
+</div>
+
+<style>
+  .media { position: relative; }
+  .media.has-phone { padding-right: 12%; padding-bottom: 6%; }
+  .media .phone { position: absolute; right: 0; bottom: 0; width: 24%; min-width: 92px; }
+</style>

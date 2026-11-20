@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="Page not found · Yuvam Bhargav">
+  <section class="nf">
+    <div class="wrap">
+      <p class="eyebrow"><span class="num">404</span> Not found</p>
+      <h1 class="nf-title">This page wandered off.</h1>
+      <p class="nf-lede">The link may be old. Everything I’ve made is one click away.</p>
+      <div class="nf-cta">
+        <a class="btn btn-primary" href="/"><Icon name="arrow-left" /> Home</a>
+        <a class="btn" href="/projects">All projects</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { min-height: 80svh; display: flex; align-items: center; padding: calc(var(--nav-h) + 48px) 0 64px; }
+  .nf-title { font-size: clamp(48px, 8vw, 120px); font-weight: 700; letter-spacing: -0.045em; line-height: 0.92; margin: 22px 0; max-width: 12ch; }
+  .nf-lede { color: var(--text-2); font-size: 19px; }
+  .nf-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+</style>

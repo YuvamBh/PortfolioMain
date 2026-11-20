@@ -1,0 +1,149 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ProjectMedia from '../components/ProjectMedia.astro';
+import { projects } from '../data/profile';
+const filters = ['All', 'Product design', 'Web', 'Mobile', 'AI'];
+---
+<Base title="All projects · Yuvam Bhargav" description="Every project Yuvam Bhargav has designed and built, with the problem, what he did, the tools and live links.">
+  <section class="p-hero">
+    <div class="wrap">
+      <a class="link-arrow back" href="/"><Icon name="arrow-left" /><span>Home</span></a>
+      <p class="eyebrow"><span class="num">{String(projects.length).padStart(2, '0')}</span> Work index</p>
+      <h1 class="p-title" data-split>All projects.</h1>
+      <p class="p-lede" data-reveal>The problem, what I designed and built, the tools, and where to see it live.</p>
+      <div class="filters" role="group" aria-label="Filter projects" data-filters data-reveal>
+        {filters.map((f, i) => <button type="button" aria-pressed={i === 0 ? 'true' : 'false'} data-filter={f}>{f}</button>)}
+      </div>
+      <p class="sr-only" aria-live="polite" data-filter-status></p>
+    </div>
+  </section>
+
+  <div class="wrap p-layout">
+    <nav class="p-index" aria-label="Projects on this page">
+      <ol>
+        {projects.map((p, i) => (
+          <li data-kind={p.kind.join('|')}><a href={`#${p.slug}`}><span>{String(i + 1).padStart(2, '0')}</span>{p.title}</a></li>
+        ))}
+      </ol>
+    </nav>
+
+    <div class="p-list">
+      {projects.map((p, i) => (
+        <article id={p.slug} class="p-item" data-kind={p.kind.join('|')} aria-labelledby={`t-${p.slug}`}>
+          <div class="p-top">
+            <span class="p-num">{String(i + 1).padStart(2, '0')}</span>
+            <span>{p.year}</span>
+            <span>{p.context}</span>
+          </div>
+          <h2 id={`t-${p.slug}`} class="p-name" data-split>{p.title}</h2>
+          <p class="p-summary">{p.summary}</p>
+          <div class="p-media" data-reveal><ProjectMedia project={p} eager={i === 0} /></div>
+          <div class="p-details">
+            {p.problem && (
+              <div data-reveal>
+                <h3 class="mini">The problem</h3>
+                <p class="p-problem">{p.problem}</p>
+              </div>
+            )}
+            <div data-reveal>
+              <h3 class="mini">What I did</h3>
+              <ul class="p-points">{p.points.map((pt) => <li>{pt}</li>)}</ul>
+            </div>
+            <div data-reveal>
+              <h3 class="mini">Tools</h3>
+              <ul class="tags">{p.tags.map((t) => <li>{t}</li>)}</ul>
+            </div>
+            {p.links.length > 0 && (
+              <div class="p-links" data-reveal>
+                {p.links.map((l) => (
+                  <a class="btn" href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+                    {l.label.includes('GitHub') ? <Icon name="github" /> : <Icon name="arrow-up-right" />} {l.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .p-hero { padding: calc(var(--nav-h) + clamp(48px, 8vw, 96px)) 0 clamp(48px, 7vw, 80px); }
+  .back { margin-bottom: 28px; color: var(--text-2); }
+  .p-title { font-size: clamp(52px, 8.6vw, 150px); font-weight: 700; letter-spacing: -0.04em; line-height: 0.92; margin: 22px 0 24px; }
+  .p-lede { color: var(--text-2); font-size: clamp(17px, 1.6vw, 20px); max-width: 52ch; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .filters button {
+    min-height: 42px; padding: 0 16px; border: 1px solid rgba(var(--ink), 0.2); background: rgba(var(--ink), 0.03);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-2); cursor: pointer;
+    transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+  }
+  .filters button:hover { border-color: var(--line-strong); color: var(--text); }
+  .filters button[aria-pressed='true'] { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+  .p-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); padding-bottom: clamp(80px, 10vw, 140px); }
+  .p-index { position: sticky; top: calc(var(--nav-h) + 24px); align-self: start; }
+  .p-index ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; border-left: 1px solid var(--line); }
+  .p-index a { display: flex; gap: 12px; align-items: baseline; min-height: 40px; padding: 8px 0 8px 16px; color: var(--text-3); text-decoration: none; font-size: 14px; transition: color 0.25s var(--ease-out); margin-left: -1px; border-left: 1px solid transparent; }
+  .p-index a span { font-size: 12px; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .p-index a:hover, .p-index a[aria-current='true'] { color: var(--text); border-left-color: var(--accent); }
+  .p-index li[hidden], .p-item[hidden] { display: none; }
+
+  .p-list { display: grid; gap: clamp(88px, 12vw, 160px); }
+  .p-item { scroll-margin-top: calc(var(--nav-h) + 24px); }
+  .p-top { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--text-3); padding-top: 16px; border-top: 1px solid var(--line); margin-bottom: 18px; }
+  .p-num { color: var(--accent); font-weight: 600; }
+  .p-name { font-size: clamp(36px, 5vw, 72px); letter-spacing: -0.03em; line-height: 1.02; }
+  .p-summary { color: var(--text-2); font-size: clamp(18px, 1.5vw, 21px); line-height: 1.6; max-width: 52ch; margin: 18px 0 36px; }
+  .p-media { margin-bottom: 40px; }
+  .p-details { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px; }
+  .p-details > div:nth-child(1) { grid-column: 1 / -1; }
+  .p-problem { font-size: 18px; max-width: 62ch; }
+  .p-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; color: var(--text-2); line-height: 1.7; max-width: var(--measure); }
+  .p-points li { position: relative; padding-left: 18px; }
+  .p-points li::before { content: ''; position: absolute; left: 0; top: 0.75em; width: 7px; height: 1px; background: var(--accent); }
+  .p-links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 10px; }
+  .p-links .btn { width: auto; }
+
+  @media (max-width: 960px) {
+    .p-layout { grid-template-columns: 1fr; }
+    .p-index { display: none; }
+  }
+  @media (max-width: 700px) {
+    .p-details { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Filter by kind; the index and the list stay in sync, and the count is announced.
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const items = Array.from(document.querySelectorAll<HTMLElement>('.p-item'));
+  const index = Array.from(document.querySelectorAll<HTMLElement>('.p-index li'));
+  const status = document.querySelector('[data-filter-status]');
+  buttons.forEach((b) => b.addEventListener('click', () => {
+    const f = b.dataset.filter ?? 'All';
+    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    let shown = 0;
+    [...items, ...index].forEach((el) => {
+      const on = f === 'All' || (el.dataset.kind ?? '').split('|').includes(f);
+      el.hidden = !on;
+    });
+    shown = items.filter((i) => !i.hidden).length;
+    if (status) status.textContent = `Showing ${shown} project${shown === 1 ? '' : 's'}`;
+    window.dispatchEvent(new Event('resize'));
+  }));
+
+  // Highlight the project in view in the side index.
+  const links = new Map(index.map((li) => [li.querySelector('a')?.getAttribute('href')?.slice(1), li.querySelector('a')]));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      links.forEach((a) => a?.removeAttribute('aria-current'));
+      links.get(e.target.id)?.setAttribute('aria-current', 'true');
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  items.forEach((i) => io.observe(i));
+</script>

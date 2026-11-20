@@ -1,0 +1,126 @@
+---
+// Selected work, after the "Robotics Problem" section on destroai.com: a pinned, full-screen stage. The
+// active project's screenshot fills the background (dimmed); a dial on the left turns with the scroll and
+// snaps to each project's number; the project's details sit beside it. scripts/motion.ts drives the dial
+// and adds `dial-on` to <html> on large screens. Without it (phones, reduced motion, no script) the same
+// projects show as a plain list of cards.
+import Icon from './Icon.astro';
+import { projects } from '../data/profile';
+const featured = projects.filter((p) => p.featured);
+const n = featured.length;
+---
+<section id="work" class="work" data-dial aria-labelledby="work-title">
+  <h2 id="work-title" class="sr-only">Selected work</h2>
+  <div class="stage" data-dial-stage>
+    <div class="bg" aria-hidden="true">
+      {featured.map((p, i) => p.image && <img src={p.image} alt="" width="1600" height="1000" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" data-bg={i} data-active={i === 0 ? '' : undefined} />)}
+    </div>
+    <div class="shade" aria-hidden="true"></div>
+    <span class="corner c-tl" aria-hidden="true"></span><span class="corner c-tr" aria-hidden="true"></span>
+    <span class="corner c-bl" aria-hidden="true"></span><span class="corner c-br" aria-hidden="true"></span>
+
+    <div class="dial" aria-hidden="true" data-dial-face>
+      <svg class="dial-svg" data-dial-svg><g data-dial-ticks></g></svg>
+      {featured.map((_, i) => <span class="dial-num" data-dial-num>{String(i + 1).padStart(2, '0')}</span>)}
+      <span class="dial-dot" data-dial-dot></span>
+    </div>
+
+    <ol class="items">
+      {featured.map((p, i) => (
+        <li class="item" data-dial-item data-active={i === 0 ? '' : undefined}>
+          {p.image && <img class="item-img" src={p.image} alt={`${p.title} website`} width="1600" height="1000" loading="lazy" decoding="async" />}
+          <p class="item-label"><span aria-hidden="true">◆</span> Selected work</p>
+          <h3 class="item-title">{p.title}</h3>
+          <p class="item-context">{p.context} · {p.year}</p>
+          <p class="item-summary">{p.summary}</p>
+          <ul class="item-tags">{p.tags.map((t) => <li>{t}</li>)}</ul>
+          <div class="item-links">
+            <a class="btn" href={`/projects#${p.slug}`}>Case study <Icon name="arrow-right" /></a>
+            {p.links.map((l) => (
+              <a class="item-link" href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noopener">{l.label} ↗</a>
+            ))}
+          </div>
+          <p class="item-count">{i + 1} / {n}</p>
+        </li>
+      ))}
+    </ol>
+
+    <a class="all" href="/projects">All {projects.length} projects ↗</a>
+  </div>
+</section>
+
+<style>
+  /* ── Plain list (phones, reduced motion, no script) ── */
+  .work { padding: clamp(88px, 12vw, 140px) 0; border-top: 1px solid var(--line); }
+  .stage { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+  .bg, .shade, .corner, .dial { display: none; }
+  .items { list-style: none; display: grid; gap: 72px; }
+  .item { display: grid; gap: 12px; }
+  .item-img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 6px; border: 1px solid var(--line-strong); margin-bottom: 10px; }
+  .item-label, .item-count, .all { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+  .item-label span { color: var(--accent); margin-right: 6px; }
+  .item-title { font-family: var(--font-body); font-weight: 500; font-size: clamp(28px, 3vw, 40px); letter-spacing: -0.03em; }
+  .item-context { font-size: 14px; color: var(--text-3); }
+  .item-summary { color: var(--text-2); font-size: 17px; line-height: 1.7; max-width: 52ch; }
+  .item-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--text-2); }
+  .item-tags li { position: relative; }
+  .item-tags li + li::before { content: ''; position: absolute; left: -11px; top: 50%; width: 3px; height: 3px; border-radius: 50%; background: var(--text-3); }
+  .item-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; margin-top: 6px; }
+  .item-links .btn { width: auto; --h: 42px; }
+  .item-link { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; border-bottom: 1px solid transparent; }
+  .item-link:hover { border-bottom-color: var(--accent); }
+  .all { display: inline-flex; margin-top: 48px; text-decoration: none; color: var(--text-2); }
+
+  /* ── The pinned dial (large screens with motion) ── */
+  :global(html.dial-on) .work {
+    padding: 0; border-top: 0;
+    --text: #f0ede8; --text-2: rgba(240, 237, 232, 0.74); --text-3: rgba(240, 237, 232, 0.5); --accent: #c9a96e;
+    color: var(--text); background: #0b0a09;
+  }
+  :global(html.dial-on) .stage { position: relative; height: 100vh; max-width: none; padding: 0; overflow: hidden; }
+  :global(html.dial-on) .bg, :global(html.dial-on) .shade, :global(html.dial-on) .corner, :global(html.dial-on) .dial { display: block; }
+  :global(html.dial-on) .bg img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center;
+    opacity: 0; transform: scale(1.06); filter: saturate(0.85);
+    transition: opacity 0.9s var(--ease-out), transform 1.6s var(--ease-out);
+  }
+  :global(html.dial-on) .bg img[data-active] { opacity: 1; transform: scale(1); }
+  :global(html.dial-on) .shade {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(8, 7, 6, 0.9) 0%, rgba(8, 7, 6, 0.78) 45%, rgba(8, 7, 6, 0.45) 75%, rgba(8, 7, 6, 0.3) 100%),
+      linear-gradient(180deg, rgba(8, 7, 6, 0.5) 0%, transparent 25%, transparent 75%, rgba(8, 7, 6, 0.6) 100%);
+  }
+  .corner { position: absolute; width: 14px; height: 14px; border-color: rgba(240, 237, 232, 0.5); border-style: solid; border-width: 0; }
+  .c-tl { top: 96px; left: 24px; border-top-width: 1px; border-left-width: 1px; }
+  .c-tr { top: 96px; right: 24px; border-top-width: 1px; border-right-width: 1px; }
+  .c-bl { bottom: 24px; left: 24px; border-bottom-width: 1px; border-left-width: 1px; }
+  .c-br { bottom: 24px; right: 24px; border-bottom-width: 1px; border-right-width: 1px; }
+
+  :global(html.dial-on) .dial { position: absolute; inset: 0; pointer-events: none; }
+  .dial-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .dial-num {
+    position: absolute; left: 0; top: 0; font-family: var(--font-body); font-weight: 400; font-size: 76px; line-height: 1;
+    letter-spacing: -0.04em; color: #f0ede8; transform-origin: left center; will-change: transform, opacity; white-space: nowrap;
+  }
+  .dial-dot { position: absolute; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: #f0ede8; box-shadow: 0 0 0 4px rgba(240, 237, 232, 0.12); }
+
+  :global(html.dial-on) .items { position: absolute; left: 45%; right: 8%; top: 50%; transform: translateY(-50%); display: grid; gap: 0; }
+  :global(html.dial-on) .item {
+    grid-area: 1 / 1; align-content: center; max-width: 560px; gap: 12px;
+    visibility: hidden; opacity: 0; transform: translateY(18px); filter: blur(6px);
+    transition: opacity 0.45s var(--ease-out), transform 0.6s var(--ease-out), filter 0.45s var(--ease-out), visibility 0s linear 0.45s;
+  }
+  :global(html.dial-on) .item[data-active] {
+    visibility: visible; opacity: 1; transform: none; filter: none;
+    transition: opacity 0.6s var(--ease-out) 0.08s, transform 0.7s var(--ease-out) 0.08s, filter 0.6s var(--ease-out) 0.08s, visibility 0s;
+  }
+  :global(html.dial-on) .item-img { display: none; }
+  :global(html.dial-on) .item-title { font-size: clamp(30px, 2.8vw, 44px); }
+  :global(html.dial-on) .item-summary { font-size: 16px; }
+  :global(html.dial-on) .item-links .btn { color: #f0ede8; border-color: rgba(240, 237, 232, 0.4); background: rgba(240, 237, 232, 0.06); }
+  :global(html.dial-on) .item-links .btn:hover { background: #f0ede8; color: #0b0a09; }
+  :global(html.dial-on) .item-count { margin-top: 8px; }
+  :global(html.dial-on) .all { position: absolute; right: 48px; bottom: 30px; margin: 0; color: rgba(240, 237, 232, 0.7); }
+  :global(html.dial-on) .all:hover { color: #f0ede8; }
+</style>
