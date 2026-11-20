@@ -1,0 +1,31 @@
+---
+// A square tile holding a company or issuer logo: a raster logo, a one-colour SVG mark drawn in ink
+// (so it works in both themes), or a monogram when there is no logo.
+import type { Logo } from '../data/profile';
+interface Props { logo: Logo; size?: number }
+const { logo, size = 48 } = Astro.props;
+---
+<span class="tile" style={`--s:${size}px`} aria-hidden="true">
+  {'monogram' in logo ? (
+    <span class="mono">{logo.monogram}</span>
+  ) : logo.mask ? (
+    <span class="mask" style={`-webkit-mask-image:url(${logo.src});mask-image:url(${logo.src})`}></span>
+  ) : (
+    <img src={logo.src} alt="" loading="lazy" decoding="async" width={size} height={size} />
+  )}
+</span>
+
+<style>
+  .tile {
+    width: var(--s); height: var(--s); flex: none; display: grid; place-items: center; overflow: hidden;
+    border-radius: calc(var(--s) * 0.22); background: #f6f3ee; border: 1px solid rgba(20, 18, 15, 0.08);
+    box-shadow: 0 6px 18px -10px rgba(0, 0, 0, 0.35);
+  }
+  .tile img { width: 72%; height: 72%; object-fit: contain; }
+  .mask {
+    width: 74%; height: 74%; background: #141210;
+    -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+  }
+  .mono { font-family: var(--font-display); font-weight: 700; font-size: calc(var(--s) * 0.34); letter-spacing: -0.02em; color: #141210; }
+</style>
