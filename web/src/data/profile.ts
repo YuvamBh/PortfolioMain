@@ -37,13 +37,14 @@ export const profile = {
     source: 'https://github.com/YuvamBh/PortfolioMain',
   },
   // The hero's rotating line: what I've built, one at a time (no client names).
+  // Hero highlights. Tag: Shipped when the project is live (it has a live link in `projects`), Built otherwise.
   highlights: [
-    'Mystré: a fashion app where people react to designs before they’re made.',
-    'A full hackathon management system, from applications to results.',
-    'Multi-agent AI operations: CEO, CFO and procurement agents.',
-    'A geospatial parcel platform built on 39+ public data sources.',
-    'A personal AI assistant that keeps your data on your own machine.',
-  ],
+    { tag: 'Shipped', text: 'Mystré: a fashion app where people react to designs before they’re made.' },
+    { tag: 'Shipped', text: 'A full hackathon management system, from applications to results.' },
+    { tag: 'Built', text: 'Multi-agent AI operations: CEO, CFO and procurement agents.' },
+    { tag: 'Shipped', text: 'A geospatial parcel platform built on 39+ public data sources.' },
+    { tag: 'Built', text: 'A personal AI assistant that keeps your data on your own machine.' },
+  ] as { tag: 'Shipped' | 'Built'; text: string }[],
   statement:
     'I take products from idea to launch: framing the problem, designing the system, wiring in the AI and shipping an experience people want to use.',
   // Bio as text with linked words; hovering a link shows a preview of the page (About.astro).
@@ -81,32 +82,77 @@ export const profile = {
     notes: ['GPA 3.9', 'Dean’s List 2024, 2025 and 2026'],
     seal: '/logos/asu-seal.webp',
   },
-  stats: [
-    { value: 400, suffix: '+', label: 'participants on the hackathon platform I built' },
-    { value: 400, prefix: '~', label: 'students I support as a teaching assistant' },
-    { value: 9, suffix: '', label: 'live sites and apps I designed or built' },
-  ],
-  // Toolkit: most relevant first. Icons are Simple Icons slugs in /public/tools.
+  // Toolkit: most relevant first. Icons are Simple Icons slugs in /public/tools. Every tool is used in a
+  // project or repo, named on the resumes, or covered by a certificate (pandas, NumPy, scikit-learn and Jupyter:
+  // IBM Data Science Professional).
   skills: [
     {
       group: 'AI and machine learning',
-      note: 'Agents and tool use, RAG, embeddings and vector search, NLP and evaluation.',
-      tools: [{ name: 'Python', icon: 'python' }, { name: 'TensorFlow', icon: 'tensorflow' }, { name: 'PyTorch', icon: 'pytorch' }, { name: 'OpenAI', icon: 'openai' }, { name: 'Claude', icon: 'anthropic' }],
+      tools: [
+        { name: 'Python', icon: 'python' },
+        { name: 'PyTorch', icon: 'pytorch' },
+        { name: 'TensorFlow', icon: 'tensorflow' },
+        { name: 'Hugging Face', icon: 'huggingface' },
+        { name: 'scikit-learn', icon: 'scikitlearn' },
+        { name: 'pandas', icon: 'pandas' },
+        { name: 'NumPy', icon: 'numpy' },
+        { name: 'Jupyter', icon: 'jupyter' },
+        { name: 'OpenAI', icon: 'openai' },
+        { name: 'Claude', icon: 'claude' },
+        { name: 'MCP', icon: 'modelcontextprotocol' },
+      ],
     },
     {
       group: 'Product and full stack',
-      note: 'APIs, queues and background workers, auth and row-level security, cloud deploys.',
-      tools: [{ name: 'TypeScript', icon: 'typescript' }, { name: 'Node.js', icon: 'nodedotjs' }, { name: 'FastAPI', icon: 'fastapi' }, { name: 'PostgreSQL', icon: 'postgresql' }, { name: 'Supabase', icon: 'supabase' }, { name: 'Redis', icon: 'redis' }, { name: 'Docker', icon: 'docker' }, { name: 'Vercel', icon: 'vercel' }, { name: 'GitHub', icon: 'github' }],
+      tools: [
+        { name: 'TypeScript', icon: 'typescript' },
+        { name: 'Node.js', icon: 'nodedotjs' },
+        { name: 'Bun', icon: 'bun' },
+        { name: 'FastAPI', icon: 'fastapi' },
+        { name: 'Flask', icon: 'flask' },
+        { name: 'Pydantic', icon: 'pydantic' },
+        { name: 'PostgreSQL', icon: 'postgresql' },
+        { name: 'SQLAlchemy', icon: 'sqlalchemy' },
+        { name: 'Supabase', icon: 'supabase' },
+        { name: 'Redis', icon: 'redis' },
+        { name: 'Stripe', icon: 'stripe' },
+        { name: 'Resend', icon: 'resend' },
+        { name: 'PostHog', icon: 'posthog' },
+        { name: 'shadcn/ui', icon: 'shadcnui' },
+        { name: 'Radix UI', icon: 'radixui' },
+      ],
     },
     {
       group: 'Front end and mobile',
-      note: 'Web apps, iOS and Android apps, and motion that makes them feel alive.',
-      tools: [{ name: 'React', icon: 'react' }, { name: 'Next.js', icon: 'nextdotjs' }, { name: 'Astro', icon: 'astro' }, { name: 'React Native', icon: 'expo' }, { name: 'Swift', icon: 'swift' }, { name: 'Tailwind CSS', icon: 'tailwindcss' }, { name: 'GSAP', icon: 'greensock' }, { name: 'Framer Motion', icon: 'framer' }],
+      tools: [
+        { name: 'React', icon: 'react' },
+        { name: 'Next.js', icon: 'nextdotjs' },
+        { name: 'Astro', icon: 'astro' },
+        { name: 'React Native', icon: 'expo' },
+        { name: 'Swift', icon: 'swift' },
+        { name: 'JavaScript', icon: 'javascript' },
+        { name: 'HTML', icon: 'html5' },
+        { name: 'CSS', icon: 'css' },
+        { name: 'Tailwind CSS', icon: 'tailwindcss' },
+        { name: 'GSAP', icon: 'greensock' },
+        { name: 'Framer Motion', icon: 'framer' },
+        { name: 'Three.js', icon: 'threedotjs' },
+        { name: 'MapLibre', icon: 'maplibre' },
+      ],
     },
     {
-      group: 'Product design',
-      note: 'Prototyping, design systems, and accessible, responsive interfaces.',
-      tools: [{ name: 'Figma', icon: 'figma' }, { name: 'Canva', icon: 'canva' }],
+      group: 'DevOps and workflow',
+      tools: [
+        { name: 'Git', icon: 'git' },
+        { name: 'GitHub', icon: 'github' },
+        { name: 'GitHub Actions', icon: 'githubactions' },
+        { name: 'Docker', icon: 'docker' },
+        { name: 'Vercel', icon: 'vercel' },
+        { name: 'Turborepo', icon: 'turborepo' },
+        { name: 'Playwright', icon: 'playwright' },
+        { name: 'Pytest', icon: 'pytest' },
+        { name: 'Jira', icon: 'jira' },
+      ],
     },
   ],
 };
@@ -519,14 +565,14 @@ export const leadership = {
 };
 
 export const certifications: { title: string; issuer: string; logo: Logo }[] = [
-  { title: 'Data Science Professional Certificate', issuer: 'IBM', logo: { src: '/logos/ibm.webp' } },
+  { title: 'Data Science Professional Certificate', issuer: 'IBM', logo: { src: '/logos/ibm.svg', mask: true } },
   { title: 'Introduction to Generative AI', issuer: 'Google Cloud', logo: { src: '/logos/google.webp' } },
   { title: 'Claude Code 101 and other courses', issuer: 'Anthropic Academy', logo: { src: '/logos/anthropic.svg', mask: true } },
 ];
 
 export const honors: { title: string; detail: string; where: string; logo?: Logo; icon?: string }[] = [
   { title: 'Dean’s List', detail: '2024, 2025 and 2026', where: 'Arizona State University', logo: { src: '/logos/asu-seal.webp' } },
-  { title: 'IBM Z Student Ambassador', detail: '', where: 'IBM', logo: { src: '/logos/ibm.webp' } },
+  { title: 'IBM Z Student Ambassador', detail: '', where: 'IBM', logo: { src: '/logos/ibm.svg', mask: true } },
   { title: '3x hackathon winner', detail: 'Recognition at HackPrinceton and HackMIT', where: 'Hackathons', icon: 'trophy' },
   { title: '5x hackathon host and judge', detail: 'Student hackathons', where: 'ASU', icon: 'judge' },
 ];
