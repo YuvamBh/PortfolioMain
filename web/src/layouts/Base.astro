@@ -22,8 +22,9 @@ const {
 // Canonical URLs end in a slash, as the sitemap's do.
 const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const canonical = new URL(path, Astro.site);
-// The link preview: replace public/og.jpg (1200 × 630 JPEG) to change it.
-const ogImage = new URL('/og.jpg', Astro.site);
+// The link preview: public/og.jpg, 2400 × 1260 JPEG (twice the 1200 × 630 preview size, so it stays sharp after
+// LinkedIn and others shrink it). When the image changes, bump ?v= so their caches fetch the new one.
+const ogImage = new URL('/og.jpg?v=2', Astro.site);
 const ogAlt = `${profile.name}: AI, product and full-stack engineer`;
 // JSON in a script tag: escape "<" so no string can close the tag.
 const ld = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : null;
@@ -46,8 +47,8 @@ const ld = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : null;
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1260" />
     <meta property="og:image:alt" content={ogAlt} />
     <meta property="profile:first_name" content="Yuvam" />
     <meta property="profile:last_name" content="Bhargav" />
