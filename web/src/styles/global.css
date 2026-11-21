@@ -1,11 +1,14 @@
-/* Design tokens, after Mystré's web language: warm charcoal and cream, hairlines, square corners, smoked glass.
-   Dark is the default; light follows the device or the toggle. */
+/* Design tokens: warm charcoal and cream, hairlines, square corners, smoked glass. Dark (black, gray, coffee,
+   no colour washes behind the page) is the default; light follows the device or the toggle. */
 :root {
   --ink: 240, 237, 232;        /* text colour as r,g,b, for rgba() */
   --paper: 16, 14, 12;
   --glass-top: 24, 22, 19;
   --glass-foot: 12, 11, 10;
   --shade: 0, 0, 0;
+  --accent-rgb: 201, 169, 110; /* --accent as r,g,b, for tints */
+  --tint-2: 86, 62, 44;        /* coffee: the second colour in placeholder washes */
+  --amb-1: #6d3a3f; --amb-2: #8a6a3a; --amb-3: #2f4d4a;
 
   --bg: #0e0c0a;
   --bg-2: #13110f;
@@ -16,7 +19,7 @@
   --text: #f0ede8;
   --text-2: rgba(var(--ink), 0.72);   /* about 9:1 on --bg */
   --text-3: rgba(var(--ink), 0.5);    /* about 5:1 on --bg */
-  --accent: #c9a96e;                  /* Mystré gold */
+  --accent: #c9a96e;                  /* gold */
   --accent-ink: #0e0c0a;
   --shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.75);
 
@@ -42,6 +45,9 @@
   --glass-top: 250, 247, 242;
   --glass-foot: 238, 233, 225;
   --shade: 60, 45, 30;
+  --accent-rgb: 201, 169, 110; /* same tints as before the variables */
+  --tint-2: 47, 77, 74;
+  --amb-1: #6d3a3f; --amb-2: #8a6a3a; --amb-3: #2f4d4a;
 
   --bg: #f3efe8;
   --bg-2: #ece7df;
@@ -87,10 +93,11 @@ ul { margin: 0; padding: 0; }
 /* Ambient colour behind everything, so the glass has something to frost. */
 .ambient { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
 .ambient i { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.46; }
-.ambient i:nth-child(1) { width: 52vw; height: 52vw; left: -14vw; top: -10vw; background: radial-gradient(circle, #6d3a3f, transparent 65%); }
-.ambient i:nth-child(2) { width: 46vw; height: 46vw; right: -12vw; top: 30vh; background: radial-gradient(circle, #8a6a3a, transparent 65%); }
-.ambient i:nth-child(3) { width: 50vw; height: 50vw; left: 22vw; bottom: -22vw; background: radial-gradient(circle, #2f4d4a, transparent 65%); }
+.ambient i:nth-child(1) { width: 52vw; height: 52vw; left: -14vw; top: -10vw; background: radial-gradient(circle, var(--amb-1), transparent 65%); }
+.ambient i:nth-child(2) { width: 46vw; height: 46vw; right: -12vw; top: 30vh; background: radial-gradient(circle, var(--amb-2), transparent 65%); }
+.ambient i:nth-child(3) { width: 50vw; height: 50vw; left: 22vw; bottom: -22vw; background: radial-gradient(circle, var(--amb-3), transparent 65%); }
 [data-theme='light'] .ambient i { opacity: 0.3; }
+[data-theme='dark'] .ambient { display: none; } /* dark stays plain: no colour blobs */
 
 .skip-link {
   position: fixed; left: 12px; top: -60px; z-index: 300;
@@ -182,8 +189,8 @@ ul { margin: 0; padding: 0; }
 .placeholder-art {
   aspect-ratio: 16 / 10; display: grid; place-items: center; padding: 32px; text-align: center;
   background:
-    radial-gradient(120% 90% at 20% 10%, rgba(201, 169, 110, 0.22), transparent 60%),
-    radial-gradient(100% 80% at 90% 100%, rgba(47, 77, 74, 0.35), transparent 60%),
+    radial-gradient(120% 90% at 20% 10%, rgba(var(--accent-rgb), 0.22), transparent 60%),
+    radial-gradient(100% 80% at 90% 100%, rgba(var(--tint-2), 0.35), transparent 60%),
     var(--surface-2);
 }
 .placeholder-art strong { font-family: var(--font-display); font-size: clamp(28px, 4vw, 48px); letter-spacing: -0.02em; }

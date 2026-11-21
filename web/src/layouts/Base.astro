@@ -8,6 +8,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Chat from '../components/Chat.astro';
+import { CHAT_ENABLED } from '../data/flags';
 import { profile } from '../data/profile';
 
 interface Props { title?: string; description?: string }
@@ -61,7 +62,7 @@ const ogImage = new URL('/og.jpg', Astro.site);
       <slot />
     </main>
     <Footer />
-    <Chat />
+    {CHAT_ENABLED && <Chat />}
     <div class="grain" aria-hidden="true"></div>
     <script>
       import '../scripts/motion';
