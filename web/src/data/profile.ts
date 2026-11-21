@@ -6,6 +6,8 @@ export type Link = { label: string; href: string };
 export type Project = {
   slug: string;
   title: string;
+  short?: string;          // short name for the projects menu
+  line?: string;           // one line for the projects grid
   context: string;          // org or role, one line
   year: string;
   summary: string;          // one sentence
@@ -34,27 +36,33 @@ export const profile = {
     calendly: 'https://calendly.com/ybharga2-asu/30min',
     source: 'https://github.com/YuvamBh/PortfolioMain',
   },
-  // The hero's rotating line: real highlights, one at a time.
+  // The hero's rotating line: what I've built, one at a time (no client names).
   highlights: [
-    'I build products end to end: interface, backend and AI.',
-    'Founding Mystré, where people shape fashion before it is made.',
-    'Built the hackathon platform that 400+ ASU students used.',
-    'Created and deployed the Claude Builders Club website.',
-    'Shipped a parcel map for land developers at Automation Interns.',
-    'Built Claude-based agents that run operations for a construction company.',
+    'Mystré: a fashion app where people react to designs before they’re made.',
+    'A full hackathon management system, from applications to results.',
+    'Multi-agent AI operations: CEO, CFO and procurement agents.',
+    'A geospatial parcel platform built on 39+ public data sources.',
+    'A personal AI assistant that keeps your data on your own machine.',
   ],
   statement:
-    'I build products end to end, from the interface to the data and AI behind it. From a fashion app’s swipe feed to a hackathon platform that 400+ students used, I take ideas all the way to launch.',
+    'I take products from idea to launch: framing the problem, designing the system, wiring in the AI and shipping an experience people want to use.',
+  // Bio as text with linked words; hovering a link shows a preview of the page (About.astro).
   bio: [
-    'I’m a Computer Science (AI) and Data Science student at Arizona State University, graduating in December 2027. I work across product design, full-stack engineering and applied AI, so I can take an idea from a sketch to a shipped product.',
-    'Right now I’m founding Mystré, a fashion app where people react to designs before they are made. I also lead the Claude Builders Club at ASU, work as a forward deployed engineer at Automation Interns, and teach distributed systems as a TA.',
-  ],
+    [
+      'I build products: AI agents, full-stack platforms and mobile apps. Most of my time goes into ',
+      { text: 'Mystré', href: 'https://www.mystre.app', preview: '/work/mystre-desktop.webp' },
+      ', the startup I founded. It’s a fashion app where people react to designs before they’re made, so brands can see what to produce before they manufacture. I built the iOS and Android app, the brand portal and the website.',
+    ],
+    [
+      'Alongside it, I work as a forward deployed engineer at Automation Interns, building data-heavy products with clients, and as a teaching assistant for distributed software systems at ASU. I also lead the Claude Builders Club, where I built the platform that runs our hackathon.',
+    ],
+  ] as (string | { text: string; href: string; preview: string })[][],
   focus: [
-    'Product and full-stack engineering',
     'Applied AI and machine learning',
-    'Interface and interaction design',
-    'Design systems and motion',
-    'Accessible, responsive websites',
+    'Agents and LLM systems',
+    'Product development',
+    'Full-stack engineering',
+    'Mobile and web apps',
   ],
   now: [
     'Founding Mystré, a demand-intelligence platform for fashion',
@@ -66,27 +74,50 @@ export const profile = {
     school: 'Arizona State University',
     degree: 'B.S. Computer Science (Artificial Intelligence) and B.S. Data Science (Business Analytics)',
     dates: 'Expected December 2027',
+    degrees: [
+      { name: 'Bachelor of Science', field: 'Computer Science', focus: 'Artificial Intelligence' },
+      { name: 'Bachelor of Science', field: 'Data Science', focus: 'Business Analytics' },
+    ],
     notes: ['GPA 3.9', 'Dean’s List 2024, 2025 and 2026'],
+    seal: '/logos/asu-seal.webp',
   },
   stats: [
     { value: 400, suffix: '+', label: 'participants on the hackathon platform I built' },
     { value: 400, prefix: '~', label: 'students I support as a teaching assistant' },
     { value: 9, suffix: '', label: 'live sites and apps I designed or built' },
   ],
+  // Toolkit: most relevant first. Icons are Simple Icons slugs in /public/tools.
   skills: [
-    { group: 'UX and UI', items: ['Figma', 'Canva', 'User flows', 'Wireframes', 'Prototyping', 'Design systems', 'Motion design'] },
-    { group: 'Accessibility', items: ['Responsive layouts', 'Semantic HTML', 'ARIA', 'Keyboard navigation', 'Reduced motion'] },
-    { group: 'Front end', items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Astro', 'React Native', 'Tailwind CSS', 'GSAP', 'Framer Motion'] },
-    { group: 'Back end and tools', items: ['Node.js', 'Python', 'PostgreSQL', 'Supabase', 'REST APIs', 'Git and GitHub', 'Vercel', 'GitHub Pages'] },
-    { group: 'AI and machine learning', items: ['Python', 'TensorFlow', 'NLP', 'RAG', 'Embeddings and vector search', 'Claude API', 'OpenAI API', 'Agent workflows'] },
+    {
+      group: 'AI and machine learning',
+      note: 'Agents and tool use, RAG, embeddings and vector search, NLP and evaluation.',
+      tools: [{ name: 'Python', icon: 'python' }, { name: 'TensorFlow', icon: 'tensorflow' }, { name: 'PyTorch', icon: 'pytorch' }, { name: 'OpenAI', icon: 'openai' }, { name: 'Claude', icon: 'anthropic' }],
+    },
+    {
+      group: 'Product and full stack',
+      note: 'APIs, queues and background workers, auth and row-level security, cloud deploys.',
+      tools: [{ name: 'TypeScript', icon: 'typescript' }, { name: 'Node.js', icon: 'nodedotjs' }, { name: 'FastAPI', icon: 'fastapi' }, { name: 'PostgreSQL', icon: 'postgresql' }, { name: 'Supabase', icon: 'supabase' }, { name: 'Redis', icon: 'redis' }, { name: 'Docker', icon: 'docker' }, { name: 'Vercel', icon: 'vercel' }, { name: 'GitHub', icon: 'github' }],
+    },
+    {
+      group: 'Front end and mobile',
+      note: 'Web apps, iOS and Android apps, and motion that makes them feel alive.',
+      tools: [{ name: 'React', icon: 'react' }, { name: 'Next.js', icon: 'nextdotjs' }, { name: 'Astro', icon: 'astro' }, { name: 'React Native', icon: 'expo' }, { name: 'Swift', icon: 'swift' }, { name: 'Tailwind CSS', icon: 'tailwindcss' }, { name: 'GSAP', icon: 'greensock' }, { name: 'Framer Motion', icon: 'framer' }],
+    },
+    {
+      group: 'Product design',
+      note: 'Prototyping, design systems, and accessible, responsive interfaces.',
+      tools: [{ name: 'Figma', icon: 'figma' }, { name: 'Canva', icon: 'canva' }],
+    },
   ],
 };
 
 export const projects: Project[] = [
   {
     slug: 'mystre',
+    line: 'A fashion app where people react to designs before they’re made.',
+    short: 'Mystré',
     title: 'Mystré',
-    context: 'Founder, product designer and engineer',
+    context: 'Founder',
     year: '2026',
     summary: 'A fashion app where people react to designs before they are made, and a portal that tells brands what to make.',
     problem: 'Brands manufacture blind and carry dead stock. People have nowhere to react to unreleased fashion without being sold to.',
@@ -107,6 +138,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'hackathon',
+    line: 'A full hackathon platform, from applications to results.',
+    short: 'HackASU',
     title: 'Hackathon platform',
     context: 'Claude Builders Club at ASU',
     year: '2026',
@@ -130,6 +163,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'claude-club',
+    line: 'The club’s website, created and deployed end to end.',
+    short: 'Claude Club',
     title: 'Claude Builders Club website',
     context: 'President and Claude Ambassador',
     year: '2026',
@@ -151,6 +186,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'landscout',
+    line: 'A geospatial parcel platform built on 39+ public data sources.',
+    short: 'LandScout',
     title: 'LandScout',
     context: 'Automation Interns, forward deployed engineer',
     year: '2026',
@@ -169,8 +206,10 @@ export const projects: Project[] = [
   },
   {
     slug: 'devlabs',
+    line: 'A builder portal where student engineers show proof of work.',
+    short: 'DevLabs',
     title: 'DevLabs',
-    context: 'Vice President, Industry Relations',
+    context: 'Industry Relations',
     year: '2025',
     summary: 'Co-built devlabs.club and its builder portal, where student engineers show proof of work to early-stage founders.',
     points: [
@@ -189,6 +228,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'meetone',
+    line: 'Booking and video calls with approvals and live status.',
+    short: 'MeetOne',
     title: 'MeetOne',
     context: 'Built for the Claude Builders Club',
     year: '2026',
@@ -210,6 +251,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'career-services',
+    line: 'Career Services web pages, built with ASU staff.',
+    short: 'Career Services',
     title: 'ASU Career Services website',
     context: 'Career Peer, web and UX',
     year: '2025',
@@ -226,6 +269,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'gcn',
+    line: 'A 14-page site for an international student community.',
+    short: 'GCN',
     title: 'Global Career Network at ASU',
     context: 'Club website',
     year: '2025',
@@ -245,6 +290,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'asu-ai',
+    line: 'AI-personalized academic planning, adopted by ASU Enterprise Technology.',
+    short: 'ASU.ai',
     title: 'ASU.ai',
     context: 'AI academic planning',
     year: '2024',
@@ -259,6 +306,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'duvi',
+    line: 'A personal AI assistant that keeps your data on your machine.',
+    short: 'duvi',
     title: 'duvi',
     context: 'Personal AI assistant for macOS',
     year: '2026',
@@ -274,6 +323,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'alert-saas',
+    line: 'Competitor monitoring with before/after change alerts.',
+    short: 'Alert SaaS',
     title: 'Alert SaaS',
     context: 'Competitor monitoring',
     year: '2026',
@@ -291,27 +342,95 @@ export const projects: Project[] = [
       { label: 'GitHub', href: 'https://github.com/YuvamBh/alert-saas' },
     ],
   },
+  {
+    slug: 'ai-ops',
+    line: 'CEO, CFO and procurement agents that run day-to-day operations.',
+    short: 'AI Ops',
+    title: 'AI operations assistant',
+    context: 'Client work',
+    year: '2026',
+    summary: 'A multi-agent operations assistant on the Claude API that a non-technical business owner works with over iMessage and calls.',
+    points: [
+      'Built CEO, CFO and procurement agents on the Claude API, with key decisions always returned to the owner.',
+      'Shaped the assistant’s replies from the owner’s feedback and built a web dashboard with live job status and chat history.',
+    ],
+    tags: ['Claude API', 'Agents', 'Dashboard'],
+    kind: ['AI'],
+    links: [],
+  },
+  {
+    slug: 'linklead',
+    line: 'Self-hosted short links with click analytics and an AI assistant.',
+    short: 'LinkLead',
+    title: 'LinkLead',
+    context: 'Link analytics',
+    year: '2026',
+    summary: 'Self-hosted short links with a click-analytics console and an assistant that answers questions about the data.',
+    points: [
+      'Built a short-link and click-analytics console with trend and breakdown charts and per-link pages (Next.js, Supabase, Upstash Redis).',
+      'Kept redirects fast by logging clicks after the response, and added an OpenAI assistant for the analytics on screen.',
+    ],
+    tags: ['Next.js', 'Supabase', 'Redis', 'OpenAI'],
+    kind: ['Web', 'AI'],
+    links: [
+      { label: 'Live', href: 'https://linklead-nine.vercel.app' },
+      { label: 'GitHub', href: 'https://github.com/YuvamBh/LinkLead' },
+    ],
+  },
+  {
+    slug: 'lifeloop',
+    line: 'A SwiftUI habit and reflection app with a map of nearby places.',
+    short: 'LifeLoop',
+    title: 'LifeLoop',
+    context: 'iOS app',
+    year: '2026',
+    summary: 'A SwiftUI app for habits, reflections with a mood score, and a map of nearby places to grow.',
+    points: [
+      'Built a four-tab SwiftUI app (SwiftData, MVVM) with empty states, inline validation and filters for goals, mood and progress.',
+      'Added MapKit and Core Location with the Overpass API to show nearby parks, libraries and gyms by category.',
+    ],
+    tags: ['SwiftUI', 'SwiftData', 'MapKit'],
+    kind: ['Mobile'],
+    links: [{ label: 'GitHub', href: 'https://github.com/YuvamBh/LifeLoop' }],
+  },
 ];
 
 export type Logo = { src: string; mask?: boolean } | { monogram: string };
+// A picture or a video shown above a leadership or event card.
+export type Media = { image?: string; video?: string; poster?: string; alt: string };
+
+// Categories for the projects grid on the home page: eight tiles around the featured project.
+export const categories: { id: string; name: string; projects: string[] }[] = [
+  // Each category opens on a different project, and none on Mystré (it has the centre tile).
+  { id: 'ai', name: 'AI and machine learning', projects: ['ai-ops', 'duvi', 'asu-ai', 'linklead'] },
+  { id: 'platforms', name: 'Full-stack platforms', projects: ['hackathon', 'meetone', 'alert-saas', 'landscout'] },
+  { id: 'web', name: 'Web', projects: ['claude-club', 'devlabs', 'gcn', 'career-services'] },
+  { id: 'mobile', name: 'Mobile', projects: ['lifeloop', 'mystre'] },
+  { id: 'design', name: 'Product design', projects: ['meetone', 'alert-saas', 'hackathon', 'mystre'] },
+  { id: 'data', name: 'Data and analytics', projects: ['alert-saas', 'landscout', 'linklead'] },
+  { id: 'community', name: 'Community', projects: ['devlabs', 'gcn', 'claude-club', 'hackathon', 'meetone'] },
+  { id: 'industry', name: 'Industry projects', projects: ['landscout', 'ai-ops', 'career-services'] },
+];
 
 export const experience: {
   org: string; role: string; dates: string; place: string; points: string[];
   logo: Logo; image?: string; site?: Link;
 }[] = [
   {
-    org: 'Mystré', role: 'Founder, Product Designer and Engineer', dates: 'Jan 2026 – Present', place: 'Tempe, AZ',
+    org: 'Mystré', role: 'Founder', dates: 'Jan 2026 – Present', place: 'Tempe, AZ',
     points: [
-      'Designed and built an iOS/Android app and a brand portal on my own.',
-      'Set up one visual system across app and web, and 30 email templates.',
+      'Founded a demand-intelligence platform for fashion: people react to unreleased designs, and brands learn what to make before they manufacture.',
+      'Built the iOS and Android app (React Native, Expo) with a gesture-driven feed, the brand portal for running design tests and reading results, and the website (Next.js, Supabase).',
+      'Lead product, engineering and brand outreach.',
     ],
     logo: { src: '/logos/mystre.svg', mask: true }, image: '/work/mystre-desktop.webp', site: { label: 'mystre.app', href: 'https://www.mystre.app' },
   },
   {
     org: 'Automation Interns', role: 'Forward Deployed Engineer', dates: 'Jun 2026 – Present', place: 'Tempe, AZ',
     points: [
-      'Delivered LandScout, a map tool uniting 39+ public data sources on 800K+ parcels.',
-      'Worked directly with the client from research to launch.',
+      'Built LandScout, a geospatial parcel platform (Next.js, TypeScript, Supabase/Postgres, MapLibre GL) unifying 39+ public data sources across 800K+ parcels.',
+      'Wrote a bulk ingestion job that pages King County ArcGIS REST data into a Postgres cache, and 21 API routes that proxy and cache GIS, geocoding and Street View requests.',
+      'Shipped OTP sign-in with access requests, saved parcel collections and CSV export, working with the client from data-source research to production on Vercel.',
     ],
     logo: { src: '/logos/automationinterns.webp' }, image: '/work/company/automationinterns.webp', site: { label: 'automationinterns.com', href: 'https://www.automationinterns.com' },
   },
@@ -362,34 +481,39 @@ export const leadership = {
     {
       org: 'Claude Builders Club at ASU', role: 'President and Claude Ambassador', dates: 'Mar 2026 – Present',
       detail: 'Lead the club, created its website, and built the hackathon platform that ran HackASU for 400+ participants.',
-      link: { label: 'claudebuilder.club', href: 'https://claudebuilder.club' },
+      link: { label: 'claudebuilder.club', href: 'https://claudebuilder.club' }, logo: { src: '/logos/cbc.webp' } as Logo,
+      media: { image: '/work/cbc-desktop.webp', alt: 'Claude Builders Club website' } as Media,
     },
     {
-      org: 'DevLabs at ASU', role: 'Vice President, Industry Relations', dates: 'Jan 2025 – Present',
+      org: 'DevLabs at ASU', role: 'Industry Relations', dates: 'Jan 2025 – Present',
       detail: 'Co-built devlabs.club and its builder portal; led DevHacks ’25 and secured $12,000+ in sponsorships.',
-      link: { label: 'devlabs.club', href: 'https://www.devlabs.club' },
+      link: { label: 'devlabs.club', href: 'https://www.devlabs.club' }, logo: { src: '/logos/devlabs.webp' } as Logo,
+      media: { image: '/work/devlabs-desktop.webp', alt: 'DevLabs website' } as Media,
     },
   ],
   past: [
     {
       org: 'Global Career Network at ASU', role: 'Director of Finance', dates: '2025',
       detail: 'Co-built the club’s website and ran events for 200+ international students.',
-      link: { label: 'gcn-asu.com', href: 'https://gcn-asu.com' },
+      link: { label: 'gcn-asu.com', href: 'https://gcn-asu.com' }, logo: { src: '/logos/gcn.webp' } as Logo,
+      media: { image: '/work/gcn-desktop.webp', alt: 'Global Career Network website' } as Media,
     },
     {
       org: 'Indian Students’ Association', role: 'Director of Finance', dates: 'Past',
-      detail: 'Managed event budgets over $15,000 and sponsorships for a community of 4,000+ students.',
+      detail: 'Managed event budgets over $15,000 and sponsorships for a community of 4,000+ students.', logo: { monogram: 'ISA' } as Logo,
+      media: undefined as Media | undefined,
     },
   ],
   events: [
     {
-      title: 'HackASU 2026', org: 'Claude Builders Club', date: 'March 2026',
+      title: 'HackASU 2026', org: 'Claude Builders Club', date: 'March 2026', logo: { src: '/logos/cbc.webp' } as Logo,
+      media: { image: '/work/hackathon-desktop.webp', alt: 'HackASU platform' } as Media,
       detail: 'Ran on the platform I built: applications, teams, check-in, submissions, judging and results for 400+ participants.',
     },
     {
-      title: 'DevHacks ’25', org: 'DevLabs × Strategy', date: 'March 29–30, 2025',
+      title: 'DevHacks ’25', org: 'DevLabs × Strategy', date: 'March 29–30, 2025', logo: { src: '/logos/devlabs.webp' } as Logo,
       detail: 'Lead organiser: 250+ participants, 10 mentors and $12,000+ in sponsorships.',
-      video: '/media/devhacks.mp4', poster: '/media/devhacks.webp',
+      media: { video: '/media/devhacks.mp4', poster: '/media/devhacks.webp', alt: 'DevHacks ’25 highlight video' } as Media,
     },
   ],
 };
@@ -401,10 +525,10 @@ export const certifications: { title: string; issuer: string; logo: Logo }[] = [
 ];
 
 export const honors: { title: string; detail: string; where: string; logo?: Logo; icon?: string }[] = [
-  { title: 'Dean’s List', detail: '2024, 2025 and 2026', where: 'Arizona State University', logo: { src: '/logos/asu.webp' } },
+  { title: 'Dean’s List', detail: '2024, 2025 and 2026', where: 'Arizona State University', logo: { src: '/logos/asu-seal.webp' } },
   { title: 'IBM Z Student Ambassador', detail: '', where: 'IBM', logo: { src: '/logos/ibm.webp' } },
   { title: '3x hackathon winner', detail: 'Recognition at HackPrinceton and HackMIT', where: 'Hackathons', icon: 'trophy' },
-  { title: '5x hackathon host and judge', detail: 'Student hackathons', where: 'ASU', icon: 'mic' },
+  { title: '5x hackathon host and judge', detail: 'Student hackathons', where: 'ASU', icon: 'judge' },
 ];
 
 // Kept for the chat's context.
