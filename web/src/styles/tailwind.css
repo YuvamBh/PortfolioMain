@@ -1,0 +1,6 @@
+/* Tailwind v4 for the React components in src/components/ui. Theme tokens and utilities only: Tailwind's
+   reset (preflight) is left out so the site's own base styles in global.css are untouched. Utilities are
+   imported unlayered so they win over global.css element rules (e.g. `img { height: auto }`). */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css";
+@source "../components";
