@@ -3,9 +3,10 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ProjectMedia from '../components/ProjectMedia.astro';
 import { projects } from '../data/profile';
+import { projectsLd } from '../lib/seo';
 const filters = ['All', 'Product design', 'Web', 'Mobile', 'AI'];
 ---
-<Base title="All projects · Yuvam Bhargav" description="Every project Yuvam Bhargav has designed and built, with the problem, what he did, the tools and live links.">
+<Base jsonLd={projectsLd()} title="All projects · Yuvam Bhargav" description="Every project Yuvam Bhargav has designed and built, with the problem, what he did, the tools and live links.">
   <section class="p-hero">
     <div class="wrap">
       <a class="link-arrow back" href="/"><Icon name="arrow-left" /><span>Home</span></a>

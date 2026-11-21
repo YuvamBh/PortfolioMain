@@ -9,8 +9,9 @@ import Leadership from '../components/Leadership.astro';
 import Accomplishments from '../components/Accomplishments.astro';
 import Contact from '../components/Contact.astro';
 import { profile } from '../data/profile';
+import { homeLd } from '../lib/seo';
 ---
-<Base>
+<Base jsonLd={homeLd()}>
   <Hero />
   <section class="statement" aria-label="What I do">
     <div class="wrap">
