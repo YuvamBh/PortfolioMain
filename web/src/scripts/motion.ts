@@ -129,92 +129,6 @@ function typeRoles() {
   })();
 }
 
-// The projects dial (Work.astro): an arc on the left turns with the scroll; each project's number rides
-// the arc, the one at the dot is large and bright; the active project's details and background swap.
-// A soft snap settles the dial on a project once scrolling stops.
-function setupDial(lenis: Lenis) {
-  const section = document.querySelector<HTMLElement>('[data-dial]');
-  if (!section) return;
-  const ticks = section.querySelector<SVGGElement>('[data-dial-ticks]');
-  const nums = Array.from(section.querySelectorAll<HTMLElement>('[data-dial-num]'));
-  const dot = section.querySelector<HTMLElement>('[data-dial-dot]');
-  const items = Array.from(section.querySelectorAll<HTMLElement>('[data-dial-item]'));
-  const bgs = Array.from(section.querySelectorAll<HTMLElement>('[data-bg]'));
-  const n = items.length;
-  if (!ticks || !dot || n < 2) return;
-  const STEP = 11; // degrees between projects on the arc
-  const state = { p: 0 };
-  let R = 0, cx = 0, cy = 0, active = -1;
-
-  const build = () => {
-    const w = window.innerWidth, h = window.innerHeight;
-    R = h * 1.15; cx = Math.max(220, w * 0.3) - R; cy = h / 2;
-    let svg = `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="rgba(240,237,232,0.42)" stroke-width="1"/>`;
-    for (let a = -64; a <= 64 + STEP * (n - 1); a += 2) {
-      const t = (a * Math.PI) / 180; const long = a % 10 === 0; const len = long ? 12 : 5;
-      const x1 = cx + R * Math.cos(t), y1 = cy + R * Math.sin(t);
-      const x2 = cx + (R + len) * Math.cos(t), y2 = cy + (R + len) * Math.sin(t);
-      svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(240,237,232,${long ? 0.5 : 0.25})" stroke-width="1"/>`;
-    }
-    for (let i = 0; i < n; i++) { // a bracket mark at each project's place on the arc
-      const t = (i * STEP * Math.PI) / 180;
-      const xa = cx + (R - 10) * Math.cos(t), ya = cy + (R - 10) * Math.sin(t);
-      const xb = cx + (R + 20) * Math.cos(t), yb = cy + (R + 20) * Math.sin(t);
-      svg += `<line x1="${xa}" y1="${ya}" x2="${xb}" y2="${yb}" stroke="rgba(240,237,232,0.6)" stroke-width="1"/>`;
-    }
-    ticks.innerHTML = svg;
-    dot.style.transform = `translate(${cx + R}px, ${cy}px)`;
-  };
-
-  const render = () => {
-    ticks.setAttribute('transform', `rotate(${-state.p * STEP} ${cx} ${cy})`);
-    nums.forEach((el, i) => {
-      const d = i - state.p; const ad = Math.abs(d);
-      const t = (d * STEP * Math.PI) / 180; const r = R + 46;
-      const x = cx + r * Math.cos(t), y = cy + r * Math.sin(t);
-      const s = ad < 1 ? 1 - ad * 0.42 : 0.58;
-      const o = ad < 1 ? 1 - ad * 0.6 : Math.max(0, 0.4 - (ad - 1) * 0.16);
-      el.style.transform = `translate(${x}px, ${y}px) translateY(-50%) scale(${s})`;
-      el.style.opacity = String(o);
-    });
-    const idx = Math.min(n - 1, Math.max(0, Math.round(state.p)));
-    if (idx !== active) {
-      active = idx;
-      items.forEach((it, k) => it.toggleAttribute('data-active', k === idx));
-      bgs.forEach((b) => b.toggleAttribute('data-active', Number(b.dataset.bg) === idx));
-    }
-  };
-
-  build(); render();
-  const tween = gsap.to(state, {
-    p: n - 1, ease: 'none', onUpdate: render,
-    scrollTrigger: {
-      trigger: section, start: 'top top', end: () => `+=${(n - 1) * window.innerHeight * 0.75}`,
-      pin: true, scrub: 0.6, invalidateOnRefresh: true, refreshPriority: 1, onRefresh: () => { build(); render(); },
-    },
-  });
-  const onResize = () => { if (html.classList.contains('dial-on')) { build(); render(); } };
-  window.addEventListener('resize', onResize);
-
-  // Soft snap: once scrolling settles inside the pinned range, glide to the nearest project.
-  let snapTimer = 0; let snapping = false;
-  const onScroll = () => {
-    if (snapping) return;
-    clearTimeout(snapTimer);
-    snapTimer = window.setTimeout(() => {
-      const st = tween.scrollTrigger; if (!st || !st.isActive) return;
-      const prog = st.progress; if (prog <= 0.001 || prog >= 0.999) return;
-      const target = st.start + (Math.round(prog * (n - 1)) / (n - 1)) * (st.end - st.start);
-      if (Math.abs(target - window.scrollY) < 3) return;
-      snapping = true;
-      lenis.scrollTo(target, { duration: 0.6, easing: (x: number) => 1 - Math.pow(1 - x, 3), onComplete: () => { snapping = false; } });
-      window.setTimeout(() => { snapping = false; }, 800);
-    }, 160);
-  };
-  lenis.on('scroll', onScroll);
-  return () => { window.removeEventListener('resize', onResize); lenis.off('scroll', onScroll); clearTimeout(snapTimer); };
-}
-
 function init() {
   if (reduce) {
     const typed = document.querySelector<HTMLElement>('[data-typed]');
@@ -266,15 +180,7 @@ function init() {
     });
   }
 
-  // The pinned projects dial is created before everything below it, so their positions include the
-  // pin's extra scroll length.
   const mm = gsap.matchMedia();
-  mm.add('(min-width: 1024px) and (min-height: 640px)', () => {
-    html.classList.add('dial-on');
-    const cleanup = setupDial(lenis);
-    return () => { cleanup?.(); html.classList.remove('dial-on'); };
-  });
-
   // Everything below is tied to the scroll position itself, so it plays forward on the way down and
   // runs back on the way up, at exactly the speed of the scroll (no pop-in, no resets).
 
@@ -285,6 +191,14 @@ function init() {
     onView(el,
       () => gsap.to(chars, { yPercent: 0, opacity: 1, filter: 'blur(0px)', duration: 0.85, ease: 'expo.out', stagger: 0.016, overwrite: true }),
       () => gsap.set(chars, { yPercent: 55, opacity: 0, filter: 'blur(8px)', overwrite: true }));
+  });
+
+  // Project cards rise in, a beat apart across each row; replayed on every return.
+  document.querySelectorAll<HTMLElement>('[data-card]').forEach((card, i) => {
+    const delay = [0, 0.1, 0, 0.08, 0.16][i % 5];
+    onView(card,
+      () => gsap.to(card, { y: 0, opacity: 1, duration: 1, ease: 'expo.out', delay, overwrite: true }),
+      () => gsap.set(card, { y: 48, opacity: 0, overwrite: true }));
   });
 
   // Experience rows: the card slides in from its side, the picture opens outward from the spine, the
@@ -347,6 +261,10 @@ function init() {
   });
 
   mm.add('(min-width: 1024px)', () => {
+    // Project screenshots drift slightly inside their frames as the page scrolls.
+    document.querySelectorAll<HTMLElement>('[data-card-img]').forEach((img) => {
+      gsap.fromTo(img, { yPercent: -6 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: img.closest('[data-card]'), start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
     // Gentle parallax on large screens only.
     document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
       const amt = Number(el.dataset.parallax || 8);
