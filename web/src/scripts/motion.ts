@@ -68,26 +68,52 @@ function cycleLines() {
   const box = document.querySelector<HTMLElement>('[data-cycle-box]');
   const ctrl = document.querySelector<HTMLElement>('[data-cycle-ctrl]');
   const pauseBtn = document.querySelector<HTMLButtonElement>('[data-cycle-pause]');
+  const tagEl = document.querySelector<HTMLElement>('[data-cycle-tag]');
   if (!el || !box) return;
+  const tags: string[] = JSON.parse(tagEl?.dataset.tags || '[]');
   const lines: string[] = JSON.parse(el.dataset.lines || '[]');
   if (lines.length < 2) return;
-  const dashes = Array.from(ctrl?.querySelectorAll('i') ?? []);
-  if (ctrl) ctrl.hidden = false;
-  let i = 0; let hovering = false; let stopped = false; let busy = false;
+  // One bar per line: the current one fills over HOLD ms (paused while hovered, paused by the button, or
+  // in a background tab), then the next line comes in. Clicking a bar jumps to that line.
+  const HOLD = 4800;
+  const dashes = Array.from(ctrl?.querySelectorAll<HTMLButtonElement>('[data-dash]') ?? []);
+  const fills = dashes.map((d) => d.querySelector<HTMLElement>('.dash-fill'));
+  ctrl?.classList.add('is-on');
+  let i = 0; let elapsed = 0; let hovering = false; let stopped = false; let busy = false;
+  let pending: number | null = null;
+  const mark = () => dashes.forEach((d, n) => {
+    d.classList.toggle('on', n === i);
+    if (n === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+  });
+  const paint = () => fills.forEach((f, n) => { if (f) f.style.transform = `scaleX(${n === i ? Math.min(elapsed / HOLD, 1) : 0})`; });
   const show = (k: number) => {
-    busy = true;
+    if (busy) { pending = k; return; }
+    busy = true; i = k; elapsed = 0; mark(); paint();
+    if (tagEl && tags[k] && tags[k] !== tagEl.textContent) {
+      gsap.to(tagEl, { opacity: 0, duration: 0.2, overwrite: true, onComplete: () => {
+        tagEl.textContent = tags[k]; gsap.to(tagEl, { opacity: 1, duration: 0.35 });
+      } });
+    }
     dissolveOut(Array.from(el.querySelectorAll('.split-word > span'))).eventCallback('onComplete', () => {
       el.textContent = lines[k];
       el.dataset.splitDone = '';
-      dissolveIn(splitWords(el)).eventCallback('onComplete', () => { busy = false; });
-      dashes.forEach((d, n) => d.classList.toggle('on', n === k));
+      dissolveIn(splitWords(el)).eventCallback('onComplete', () => {
+        busy = false;
+        const next = pending; pending = null;
+        if (next !== null && next !== i) show(next);
+      });
     });
   };
-  splitWords(el);
-  setInterval(() => {
+  splitWords(el); mark(); paint();
+  gsap.ticker.add((_time, delta) => {
     if (document.hidden || hovering || stopped || busy) return;
-    i = (i + 1) % lines.length; show(i);
-  }, 4800);
+    elapsed += delta; paint();
+    if (elapsed >= HOLD) show((i + 1) % lines.length);
+  });
+  dashes.forEach((d, n) => d.addEventListener('click', () => {
+    if (n !== i || busy) show(n);
+    else { elapsed = 0; paint(); }
+  }));
   box.addEventListener('mouseenter', () => { hovering = true; });
   box.addEventListener('mouseleave', () => { hovering = false; });
   box.addEventListener('focusin', () => { hovering = true; });
@@ -107,38 +133,32 @@ function onView(el: Element, play: () => void, reset: () => void) {
   ScrollTrigger.create({ trigger: el, start: 'top bottom', end: 'bottom top', onLeave: reset, onLeaveBack: reset });
 }
 
-// The hero's role line, written like a code comment: it deletes and retypes between the phrases.
-function typeRoles() {
-  const el = document.querySelector<HTMLElement>('[data-typed]');
-  if (!el) return;
-  const words: string[] = JSON.parse(el.dataset.words || '[]');
+// The hero's role line: the words sit stacked in one cell; every few seconds the current one rolls up and
+// out while the next rolls up into its place.
+function rollRoles() {
+  const words = Array.from(document.querySelectorAll<HTMLElement>('[data-roll] .roll-word'));
   if (words.length < 2) return;
-  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-  let w = 0; let text = words[0];
-  (async () => {
-    await sleep(1600);
-    for (;;) {
-      if (document.hidden) { await sleep(600); continue; }
-      while (text.length) { text = text.slice(0, -1); el.textContent = text; await sleep(26); }
-      await sleep(180);
-      w = (w + 1) % words.length;
-      const next = words[w];
-      for (let i = 1; i <= next.length; i++) { text = next.slice(0, i); el.textContent = text; await sleep(52 + Math.random() * 30); }
-      await sleep(2100);
-    }
-  })();
+  gsap.set(words, { yPercent: 110, opacity: 0 });
+  gsap.set(words[0], { yPercent: 0, opacity: 1 });
+  let w = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    const out = words[w]; w = (w + 1) % words.length; const next = words[w];
+    gsap.to(out, { yPercent: -110, opacity: 0, duration: 0.55, ease: 'power3.in', overwrite: true });
+    gsap.fromTo(next, { yPercent: 110, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.7, ease: 'power3.out', delay: 0.2, overwrite: true });
+  }, 2800);
 }
 
 function init() {
   if (reduce) {
-    const typed = document.querySelector<HTMLElement>('[data-typed]');
-    if (typed) typed.textContent = 'product · full-stack · ai & machine learning';
+    const first = document.querySelector<HTMLElement>('[data-roll] .roll-word');
+    if (first) first.textContent = 'product · full-stack · ai & machine learning';
     window.__motionReady = true; return;
   }
   gsap.registerPlugin(ScrollTrigger);
 
   // Smooth wheel scrolling; touch keeps native momentum.
-  const lenis = new Lenis({ lerp: 0.12, smoothWheel: true });
+  const lenis = new Lenis({ lerp: 0.18, smoothWheel: true }); // higher lerp: less glide, tighter scroll
   window.__lenis = lenis;
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((t) => lenis.raf(t * 1000));
@@ -153,7 +173,7 @@ function init() {
     const target = document.querySelector<HTMLElement>(url.hash);
     if (!target) return;
     e.preventDefault();
-    lenis.scrollTo(target, { offset: -72, duration: 1.2 });
+    lenis.scrollTo(target, { offset: -72, duration: 0.9 });
     history.pushState(null, '', url.hash);
     target.setAttribute('tabindex', '-1');
     setTimeout(() => target.focus({ preventScroll: true }), 900);
@@ -171,7 +191,7 @@ function init() {
     gsap.timeline({ delay: 0.15 })
       .to(chars, { opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power2.out', stagger: 0.04 })
       .to(fades, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08 }, '-=0.5')
-      .add(() => { cycleLines(); typeRoles(); });
+      .add(() => { cycleLines(); rollRoles(); });
     const orb = hero.querySelector('[data-orb]');
     if (orb) gsap.to(orb, { xPercent: 10, yPercent: -6, scale: 1.06, duration: 10, ease: 'sine.inOut', yoyo: true, repeat: -1 });
     gsap.to(hero.querySelector('[data-hero-inner]'), {
@@ -229,7 +249,7 @@ function init() {
   gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
     gsap.fromTo(el, { opacity: 0, y: 28 }, {
       opacity: 1, y: 0, ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 96%', end: 'top 78%', scrub: 0.5 },
+      scrollTrigger: { trigger: el, start: 'top 96%', end: 'top 78%', scrub: 0.3 },
     });
   });
 
@@ -245,10 +265,10 @@ function init() {
   // Numbers count with the scroll.
   document.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
     const to = Number(el.dataset.count); const obj = { v: 0 };
-    const fmt = () => { el.textContent = Number.isInteger(to) ? Math.round(obj.v).toString() : obj.v.toFixed(1); };
+    const fmt = () => { el.textContent = Number.isInteger(to) ? Math.round(obj.v).toLocaleString('en-US') : obj.v.toFixed(1); };
     gsap.fromTo(obj, { v: 0 }, {
       v: to, ease: 'power1.out', onUpdate: fmt,
-      scrollTrigger: { trigger: el, start: 'top 94%', end: 'top 62%', scrub: 0.6 },
+      scrollTrigger: { trigger: el, start: 'top 94%', end: 'top 62%', scrub: 0.3 },
     });
   });
 
@@ -256,7 +276,7 @@ function init() {
   document.querySelectorAll<HTMLElement>('[data-clip]').forEach((el) => {
     gsap.fromTo(el, { clipPath: 'inset(100% 0% 0% 0%)' }, {
       clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.out',
-      scrollTrigger: { trigger: el.parentElement ?? el, start: 'top 88%', end: 'top 40%', scrub: 0.6 },
+      scrollTrigger: { trigger: el.parentElement ?? el, start: 'top 88%', end: 'top 40%', scrub: 0.3 },
     });
   });
 
