@@ -1,71 +1,68 @@
 ---
+// Leadership and events: three tabs (Current, Past, Events) sharing one card. Each card shows its picture
+// or video on top, then the logo, dates, organisation, position and details. Pictures and videos come
+// from `media` on each entry in data/profile.ts.
 import Icon from './Icon.astro';
+import LogoTile from './LogoTile.astro';
 import { leadership } from '../data/profile';
-const tabs = [
-  { id: 'current', label: 'Current' },
-  { id: 'past', label: 'Past' },
-  { id: 'events', label: 'Events' },
+import type { Logo, Media, Link } from '../data/profile';
+
+type CardData = { title: string; role: string; dates: string; detail: string; logo: Logo; media?: Media; link?: Link };
+const toCard = (r: { org: string; role: string; dates: string; detail: string; logo: Logo; media?: Media; link?: Link }): CardData =>
+  ({ title: r.org, role: r.role, dates: r.dates, detail: r.detail, logo: r.logo, media: r.media, link: r.link });
+const panels = [
+  { id: 'current', label: 'Current', cards: leadership.current.map(toCard) },
+  { id: 'past', label: 'Past', cards: leadership.past.map(toCard) },
+  { id: 'events', label: 'Events', cards: leadership.events.map((e) => ({ title: e.title, role: e.org, dates: e.date, detail: e.detail, logo: e.logo, media: e.media })) as CardData[] },
 ];
 ---
 <section id="leadership" class="section" aria-labelledby="lead-title">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow"><span class="num">04</span> Leadership and events</p>
+      <p class="eyebrow"><span class="num">05</span> Leadership and events</p>
       <h2 id="lead-title" class="section-title" data-split>Building with communities.</h2>
     </div>
 
     <div class="tabs" role="tablist" aria-label="Leadership and events" data-tabs data-reveal>
-      {tabs.map((t, i) => (
+      {panels.map((t, i) => (
         <button role="tab" type="button" id={`tab-${t.id}`} aria-controls={`panel-${t.id}`}
           aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>{t.label}</button>
       ))}
     </div>
 
-    <div role="tabpanel" id="panel-current" aria-labelledby="tab-current" class="panel">
-      <div class="cards">
-        {leadership.current.map((r) => (
-          <article class="card">
-            <p class="card-dates">{r.dates}</p>
-            <h3 class="card-title">{r.org}</h3>
-            <p class="card-role">{r.role}</p>
-            <p class="card-detail">{r.detail}</p>
-            {r.link && <a class="link-arrow" href={r.link.href} target="_blank" rel="noopener"><span>{r.link.label}</span><Icon name="arrow-up-right" /></a>}
-          </article>
-        ))}
+    {panels.map((t, i) => (
+      <div role="tabpanel" id={`panel-${t.id}`} aria-labelledby={`tab-${t.id}`} class="panel" hidden={i !== 0}>
+        <div class="cards">
+          {t.cards.map((c) => (
+            <article class="card">
+              <div class="card-media">
+                {c.media?.video ? (
+                  <video controls preload="none" playsinline poster={c.media.poster} aria-label={c.media.alt}>
+                    <source src={c.media.video} type="video/mp4" />
+                  </video>
+                ) : c.media?.image ? (
+                  <img src={c.media.image} alt={c.media.alt} width="1600" height="1000" loading="lazy" decoding="async" />
+                ) : (
+                  <div class="card-media-empty"><LogoTile logo={c.logo} size={84} /></div>
+                )}
+              </div>
+              <div class="card-body">
+                <header class="card-head">
+                  <LogoTile logo={c.logo} size={48} />
+                  <div>
+                    <p class="card-dates">{c.dates}</p>
+                    <h3 class="card-title">{c.title}</h3>
+                  </div>
+                </header>
+                <p class="card-role">{c.role}</p>
+                <p class="card-detail">{c.detail}</p>
+                {c.link && <a class="link-arrow" href={c.link.href} target="_blank" rel="noopener"><span>{c.link.label}</span><Icon name="arrow-up-right" /></a>}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
-
-    <div role="tabpanel" id="panel-past" aria-labelledby="tab-past" class="panel" hidden>
-      <div class="cards">
-        {leadership.past.map((r) => (
-          <article class="card">
-            <p class="card-dates">{r.dates}</p>
-            <h3 class="card-title">{r.org}</h3>
-            <p class="card-role">{r.role}</p>
-            <p class="card-detail">{r.detail}</p>
-            {r.link && <a class="link-arrow" href={r.link.href} target="_blank" rel="noopener"><span>{r.link.label}</span><Icon name="arrow-up-right" /></a>}
-          </article>
-        ))}
-      </div>
-    </div>
-
-    <div role="tabpanel" id="panel-events" aria-labelledby="tab-events" class="panel" hidden>
-      <div class="cards">
-        {leadership.events.map((ev) => (
-          <article class="card event">
-            {ev.video && (
-              <video class="event-video" controls preload="none" playsinline poster={ev.poster} aria-label={`${ev.title} highlight video`}>
-                <source src={ev.video} type="video/mp4" />
-              </video>
-            )}
-            <p class="card-dates">{ev.date}</p>
-            <h3 class="card-title">{ev.title}</h3>
-            <p class="card-role">{ev.org}</p>
-            <p class="card-detail">{ev.detail}</p>
-          </article>
-        ))}
-      </div>
-    </div>
+    ))}
   </div>
 </section>
 
@@ -79,18 +76,27 @@ const tabs = [
   .tabs button[aria-selected='true'] { background: var(--text); color: var(--bg); }
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
   .card {
-    display: grid; gap: 10px; align-content: start; padding: 28px; border-radius: var(--radius-lg);
+    display: flex; flex-direction: column; border-radius: var(--radius-lg); overflow: hidden;
     background: linear-gradient(180deg, rgba(var(--glass-top), 0.62) 0%, rgba(var(--glass-foot), 0.42) 100%);
     backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%);
     border: 1px solid rgba(var(--ink), 0.12); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    transition: border-color 0.4s var(--ease-out), transform 0.5s var(--ease-out);
+    transition: border-color 0.4s var(--ease-out), translate 0.5s var(--ease-out);
   }
-  .card:hover { border-color: rgba(var(--ink), 0.24); transform: translateY(-3px); }
-  .card-dates { font-size: 13px; color: var(--text-3); font-variant-numeric: tabular-nums; }
-  .card-title { font-size: clamp(24px, 2.4vw, 32px); }
+  .card:hover { border-color: rgba(var(--ink), 0.24); translate: 0 -3px; }
+  .card-media { aspect-ratio: 16 / 9; background: #000; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .card-media img, .card-media video { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: scale 1s var(--ease-out); }
+  .card:hover .card-media img { scale: 1.035; }
+  .card-media-empty {
+    width: 100%; height: 100%; display: grid; place-items: center;
+    background: radial-gradient(120% 90% at 20% 10%, rgba(201, 169, 110, 0.22), transparent 60%),
+      radial-gradient(100% 80% at 90% 100%, rgba(47, 77, 74, 0.35), transparent 60%), var(--surface-2);
+  }
+  .card-body { display: grid; gap: 10px; align-content: start; padding: 22px 24px 24px; }
+  .card-head { display: flex; align-items: center; gap: 14px; margin-bottom: 2px; }
+  .card-dates { font-size: 13px; color: var(--text-3); font-variant-numeric: tabular-nums; margin-bottom: 3px; }
+  .card-title { font-size: clamp(22px, 2.1vw, 28px); }
   .card-role { color: var(--accent); font-weight: 500; font-size: 15px; }
   .card-detail { color: var(--text-2); line-height: 1.7; }
-  .event-video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; background: #000; margin-bottom: 8px; }
   .panel { animation: fade 0.5s var(--ease-out); }
   @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   @media (max-width: 480px) { .tabs { display: flex; } .tabs button { flex: 1; padding: 0 10px; } }

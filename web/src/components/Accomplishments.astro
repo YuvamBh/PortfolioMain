@@ -1,12 +1,12 @@
 ---
-import Icon from './Icon.astro';
+import Badge from './Badge.astro';
 import LogoTile from './LogoTile.astro';
 import { certifications, honors } from '../data/profile';
 ---
 <section id="accomplishments" class="section" aria-labelledby="acc-title">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow"><span class="num">05</span> Accomplishments</p>
+      <p class="eyebrow"><span class="num">06</span> Accomplishments</p>
       <h2 id="acc-title" class="section-title" data-split>Certifications and honors.</h2>
     </div>
     <div class="acc-grid">
@@ -35,7 +35,7 @@ import { certifications, honors } from '../data/profile';
         <ul class="acc-list">
           {honors.map((h, i) => (
             <li>
-              {h.logo ? <LogoTile logo={h.logo} size={48} /> : <span class="acc-icon" aria-hidden="true"><Icon name={h.icon ?? 'sparkle'} size={22} /></span>}
+              {h.logo ? <LogoTile logo={h.logo} size={48} /> : <Badge kind={h.icon === 'judge' ? 'judge' : 'trophy'} size={48} />}
               <div>
                 <p class="acc-title">{h.title}</p>
                 <p class="acc-sub">{[h.detail, h.where].filter(Boolean).join(' · ')}</p>
