@@ -1,9 +1,9 @@
 ---
-// About: who I am through the work (Mystré first, then the internship and campus roles), the numbers,
+// About: who I am through the work (Mystré first, then the internship and campus roles),
 // focus and a one-line education note. The toolkit has its own section (Toolkit.astro).
 // The diploma version of education lives in Diploma.astro if it's ever wanted back.
 import { profile } from '../data/profile';
-const { bio, stats, focus, now, education } = profile;
+const { bio, focus, now, education } = profile;
 ---
 <section id="about" class="section about" aria-labelledby="about-title">
   <div class="wrap">
@@ -27,15 +27,6 @@ const { bio, stats, focus, now, education } = profile;
             </p>
           ))}
         </div>
-
-        <ul class="stats glass" aria-label="In numbers" data-reveal>
-          {stats.map((s) => (
-            <li>
-              <strong class="stat-num">{s.prefix && <span class="affix">{s.prefix}</span>}<span data-count={s.value}>{s.value}</span>{s.suffix && <span class="affix">{s.suffix}</span>}</strong>
-              <span class="stat-label">{s.label}</span>
-            </li>
-          ))}
-        </ul>
 
         <div class="about-cols">
           <div data-reveal>
@@ -80,12 +71,6 @@ const { bio, stats, focus, now, education } = profile;
   .lp-card img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 10px; }
   @media (hover: none) { .lp-card { display: none; } }
 
-  .stats { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-radius: var(--radius-lg); overflow: hidden; }
-  .stats li { padding: 24px 22px; display: grid; gap: 10px; align-content: start; }
-  .stats li + li { border-left: 1px solid var(--line); }
-  .stat-num { display: inline-flex; align-items: baseline; gap: 0.04em; font-family: var(--font-display); font-weight: 700; font-size: clamp(36px, 4vw, 52px); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: var(--text); }
-  .affix { font-family: var(--font-body); font-weight: 500; font-size: 0.72em; color: var(--accent); }
-  .stat-label { font-size: 14px; color: var(--text-2); line-height: 1.5; }
 
   .about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
   .mini { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
@@ -105,9 +90,6 @@ const { bio, stats, focus, now, education } = profile;
     .about-photo { position: relative; top: 0; max-width: 420px; }
   }
   @media (max-width: 640px) {
-    .stats { grid-template-columns: 1fr; }
-    .stats li + li { border-left: 0; border-top: 1px solid var(--line); }
-    .stats li { grid-template-columns: auto 1fr; align-items: center; gap: 18px; }
     .about-cols { grid-template-columns: 1fr; }
   }
 </style>

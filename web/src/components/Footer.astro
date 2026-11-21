@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { profile } from '../data/profile';
 const year = new Date().getFullYear();
 ---
@@ -8,8 +9,9 @@ const year = new Date().getFullYear();
     <div class="footer-row">
       <p>© {year} {profile.name}. Designed and built by me.</p>
       <nav aria-label="Footer">
-        <a href={profile.links.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-        <a href={`mailto:${profile.email}`}>Email</a>
+        <a href={profile.links.github} target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><Icon name="github" size={20} /></a>
+        <a href={profile.links.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><Icon name="linkedin" size={20} /></a>
+        <a href={`mailto:${profile.email}`} aria-label={`Email ${profile.email}`} title="Email"><Icon name="mail" size={20} /></a>
       </nav>
     </div>
   </div>
@@ -26,7 +28,7 @@ const year = new Date().getFullYear();
   }
   .footer-mark span { color: var(--accent); }
   .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 32px; color: var(--text-3); font-size: 14px; border-top: 1px solid var(--line); padding-top: 16px; }
-  .footer-row nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
-  .footer-row a { min-height: 44px; display: inline-flex; align-items: center; color: var(--text-2); text-decoration: none; }
+  .footer-row nav { display: flex; flex-wrap: wrap; gap: 4px; margin-right: -12px; }
+  .footer-row a { width: 44px; height: 44px; display: inline-grid; place-items: center; color: var(--text-2); text-decoration: none; transition: color 0.2s ease; }
   .footer-row a:hover { color: var(--text); }
 </style>

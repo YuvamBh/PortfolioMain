@@ -80,16 +80,13 @@ const panels = [
     background: linear-gradient(180deg, rgba(var(--glass-top), 0.62) 0%, rgba(var(--glass-foot), 0.42) 100%);
     backdrop-filter: blur(22px) saturate(160%); -webkit-backdrop-filter: blur(22px) saturate(160%);
     border: 1px solid rgba(var(--ink), 0.12); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    transition: border-color 0.4s var(--ease-out), translate 0.5s var(--ease-out);
   }
-  .card:hover { border-color: rgba(var(--ink), 0.24); translate: 0 -3px; }
   .card-media { aspect-ratio: 16 / 9; background: #000; overflow: hidden; border-bottom: 1px solid var(--line); }
-  .card-media img, .card-media video { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: scale 1s var(--ease-out); }
-  .card:hover .card-media img { scale: 1.035; }
+  .card-media img, .card-media video { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
   .card-media-empty {
     width: 100%; height: 100%; display: grid; place-items: center;
-    background: radial-gradient(120% 90% at 20% 10%, rgba(201, 169, 110, 0.22), transparent 60%),
-      radial-gradient(100% 80% at 90% 100%, rgba(47, 77, 74, 0.35), transparent 60%), var(--surface-2);
+    background: radial-gradient(120% 90% at 20% 10%, rgba(var(--accent-rgb), 0.22), transparent 60%),
+      radial-gradient(100% 80% at 90% 100%, rgba(var(--tint-2), 0.35), transparent 60%), var(--surface-2);
   }
   .card-body { display: grid; gap: 10px; align-content: start; padding: 22px 24px 24px; }
   .card-head { display: flex; align-items: center; gap: 14px; margin-bottom: 2px; }
